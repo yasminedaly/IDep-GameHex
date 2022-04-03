@@ -3,9 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Supplier;
-use DateTime;
+use DateType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType as TypeDateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,8 +16,8 @@ class SupplierType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('start_date', DateTimeType::class, [
-                'html5' => false
+            ->add('start_date', TypeDateType::class, [
+                'widget' => 'single_text'
             ])
             ->add('leave_date')
             ->add('nvr_units_sold');
