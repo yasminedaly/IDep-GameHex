@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supplier{% endblock %}
+
+{% block body %}
+    <h1>Supplier</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ supplier.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ supplier.name }}</td>
+            </tr>
+            <tr>
+                <th>Start_date</th>
+                <td>{{ supplier.startDate ? supplier.startDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Leave_date</th>
+                <td>{{ supplier.leaveDate ? supplier.leaveDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Nvr_units_sold</th>
+                <td>{{ supplier.nvrUnitsSold }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_supplier_index') }}">back to list</a>
+
+    <a href="{{ path('app_supplier_edit', {'id': supplier.id}) }}">edit</a>
+
+    {{ include('supplier/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,15 @@
+{{ form_start(form) }}
+{# {{ form_widget(form) }} #}
+<div class="form-group">
+    {{ form_label(form.name) }}
+    {{ form_widget(form.name, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.name) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.start_date) }}
+    {{ form_widget(form.start_date, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.start_date) }}
+</div>
+
+<button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
