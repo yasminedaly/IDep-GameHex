@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Session index{% endblock %}
+
+{% block body %}
+    <h1>Session index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>StartTime</th>
+                <th>Date</th>
+                <th>Rating</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for session in sessions %}
+            <tr>
+                <td>{{ session.id }}</td>
+                <td>{{ session.startTime ? session.startTime|date('H:i:s') : '' }}</td>
+                <td>{{ session.Date ? session.Date|date('Y-m-d') : '' }}</td>
+                <td>{{ session.rating }}</td>
+                <td>
+                    <a href="{{ path('app_session_show', {'id': session.id}) }}">show</a>
+                    <a href="{{ path('app_session_edit', {'id': session.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_session_new') }}">Create new</a>
+{% endblock %}

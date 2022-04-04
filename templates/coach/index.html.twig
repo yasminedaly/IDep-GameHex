@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Coach index{% endblock %}
+
+{% block body %}
+    <h1>Coach index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Rating</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for coach in coaches %}
+            <tr>
+                <td>{{ coach.id }}</td>
+                <td>{{ coach.rating }}</td>
+                <td>
+                    <a href="{{ path('app_coach_show', {'id': coach.id}) }}">show</a>
+                    <a href="{{ path('app_coach_edit', {'id': coach.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_coach_new') }}">Create new</a>
+{% endblock %}
