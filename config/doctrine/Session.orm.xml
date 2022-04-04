@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="App\Entity\Session" table="session">
+    <indexes>
+      <index name="FK_session_user" columns="userID"/>
+      <index name="FK_D044D5D47EF1F90C" columns="coachId"/>
+    </indexes>
+    <id name="sessionid" type="integer" column="sessionId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="starttime" type="time" column="startTime" nullable="false"/>
+    <field name="date" type="date" column="Date" nullable="false"/>
+    <field name="rating" type="float" column="rating" precision="10" scale="0" nullable="false"/>
+    <many-to-one field="coachid" target-entity="Coach" fetch="LAZY">
+      <join-columns>
+        <join-column name="coachId" referenced-column-name="coachId"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="userid" target-entity="User" fetch="LAZY">
+      <join-columns>
+        <join-column name="userID" referenced-column-name="userID"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

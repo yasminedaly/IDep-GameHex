@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Info index{% endblock %}
+
+{% block body %}
+    <h1>Esports Informations</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Contentid</th>
+                <th>Contenttitle</th>
+                <th>Contentdate</th>
+                <th>Infocontent</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for info in infos %}
+            <tr>
+                <td>{{ info.contentid }}</td>
+                <td>{{ info.contenttitle }}</td>
+                <td>{{ info.contentdate ? info.contentdate|date('Y-m-d') : '' }}</td>
+                <td>{{ info.infocontent }}</td>
+                <td>
+                    <a href="{{ path('app_info_show', {'contentid': info.contentid}) }}">show</a>
+                    <a href="{{ path('app_info_edit', {'contentid': info.contentid}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_info_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="App\Entity\Teammembers" table="teammembers">
+    <indexes>
+      <index name="team_members_FK" columns="teamId"/>
+    </indexes>
+    <id name="riotid" type="integer" column="riotId">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="memberrole" type="string" column="memberRole" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="memberphone" type="integer" column="memberPhone" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="membermail" type="string" column="memberMail" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="userid" type="integer" column="userID" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="teamid" target-entity="Teams" fetch="LAZY">
+      <join-columns>
+        <join-column name="teamId" referenced-column-name="teamId"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>
