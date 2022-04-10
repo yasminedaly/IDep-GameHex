@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Articles{% endblock %}
+
+{% block body %}
+    <h1>Edit Articles</h1>
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.username }}, <a href="{{ path('app_login') }}">Logout</a>
+        </div>
+    {% endif %}
+
+    {{ include('articles/_form.html.twig', {'button_label': 'Update'}) }}
+    <center>
+    <a href="{{ path('app_articles_index') }}">back to list</a>
+    </center>
+    {{ include('articles/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}New User{% endblock %}
+
+{% block body %}
+    <h1>Create new User</h1>
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.username }}, <a href="{{ path('app_login') }}">Logout</a>
+        </div>
+    {% endif %}
+    {{ include('admin/_form.html.twig') }}
+
+    <a href="{{ path('backend_user_index') }}">back to list</a>
+{% endblock %}

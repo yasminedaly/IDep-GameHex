@@ -1,7 +1,4 @@
 {
-    "composer/package-versions-deprecated": {
-        "version": "1.11.99.5"
-    },
     "doctrine/annotations": {
         "version": "1.13",
         "recipe": {
@@ -412,6 +409,9 @@
             "./tests/bootstrap.php"
         ]
     },
+    "symfony/polyfill-intl-grapheme": {
+        "version": "v1.25.0"
+    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.25.0"
     },
@@ -495,6 +495,9 @@
     "symfony/stopwatch": {
         "version": "v4.4.38"
     },
+    "symfony/string": {
+        "version": "v5.4.3"
+    },
     "symfony/translation": {
         "version": "4.4",
         "recipe": {
@@ -575,6 +578,9 @@
     },
     "symfony/yaml": {
         "version": "v4.4.37"
+    },
+    "symfonycasts/verify-email-bundle": {
+        "version": "v1.10.0"
     },
     "theseer/tokenizer": {
         "version": "1.2.1"
