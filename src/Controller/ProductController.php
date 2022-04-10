@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/product")
+ * @Route("/admin/product")
  */
 class ProductController extends AbstractController
 {
@@ -79,7 +79,7 @@ class ProductController extends AbstractController
      */
     public function delete(Request $request, Product $product, ProductRepository $productRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $product->getId(), $request->request->get('_token'))) {
             $productRepository->remove($product);
         }
 

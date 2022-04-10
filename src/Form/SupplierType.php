@@ -19,7 +19,9 @@ class SupplierType extends AbstractType
             ->add('start_date', TypeDateType::class, [
                 'widget' => 'single_text'
             ])
-            ->add('leave_date')
+            ->add('leave_date', TypeDateType::class, [
+                'widget' => 'single_text'
+            ])
             ->add('nvr_units_sold');
     }
 

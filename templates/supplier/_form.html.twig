@@ -10,6 +10,16 @@
     {{ form_widget(form.start_date, { attr: { class: "form-control" } } ) }}
     {{ form_errors(form.start_date) }}
 </div>
+<div class="form-group">
+    {{ form_label(form.leave_date) }}
+    {{ form_widget(form.leave_date, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.leave_date) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.nvr_units_sold) }}
+    {{ form_widget(form.nvr_units_sold, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.nvr_units_sold) }}
+</div>
 
 <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

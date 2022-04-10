@@ -1,41 +1,41 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
 {% block title %}Supplier index{% endblock %}
 
 {% block body %}
-    <h1>Supplier index</h1>
+<h1>Supplier index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Start_date</th>
-                <th>Leave_date</th>
-                <th>Nvr_units_sold</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Start_date</th>
+            <th>Leave_date</th>
+            <th>Nvr_units_sold</th>
+            <th>actions</th>
+        </tr>
+    </thead>
+    <tbody>
         {% for supplier in suppliers %}
-            <tr>
-                <td>{{ supplier.id }}</td>
-                <td>{{ supplier.name }}</td>
-                <td>{{ supplier.startDate ? supplier.startDate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ supplier.leaveDate ? supplier.leaveDate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ supplier.nvrUnitsSold }}</td>
-                <td>
-                    <a href="{{ path('app_supplier_show', {'id': supplier.id}) }}">show</a>
-                    <a href="{{ path('app_supplier_edit', {'id': supplier.id}) }}">edit</a>
-                </td>
-            </tr>
+        <tr>
+            <td>{{ supplier.id }}</td>
+            <td>{{ supplier.name }}</td>
+            <td>{{ supplier.startDate ? supplier.startDate|date('Y-m-d H:i:s') : '' }}</td>
+            <td>{{ supplier.leaveDate ? supplier.leaveDate|date('Y-m-d H:i:s') : '' }}</td>
+            <td>{{ supplier.nvrUnitsSold }}</td>
+            <td>
+                <a href="{{ path('app_supplier_show', {'id': supplier.id}) }}">show</a>
+                <a href="{{ path('app_supplier_edit', {'id': supplier.id}) }}">edit</a>
+            </td>
+        </tr>
         {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
+        <tr>
+            <td colspan="6">no records found</td>
+        </tr>
         {% endfor %}
-        </tbody>
-    </table>
+    </tbody>
+</table>
 
-    <a href="{{ path('app_supplier_new') }}">Create new</a>
+<a href="{{ path('app_supplier_new') }}">Create new</a>
 {% endblock %}

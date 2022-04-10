@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/supplier")
+ * @Route("/admin/supplier")
  */
 class SupplierController extends AbstractController
 {
@@ -79,7 +79,7 @@ class SupplierController extends AbstractController
      */
     public function delete(Request $request, Supplier $supplier, SupplierRepository $supplierRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$supplier->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $supplier->getId(), $request->request->get('_token'))) {
             $supplierRepository->remove($supplier);
         }
 
