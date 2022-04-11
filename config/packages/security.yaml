@@ -1,12 +1,22 @@
 security:
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_USER]
     encoders:
         App\Entity\User:
             algorithm: auto
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
+        chain_provider:
+            chain:
+                providers:
+                    - db_provider
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+        db_provider:
             entity:
                 class: App\Entity\User
                 property: email
@@ -15,6 +25,9 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            form_login:
+                login_path: login
+                check_path: login
             anonymous: lazy
             provider: app_user_provider
             guard:

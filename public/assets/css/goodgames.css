@@ -91,6 +91,76 @@
   Base
 
  -------------------------------------------------------------------*/
+
+
+
+
+a {
+    text-decoration: none !important;
+    font-family: Helvetica;
+}
+aside nav.left-nav {
+    background-color: #f5f5f5
+}
+aside nav.left-nav ul {
+    margin-left: 0;
+    padding-left: 0
+}
+aside nav.left-nav ul li {
+    border-bottom: 2px solid #fff;
+    font-size: 1.75rem
+}
+.image-container {
+    background: #000 !important;
+    text-align: center;
+    padding: 1rem 0;
+}
+aside nav.left-nav ul li.nolistHighlight {
+    background-color: #17629e;
+    color: #fff;
+    text-decoration: none
+}
+aside nav.left-nav ul li.nolistHighlight a {
+    color: #fff
+}
+aside nav.left-nav ul li a {
+    color: #010100;
+    font-weight: 400;
+    display: block;
+    padding: 1.6rem;
+    padding-left: 1.5rem;
+    font-size: 1.25rem;
+}
+aside nav.left-nav ul li a:hover {
+    color: #fff;
+    background-color: #17629e;
+    text-decoration: none
+}
+aside nav.left-nav ul li ul {
+    display: none;
+    background-color: #d7d7d7
+}
+aside nav.left-nav ul li ul li a {
+    font-size: 1.25rem;
+    font-weight: 300;
+    padding-left: 2.5rem
+}
+aside nav.left-nav ul li ul li a.active {
+    background-color: initial;
+    color: #17629e;
+    padding-bottom: initial
+}
+aside nav.left-nav ul li ul li a:hover {
+    color: #fff;
+    background-color: #17629e
+}
+
+
+
+
+
+
+
 body {
     position: relative;
     color: #7f8b92;
