@@ -8,9 +8,10 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Articleid</th>
-                <th>Content</th>
-                <th>actions</th>
+                <th>ID</th>
+                <th>Article Content</th>
+                <th>Category</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -18,6 +19,7 @@
             <tr>
                 <td>{{ article.articleid }}</td>
                 <td>{{ article.content }}</td>
+                <td>{{ article.category.title }}</td>
                 <td>
                     <a href="{{ path('app_articles_show', {'articleid': article.articleid}) }}">show</a>
                     <a href="{{ path('app_articles_edit', {'articleid': article.articleid}) }}">edit</a>

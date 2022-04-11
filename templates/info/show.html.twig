@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Info{% endblock %}
+{% block title %}Informations{% endblock %}
 
 {% block body %}
     <h1>Info</h1>
@@ -8,19 +8,19 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Contentid</th>
+                <th>ID</th>
                 <td>{{ info.contentid }}</td>
             </tr>
             <tr>
-                <th>Contenttitle</th>
+                <th>Title</th>
                 <td>{{ info.contenttitle }}</td>
             </tr>
             <tr>
-                <th>Contentdate</th>
+                <th>Upload Date</th>
                 <td>{{ info.contentdate ? info.contentdate|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>Infocontent</th>
+                <th>Content Info</th>
                 <td>{{ info.infocontent }}</td>
             </tr>
         </tbody>

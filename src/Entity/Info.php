@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Info
@@ -25,6 +26,12 @@ class Info
      * @var string
      *
      * @ORM\Column(name="contentTitle", type="string", length=100, nullable=false)
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 70,
+     *      minMessage = "The content title must be at least {{ limit }} characters long",
+     *      maxMessage = "The e-content title cannot be longer than {{ limit }} characters"
+     * )
      */
     private $contenttitle;
 
@@ -39,6 +46,12 @@ class Info
      * @var string
      *
      * @ORM\Column(name="infoContent", type="text", length=65535, nullable=false)
+     * @Assert\Length(
+     *      min = 30,
+     *      max = 40000,
+     *      minMessage = "The content informations must be at least {{ limit }} characters long",
+     *      maxMessage = "The content infos cannot be longer than {{ limit }} characters"
+     * )
      */
     private $infocontent;
 
