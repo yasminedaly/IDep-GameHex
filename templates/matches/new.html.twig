@@ -1,4 +1,4 @@
-{% extends 'baseAdmin.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}New Matches{% endblock %}
 
@@ -7,5 +7,5 @@
 
     {{ include('matches/_form.html.twig') }}
 
-    <a href="{{ path('app_matches_indexAdmin') }}">back to list</a>
+    <a href="{{ path('app_matches_index') }}">back to list</a>
 {% endblock %}

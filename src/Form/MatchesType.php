@@ -12,12 +12,12 @@ class MatchesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('team1')
-            ->add('team2')
             ->add('matchRes')
             ->add('matchCom')
             ->add('matchDate')
             ->add('matchTime')
+            ->add('team1')
+            ->add('team2')
         ;
     }
 

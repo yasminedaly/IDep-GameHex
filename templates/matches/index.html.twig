@@ -1,16 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Matches{% endblock %}
+{% block title %}Matches index{% endblock %}
 
 {% block body %}
-    <h1>Matches</h1>
+    <h1>Matches index</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Team1</th>
-                <th>Team2</th>
                 <th>MatchRes</th>
                 <th>MatchCom</th>
                 <th>MatchDate</th>
@@ -22,22 +20,22 @@
         {% for match in matches %}
             <tr>
                 <td>{{ match.id }}</td>
-                <td>{{ match.team1 }}</td>
-                <td>{{ match.team2 }}</td>
                 <td>{{ match.matchRes }}</td>
                 <td>{{ match.matchCom }}</td>
                 <td>{{ match.matchDate ? match.matchDate|date('Y-m-d') : '' }}</td>
                 <td>{{ match.matchTime ? match.matchTime|date('H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('app_matches_show', {'id': match.id}) }}">show</a>
+                    <a href="{{ path('app_matches_edit', {'id': match.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">no records found</td>
+                <td colspan="6">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
+    <a href="{{ path('app_matches_new') }}">Create new</a>
 {% endblock %}

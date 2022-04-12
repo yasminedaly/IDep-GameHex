@@ -25,17 +25,6 @@ class MatchesController extends AbstractController
         ]);
     }
 
-
-    /**
-     * @Route("/back", name="app_matches_indexAdmin", methods={"GET"})
-     */
-    public function indexAdmin(MatchesRepository $matchesRepository): Response
-    {
-        return $this->render('matches/indexAdmin.html.twig', [
-            'matches' => $matchesRepository->findAll(),
-        ]);
-    }
-
     /**
      * @Route("/new", name="app_matches_new", methods={"GET", "POST"})
      */

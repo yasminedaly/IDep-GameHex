@@ -3,10 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\MatchesRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @ORM\Entity(repositoryClass=MatchesRepository::class)
  */
@@ -20,19 +19,22 @@ class Matches
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity=Teams::class, inversedBy="matches")
+     * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank
      */
     private $team1;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity=Teams::class, inversedBy="matches")
+     * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank
      */
     private $team2;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $matchRes;
 
@@ -44,6 +46,7 @@ class Matches
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\GreaterThan("today UTC")
      */
     private $matchDate;
 
@@ -52,39 +55,29 @@ class Matches
      */
     private $matchTime;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Teams::class, inversedBy="matches")
-     */
-    private $teams;
-
-    public function __construct()
-    {
-        $this->teams = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTeam1(): ?int
+    public function getTeam1(): ?Teams
     {
         return $this->team1;
     }
 
-    public function setTeam1(int $team1): self
+    public function setTeam1(?Teams $team1): self
     {
         $this->team1 = $team1;
 
         return $this;
     }
 
-    public function getTeam2(): ?int
+    public function getTeam2(): ?Teams
     {
         return $this->team2;
     }
 
-    public function setTeam2(int $team2): self
+    public function setTeam2(?Teams $team2): self
     {
         $this->team2 = $team2;
 
@@ -135,30 +128,6 @@ class Matches
     public function setMatchTime(\DateTimeInterface $matchTime): self
     {
         $this->matchTime = $matchTime;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Teams>
-     */
-    public function getTeams(): Collection
-    {
-        return $this->teams;
-    }
-
-    public function addTeam(Teams $team): self
-    {
-        if (!$this->teams->contains($team)) {
-            $this->teams[] = $team;
-        }
-
-        return $this;
-    }
-
-    public function removeTeam(Teams $team): self
-    {
-        $this->teams->removeElement($team);
 
         return $this;
     }
