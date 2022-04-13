@@ -12,6 +12,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
@@ -47,9 +48,14 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
 
     public function getCredentials(Request $request)
     {
+        $user=$this->entityManager->getRepository(User::class)->findOneBy(['email' => $request->request->get('email')]);
+        $roles=null;
+        if (isset($user))
+        $roles=$user->getRoles();
         $credentials = [
             'email' => $request->request->get('email'),
             'password' => $request->request->get('password'),
+            'roles'=> $roles,
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
         $request->getSession()->set(
@@ -96,8 +102,18 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
         }
 
         // For example : 
-        return new RedirectResponse($this->urlGenerator->generate('app_articles_new'));
+        //return new RedirectResponse($this->urlGenerator->generate('app_articles_new'));
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        $cre=$this->getCredentials($request);
+
+
+        VarDumper::dump($cre);
+        VarDumper::dump($cre["roles"][0]);
+        if (isset($cre["roles"])) {
+            if (strcmp($cre["roles"][0], "ROLE_ADMIN") == 0)
+                return new RedirectResponse($this->urlGenerator->generate('backend_user_index'));
+            return new RedirectResponse($this->urlGenerator->generate('app_articles_index'));
+        }
     }
 
     protected function getLoginUrl()

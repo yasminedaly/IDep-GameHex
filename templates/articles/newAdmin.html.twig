@@ -1,15 +1,17 @@
 {% extends 'baseAdmin.html.twig' %}
 
-{% block title %}New User{% endblock %}
+{% block title %}New Articles{% endblock %}
 
 {% block body %}
-    <h1>Create new User</h1>
+    <h1>Create new Articles</h1>
     {% if app.user %}
         <div class="mb-3">
             You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% endif %}
-    {{ include('admin/_form.html.twig') }}
 
-    <a href="{{ path('backend_user_index') }}">back to list</a>
+    {{ include('articles/_formAdmin.html.twig') }}
+    <center>
+    <a href="{{ path('app_articles_indexAdmin') }}">back to list</a>
+    </center>
 {% endblock %}
