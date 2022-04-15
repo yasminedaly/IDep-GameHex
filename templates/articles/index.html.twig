@@ -37,4 +37,7 @@
     </table>
     
     <a href="{{ path('app_articles_new') }}">Create new</a>
+                <center>
+                    <a href="{{ path('app_profile', {'email': app.user.username}) }}" class="btn btn-primary btn-lg my-10">Profile</a>
+                </center>
 {% endblock %}

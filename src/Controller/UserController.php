@@ -45,7 +45,7 @@ class UserController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
+ 
     /**
      * @Route("/{id}", name="app_user_show", methods={"GET"})
      */
@@ -55,6 +55,41 @@ class UserController extends AbstractController
             'user' => $user,
         ]);
     }
+    /**
+     * @Route("/profile/{email}", name="app_profile", methods={"GET"})
+     */
+    public function showOne(User $user): Response
+    {
+        return $this->render('profile/profile.html.twig', [
+            'user' => $user,
+        ]);
+    }
+    
+    /**
+     * @Route("/profile/{email}/edit", name="app_profile_edit", methods={"GET", "POST"})
+     */
+    public function editProfile(Request $request, User $user, UserPasswordEncoderInterface $userPasswordEncoder, UserRepository $userRepository): Response
+    {
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setPassword(
+                $userPasswordEncoder->encodePassword(
+                        $user,
+                        $form->get('plainPassword')->getData()
+                    )
+                );
+            $userRepository->add($user);
+            return $this->redirectToRoute('app_profile', ['email' => $user->getEmail()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('profile/editProfile.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
+    }
+
 
     /**
      * @Route("/{id}/edit", name="app_user_edit", methods={"GET", "POST"})
