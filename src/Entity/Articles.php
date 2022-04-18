@@ -22,6 +22,11 @@ class Articles
      */
     private $content;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $accept='0';
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +40,18 @@ class Articles
     public function setContent(string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getAccept(): ?int
+    {
+        return $this->accept;
+    }
+
+    public function setAccept(int $accept): self
+    {
+        $this->accept = $accept;
 
         return $this;
     }

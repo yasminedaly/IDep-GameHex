@@ -26,6 +26,9 @@
                 <td>
                     <a href="{{ path('app_articles_showAdmin', {'id': article.id}) }}">show</a>
                     <a href="{{ path('app_articles_editAdmin', {'id': article.id}) }}">edit</a>
+                    {% if article.accept== 0%}
+                    <a class="fa fa-check-square" href="{{ path('backend_user_article_accepte', {'id': article.id}) }}">Accept</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}

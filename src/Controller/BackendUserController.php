@@ -3,12 +3,17 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Articles;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Repository\ArticlesRepository;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 /**
  * @Route("/admin/user")
@@ -24,6 +29,66 @@ class BackendUserController extends AbstractController
             'users' => $userRepository->findAll(),
         ]);
     }
+
+    /**
+     * @Route("/pdf", name="pdf", methods={"GET"})
+     */
+    public function pdf(UserRepository $userRepository): Response
+    {   
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFront', 'Arial');
+
+        $dompdf = new Dompdf($pdfOptions);
+
+        $html = $this->renderView('admin/pdf.html.twig', [
+            'users' => $userRepository->findAll(),
+        ]);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A2', 'portrait');
+        $dompdf->render();
+        $dompdf->stream("UserList.pdf", [
+            "Attachement" => true
+        ]);
+
+        
+    }
+
+
+    /**
+     * @Route("/profile/{email}", name="backend_profile", methods={"GET"})
+     */
+    public function showOne(User $user): Response
+    {
+        return $this->render('profile/profileAdmin.html.twig', [
+            'user' => $user,
+        ]);
+    }
+    
+    /**
+     * @Route("/profile/{email}/edit", name="backend_profile_edit", methods={"GET", "POST"})
+     */
+    public function editProfile(Request $request, User $user, UserPasswordEncoderInterface $userPasswordEncoder, UserRepository $userRepository): Response
+    {
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setPassword(
+                $userPasswordEncoder->encodePassword(
+                        $user,
+                        $form->get('plainPassword')->getData()
+                    )
+                );
+            $userRepository->add($user);
+            return $this->redirectToRoute('backend_profile', ['email' => $user->getEmail()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('profile/editProfileAdmin.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
+    }
+
 
     /**
      * @Route("/new", name="backend_user_new", methods={"GET", "POST"})
@@ -85,4 +150,16 @@ class BackendUserController extends AbstractController
 
         return $this->redirectToRoute('backend_user_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    /**
+    * @Route("/admin/accepter/{id}", name="backend_user_article_accepte", methods={"GET"})
+    */
+    public function accepte(ArticlesRepository $ArticlesRepository,Articles $id): Response
+    {
+    $id->setAccept(1);
+    $this->getDoctrine()->getManager()->flush();
+   
+    return $this->redirectToRoute('backend_user_index', [], Response::HTTP_SEE_OTHER);
+    }
+
 }

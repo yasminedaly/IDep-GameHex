@@ -19,7 +19,9 @@
             </tr>
         </thead>
         <tbody>
+      
         {% for article in articles %}
+          {% if article.accept== 1%}
             <tr>
                 <td>{{ article.id }}</td>
                 <td>{{ article.content }}</td>
@@ -28,11 +30,14 @@
                     <a href="{{ path('app_articles_edit', {'id': article.id}) }}">edit</a>
                 </td>
             </tr>
+            {% endif %}
         {% else %}
             <tr>
                 <td colspan="3">no records found</td>
             </tr>
         {% endfor %}
+             
+
         </tbody>
     </table>
     

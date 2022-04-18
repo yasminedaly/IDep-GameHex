@@ -1,0 +1,46 @@
+
+
+{% block body %}
+    <body style="background-color:powderblue;">
+    <picture>
+    {#<img src="file:///D:/XAMPP/htdocs/Server/IDep-GameHex/public/assets/images/Image1.png"  >#}
+    <img class="brand-logo"  src="{{asset("assets/images/Image1.png")}}" />
+    </picture>
+    
+    <h1 align="center" style="color:red">User List</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="color:blue">Id</th>
+                <th style="color:blue">Name</th>
+                <th style="color:blue">LastName</th>
+                <th style="color:blue">CIN</th>
+                <th style="color:blue">Phone</th>
+                <th style="color:blue">Date</th>
+                <th style="color:blue">Email</th>
+                <th style="color:blue">Password</th>
+                <th style="color:blue">Roles</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.CIN }}</td>
+                <td>{{ user.phone }}</td>
+                <td>{{ user.date }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                
+            </tr>
+        
+        {% endfor %}
+        </tbody>
+    </table>
+    </body>
+    
+{% endblock %}

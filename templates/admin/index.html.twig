@@ -3,7 +3,7 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
+    <h1>User List</h1>
     {#{% if app.user %}
         <div class="mb-3">
             You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
@@ -49,5 +49,11 @@
         </tbody>
     </table>
 
+    <center>
     {#<a href="{{ path('backend_user_new') }}">Create new</a>#}
+
+    <button class="btn-info btn-lg mt-10">
+    <a href="{{ path('pdf') }}">Print</a>
+    </button>
+    </center>
 {% endblock %}
