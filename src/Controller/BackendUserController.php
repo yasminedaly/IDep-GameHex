@@ -44,7 +44,7 @@ class BackendUserController extends AbstractController
             'users' => $userRepository->findAll(),
         ]);
         $dompdf->loadHtml($html);
-        $dompdf->setPaper('A2', 'portrait');
+        $dompdf->setPaper('A3', 'portrait');
         $dompdf->render();
         $dompdf->stream("UserList.pdf", [
             "Attachement" => true
@@ -159,7 +159,7 @@ class BackendUserController extends AbstractController
     $id->setAccept(1);
     $this->getDoctrine()->getManager()->flush();
    
-    return $this->redirectToRoute('backend_user_index', [], Response::HTTP_SEE_OTHER);
+    return $this->redirectToRoute('app_articles_indexAdmin', [], Response::HTTP_SEE_OTHER);
     }
 
 }

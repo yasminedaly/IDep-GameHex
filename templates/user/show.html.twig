@@ -3,12 +3,8 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_login') }}">Logout</a>
-        </div>
-    {% endif %}
+    <h1 align="center">User Info</h1>
+    
     <table class="table">
         <tbody>
             <tr>

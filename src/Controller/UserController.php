@@ -128,4 +128,29 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    /**
+     * @Route("/ban/{id}", name="ban")
+     */
+    public function ban($id): Response
+    {
+        $user=$this->getDoctrine()->getRepository(User::class)->find($id);
+        $user->setBan(true);
+        $user->setActivate(false);
+        $this->getDoctrine()->getManager()->flush();
+        return $this->redirectToRoute('backend_user_index');
+    }
+
+    /**
+     * @Route("activate/{id}", name="activate")
+     */
+    public function activate($id): Response
+    {
+        $user=$this->getDoctrine()->getRepository(User::class)->find($id);
+        $user->setBan(false);
+        $user->setActivate(true);
+        $this->getDoctrine()->getManager()->flush();
+        return $this->redirectToRoute('backend_user_index');
+    }
+
 }

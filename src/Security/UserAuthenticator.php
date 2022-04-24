@@ -52,6 +52,11 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
         $roles=null;
         if (isset($user))
         $roles=$user->getRoles();
+        if ($user->getBan()==1)
+        return ['email' => null,
+        'password' => null,
+        'roles'=> null,
+        'csrf_token' => null,];
         $credentials = [
             'email' => $request->request->get('email'),
             'password' => $request->request->get('password'),
@@ -105,10 +110,13 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
         //return new RedirectResponse($this->urlGenerator->generate('app_articles_new'));
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
         $cre=$this->getCredentials($request);
-
+        $user=$token->getUser();
 
         VarDumper::dump($cre);
         VarDumper::dump($cre["roles"][0]);
+
+        
+        
         if (isset($cre["roles"])) {
             if (strcmp($cre["roles"][0], "ROLE_ADMIN") == 0)
                 return new RedirectResponse($this->urlGenerator->generate('backend_user_index'));

@@ -3,12 +3,13 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    <h1>User List</h1>
+    <h1 align="center">User List</h1>
     {#{% if app.user %}
         <div class="mb-3">
             You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% endif %}#}
+
     <table class="table">
         <thead>
             <tr>
@@ -19,12 +20,15 @@
                 <th>Phone</th>
                 <th>Date</th>
                 <th>Email</th>
-                <th>Password</th>
+                {#<th>Password</th>#}
                 <th>Roles</th>
+                <th>ban</th>
+                <th>activate</th>
                 <th>actions</th>
             </tr>
         </thead>
-        <tbody>
+        
+        <tbody id="myTable">
         {% for user in users %}
             <tr>
                 <td>{{ user.id }}</td>
@@ -34,11 +38,15 @@
                 <td>{{ user.phone }}</td>
                 <td>{{ user.date }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.password }}</td>
+                {#<td>{{ user.password }}</td>#}
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.ban }}</td>
+                <td>{{ user.activate }}</td>
                 <td>
                     <a href="{{ path('backend_user_show', {'id': user.id}) }}">show</a>
                     <a href="{{ path('backend_user_edit', {'id': user.id}) }}">edit</a>
+                    <a href="{{ path('ban', {'id': user.id}) }}">ban</a>
+                    <a href="{{ path('activate', {'id': user.id}) }}">activate</a>
                 </td>
             </tr>
         {% else %}

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<--651-->
+<!--651-->
 <html lang="en">
 
 <head>
@@ -13,7 +13,7 @@
     <meta name="keywords" content="game, gaming, template, HTML template, responsive, Bootstrap, premium">
     <meta name="author" content="_nK">
 
-    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="icon" type="image/png" href="assets/images/Image1.png">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -84,7 +84,7 @@
         <!-- START: Top Contacts -->
         <div class="nk-contacts-top">
             <div class="container">
-                <div class="nk-contacts-left">
+            <!-- <div class="nk-contacts-left">
                     <ul class="nk-social-links">
                         <li><a class="nk-social-rss" href="#"><span class="fa fa-rss"></span></a></li>
                         <li><a class="nk-social-twitch" href="#"><span class="fab fa-twitch"></span></a></li>
@@ -118,19 +118,20 @@
                     <li><a class="nk-social-vk" href="#"><span class="fab fa-vk"></span></a></li>
                     <li><a class="nk-social-wordpress" href="#"><span class="fab fa-wordpress"></span></a></li>
                     <li><a class="nk-social-youtube" href="#"><span class="fab fa-youtube"></span></a></li>
-                -->
+                
                     </ul>
-                </div>
+                </div>-->
+                
                 <div class="nk-contacts-right">
                     <ul class="nk-contacts-icons">
 
-                        <li>
+                        <!--<li>
                             <a href="#" data-toggle="modal" data-target="#modalSearch">
                                 <span class="fa fa-search"></span>
                             </a>
-                        </li>
+                        </li>-->
 
-
+                        {% if app.user.username is not defined %}
                         <li>
                             <a href="#" data-toggle="modal" data-target="#modalLogin">
                                 <span class="fa fa-user"></span>
@@ -179,9 +180,10 @@
                                 </div>
                             </div>
                         </li>
-
+                        {% endif %} 
                     </ul>
                 </div>
+                
             </div>
         </div>
         <!-- END: Top Contacts -->
@@ -200,12 +202,12 @@
             <div class="container">
                 <div class="nk-nav-table">
 
-                    <a href="index.html" class="nk-nav-logo">
-                        <img src="{{asset("assets/images/logo.png")}}" alt="GoodGames" width="199">
+                    <a href="{{ path('app_articles_index') }}" class="nk-nav-logo">
+                        <img src="{{asset("assets/images/Image1.png")}}" alt="GameHex" width="199">
                     </a>
 
                     <ul class="nk-nav nk-nav-right d-none d-lg-table-cell" data-nav-mobile="#nk-nav-mobile">
-
+                        {% if app.user.username is not defined %}
                         <li class=" nk-drop-item">
                             <a href="elements.html">
                                 Features
@@ -353,12 +355,13 @@
                                 </li>
                             </ul>
                         </li>
+                        
                         <li class=" nk-drop-item">
                             <a href="store.html">
                                 Store
 
                             </a>
-                            <ul class="dropdown">
+                         <ul class="dropdown">
 
                                 <li>
                                     <a href="store.html">
@@ -393,12 +396,56 @@
                                 <li>
                                     <a href="store-cart.html">
                                         Cart
-
                                     </a>
                                 </li>
                             </ul>
                         </li>
-                    </ul>
+                        {% endif %} 
+                                    {% if app.user.username is defined %}
+
+                                    <li>
+                                    <a href="#" data-toggle="modal" data-target="#modalSearch">
+                                     <span class="fa fa-search"></span>
+                                    </a>
+                                    </li>
+
+                                     <li>
+                                    <a href="{{ path('app_articles_index') }}">
+                                    Articles
+                                    </a>
+                                    </li>
+                                    <li>
+                                    <a href="/user/profile/{{ app.user.username }}">
+                                        Profile
+                                    </a>
+                                    </li>
+                                   
+                                <li class=" nk-drop-item" >
+                                            <a href="/user/profile/{{ app.user.username }}">
+                                             {{ app.user.name }} {{ app.user.lastName }}
+	                                        </a>
+                                    <ul class="dropdown">
+
+                                        <li>
+               
+                                            <a href="/user/profile/{{ app.user.username }}">
+                                            Profile
+	                                        </a>
+         	                            </li>
+
+                                        <li>
+                                            <a href="{{ path('app_logout') }}">
+                                            Logout
+
+                                            </a>
+                                        </li> 
+        
+                                    </ul> 
+            
+                                </li> 
+                                {% endif %}         
+                            
+                        
                     <ul class="nk-nav nk-nav-right nk-nav-icons">
 
                         <li class="single-icon d-lg-none">
@@ -486,15 +533,14 @@
                         <div class="nk-widget">
                             <h4 class="nk-widget-title"><span class="text-main-1">Contact</span> With Us</h4>
                             <div class="nk-widget-content">
-                                <form action="php/ajax-contact-form.php" class="nk-form nk-form-ajax">
+                                <form action="#" class="nk-form nk-form-ajax">
                                     <div class="row vertical-gap sm-gap">
                                         <div class="col-md-6">
-                                            <input type="email" class="form-control required" name="email"
-                                                placeholder="Email *">
+                                        <!--<input type="email"  name="email" id="inputEmail" class="form-control" autocomplete="email" placeholder="Email" required autofocus>-->
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control required" name="name"
-                                                placeholder="Name *">
+                                        <!--<input type="text"  name="name" id="inputName" class="form-control" autocomplete="name" placeholder="Name" required autofocus>-->
+
                                         </div>
                                     </div>
                                     <div class="nk-gap"></div>
@@ -511,7 +557,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <!--<div class="col-md-6">
                         <div class="nk-widget">
                             <h4 class="nk-widget-title"><span class="text-main-1">Latest</span> Posts</h4>
                             <div class="nk-widget-content">
@@ -554,7 +600,7 @@
                                 <div class="nk-twitter-list" data-twitter-count="1"></div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
                 <div class="nk-gap-3"></div>
             </div>
@@ -562,10 +608,10 @@
             <div class="nk-copyright">
                 <div class="container">
                     <div class="nk-copyright-left">
-                        <a target="_blank" href="https://www.templateshub.net">Templates Hub</a>
+                        <a target="_blank" href="{{ path('app_articles_index') }}">For a marvellous Experience</a>
                     </div>
                     <div class="nk-copyright-right">
-                        <ul class="nk-social-links-2">
+                    <!--<ul class="nk-social-links-2">
                             <li><a class="nk-social-rss" href="#"><span class="fa fa-rss"></span></a></li>
                             <li><a class="nk-social-twitch" href="#"><span class="fab fa-twitch"></span></a></li>
                             <li><a class="nk-social-steam" href="#"><span class="fab fa-steam"></span></a></li>
@@ -600,8 +646,8 @@
                         <li><a class="nk-social-vk" href="#"><span class="fab fa-vk"></span></a></li>
                         <li><a class="nk-social-wordpress" href="#"><span class="fab fa-wordpress"></span></a></li>
                         <li><a class="nk-social-youtube" href="#"><span class="fab fa-youtube"></span></a></li>
-                    -->
-                        </ul>
+                    
+                        </ul>-->
                     </div>
                 </div>
             </div>
@@ -637,8 +683,19 @@
 
                     <div class="nk-gap-1"></div>
                     <form action="#" class="nk-form nk-form-style-1">
-                        <input type="text" value="" name="search" class="form-control"
+                        <input type="text" value="" id="myInput" name="search" class="form-control"
                             placeholder="Type something and press Enter" autofocus>
+                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                                                    <script>
+                                                    $(document).ready(function(){
+                                                    $("#myInput").on("keyup", function() {
+                                                    var value = $(this).val().toLowerCase();
+                                                    $("#myTable tr").filter(function() {
+                                                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                                    });
+                                                    });
+                                                    });
+                                                    </script>
                     </form>
                 </div>
             </div>

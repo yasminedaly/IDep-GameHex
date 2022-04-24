@@ -4,11 +4,7 @@
 
 {% block body %}
     <h1>User</h1>
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_login') }}">Logout</a>
-        </div>
-    {% endif %}
+    
     <table class="table">
         <tbody>
             <tr>
@@ -39,10 +35,10 @@
                 <th>Email</th>
                 <td>{{ user.email }}</td>
             </tr>
-            <tr>
+            {#<tr>
                 <th>Password</th>
                 <td>{{ user.password }}</td>
-            </tr>
+            </tr>#}
             
         </tbody>
     </table>

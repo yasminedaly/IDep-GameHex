@@ -70,7 +70,15 @@ class User implements UserInterface
      */
     private $isVerified = false;
 
-   
+   /**
+     * @ORM\Column(name="ban", type="boolean")
+     */
+    private $ban;
+
+    /**
+     * @ORM\Column(name="activate", type="boolean")
+     */
+    private $activate;
 
     
 
@@ -229,5 +237,28 @@ class User implements UserInterface
         return $this;
     }
 
-   
+    public function getBan(): ?bool
+    {
+        return $this->ban;
+    }
+
+    public function setBan(bool $ban): self
+    {
+        $this->ban = $ban;
+
+        return $this;
+    }
+
+    public function getActivate(): ?bool
+    {
+        return $this->activate;
+    }
+
+    public function setActivate(bool $activate): self
+    {
+        $this->activate = $activate;
+
+        return $this;
+    }
+
 }

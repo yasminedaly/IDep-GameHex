@@ -3,12 +3,8 @@
 {% block title %}Edit User{% endblock %}
 
 {% block body %}
-    <h1>Edit User</h1>
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
+    <h1 align="center">Edit User</h1>
+   
     {{ include('admin/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('backend_user_index') }}">back to list</a>

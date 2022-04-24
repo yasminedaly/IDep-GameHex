@@ -28,7 +28,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $userPasswordEncoder, EntityManagerInterface $entityManager/*,\Swift_Mailer $mailer*/): Response
+    public function register(Request $request, UserPasswordEncoderInterface $userPasswordEncoder, EntityManagerInterface $entityManager,\Swift_Mailer $mailer): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -42,7 +42,9 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-
+            $user->setBan(false);
+            $user->setActivate(true);
+            $user->setRoles(["ROLE_USER"]);
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -55,6 +57,24 @@ class RegistrationController extends AbstractController
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
             // do anything else you need here, like send an email
+            /*$mail=[];
+
+
+            $msg= $user->getEmail();
+
+
+            $message = (new \Swift_Message("New team is added with a name  : ".$msg))
+
+                ->setFrom('rambo25bh@gmail.com')
+                ->setTo('ramy.benhassine@esprit.tn')
+                ->setBody(
+                    $this->renderView(
+                        'registration/confirmation_email.html.twig',compact('user')
+                    ),
+                    'text/html'
+                ) ;
+            $mailer->send($message);*/
+
 
             return $this->redirectToRoute('app_login');
         }
