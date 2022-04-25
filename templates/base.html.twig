@@ -13,7 +13,7 @@
     <meta name="keywords" content="game, gaming, template, HTML template, responsive, Bootstrap, premium">
     <meta name="author" content="_nK">
 
-    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="icon" type="image/png" href="{{ asset("assets/template assets/images/favicon.png") }}">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -21,6 +21,7 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7cOpen+Sans:400,700" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" rel="stylesheet">
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{asset("assets/vendor/bootstrap/dist/css/bootstrap.min.css")}}">
@@ -55,6 +56,7 @@
 
     <!-- jQuery -->
     <script src="{{asset("assets/vendor/jquery/dist/jquery.min.js")}}"></script>
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
     
     
 </head>
@@ -143,7 +145,7 @@
                         
                         <div class="nk-widget-post">
                             <a href="store-product.html" class="nk-post-image">
-                                <img src="assets/images/product-5-xs.jpg" alt="In all revolutions of">
+                                <img src="{{ asset("assets/template assets/images/product-5-xs.jpg") }}" alt="In all revolutions of">
                             </a>
                             <h3 class="nk-post-title">
                                 <a href="#" class="nk-cart-remove-item"><span class="ion-android-close"></span></a>
@@ -340,50 +342,28 @@
         </li>
                     </ul>
         </li>
-        <li class=" nk-drop-item">
-            <a href="store.html">
-                Store
-                
-            </a><ul class="dropdown">
-                        
-        <li>
-            <a href="store.html">
-                Store
-                
-            </a>
-        </li>
-        <li>
-            <a href="store-product.html">
-                Product
-                
-            </a>
-        </li>
-        <li>
-            <a href="store-catalog.html">
-                Catalog
-                
-            </a>
-        </li>
-        <li>
-            <a href="store-catalog-alt.html">
-                Catalog Alt
-                
-            </a>
-        </li>
-        <li>
-            <a href="store-checkout.html">
-                Checkout
-                
-            </a>
-        </li>
-        <li>
-            <a href="store-cart.html">
-                Cart
-                
-            </a>
-        </li>
-                    </ul>
-        </li>
+                    <li class=" nk-drop-item">
+                        <a href="#">
+                            Coaching
+
+                        </a>
+                        <ul class="dropdown">
+
+                            <li>
+                                <a href="{{ path('app_session_index') }}">
+                                    Sessions
+
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_coach_index') }}">
+                                    Coaches
+
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
                 </ul>
                 <ul class="nk-nav nk-nav-right nk-nav-icons">
                     

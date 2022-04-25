@@ -1,0 +1,40 @@
+{{ form_start(form) }}
+{# {{ form_widget(form) }} #}
+<div class="form-group">
+    {{ form_label(form.title) }}
+    {{ form_widget(form.title, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.title) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.description) }}
+    {{ form_widget(form.description, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.description) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.date) }}
+    {{ form_widget(form.date, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.date) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.startTime) }}
+    {{ form_widget(form.startTime, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.startTime) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.link) }}
+    {{ form_widget(form.link, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.link) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.rating) }}
+    {{ form_widget(form.rating, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.rating) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.coach) }}
+    {{ form_widget(form.coach, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.coach) }}
+</div>
+
+<button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

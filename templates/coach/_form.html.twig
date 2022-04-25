@@ -1,0 +1,19 @@
+{{ form_start(form) }}
+{# {{ form_widget(form) }} #}
+<div class="form-group">
+    {{ form_label(form.rating) }}
+    {{ form_widget(form.rating, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.rating) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.tier) }}
+    {{ form_widget(form.tier, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.tier) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.motto) }}
+    {{ form_widget(form.motto, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.motto) }}
+</div>
+<button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

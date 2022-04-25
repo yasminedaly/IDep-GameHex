@@ -1,0 +1,49 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Coach index{% endblock %}
+
+{% block body %}
+    <center><h1>Coach index</h1></center>
+
+    <table class="table" id="myTable">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Rating</th>
+            <th>Tier</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for coach in coaches %}
+            <tr>
+                <td>{{ coach.id }}</td>
+                <td>{{ coach.rating }}</td>
+                <td>{{ coach.tier }}</td>
+                <td>
+                    <a href="{{ path('app_coach_showAdmin', {'id': coach.id}) }}">Show</a>
+                    <a href="{{ path('app_coach_delete', {'id': coach.id}) }}">Delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% block javascript %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"/>
+    <script>
+        $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        })
+    });
+    </script>
+    {% endblock %}
+    {{ include('coach/stats.html.twig') }}
+{% endblock %}

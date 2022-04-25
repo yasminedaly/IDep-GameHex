@@ -1,0 +1,140 @@
+{% extends 'base.html.twig' %}
+{% block title %}Session index{% endblock %}
+{% block body %}
+    <h1>Session index</h1>
+    <h2>Search A Session !!</h2>
+
+    <div class="sidebar-search">
+
+        <div class="input-group custom-search-form">
+
+            <input type="text" id="myInput" class="form-control" placeholder="Search here" style="margin-bottom: 20px">
+        </div>
+    </div>
+
+    <table class="container_session" id="myTable">
+        <thead>
+        <tr>
+            <th width="50px">ID</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>StartTime</th>
+            <th>Link</th>
+            <th>Rating</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for session in sessions %}
+        <tr>
+            <td>{{ session.id }}</td>
+            <td>{{ session.title }}</td>
+            <td>{{ session.description }}</td>
+            <td>{{ session.date ? session.date|date('Y-m-d') : '' }}</td>
+            <td>{{ session.startTime ? session.startTime|date('H:i:s') : '' }}</td>
+            <td>{{ session.link }}</td>
+            <td>
+                <div>
+                    <span></span>
+                    <span class="rating" data-rating="0">
+                    <i class="star" data-checked="false" data-note="1">&#9733;</i>
+                    <i class="star" data-checked="false" data-note="2">&#9733;</i>
+                    <i class="star" data-checked="false" data-note="3">&#9733;</i>
+                    <i class="star" data-checked="false" data-note="4">&#9733;</i>
+                    <i class="star" data-checked="false" data-note="5">&#9733;</i>
+                </span>
+                    <span>
+                    <input class="session-id" hidden value="{{ session.id }}">
+                </span>
+                </div>
+            </td>
+            <td>
+                <a href="{{ path('app_session_show', {'id': session.id}) }}">show</a>
+                <a href="{{ path('app_session_edit', {'id': session.id}) }}">edit</a>
+            </td>
+        </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('app_session_new') }}">Create new</a>
+{% block js %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            })
+        });
+    </script>
+    <script>
+        const ratings = document.querySelectorAll('.rating');
+        const session_id = document.querySelector('.session-id').value;
+        ratings.forEach(rating =>
+            rating.addEventListener('mouseleave', ratingHandler)
+        );
+        const stars = document.querySelectorAll('.rating .star');
+        stars.forEach(star => {
+            star.addEventListener('mouseover', starSelection);
+            star.addEventListener('mouseleave', starSelection);
+            star.addEventListener('click', activeSelect);
+        });
+        function ratingHandler(e) {
+            const childStars = e.target.children;
+            for(let i = 0; i < childStars.length; i++) {
+                const star = childStars.item(i)
+                if (star.dataset.checked === "true") {
+                    star.classList.add('hover');
+                }
+                else {
+                    star.classList.remove('hover');
+                }
+            }
+        }
+        function starSelection(e) {
+            const parent = e.target.parentElement
+            const childStars = parent.children;
+            const dataset = e.target.dataset;
+            const note = +dataset.note; // Convert note (string) to note (number)
+            for (let i = 0; i < childStars.length; i++) {
+                const star = childStars.item(i)
+                if (+star.dataset.note > note) {
+                    star.classList.remove('hover');
+                } else {
+                    star.classList.add('hover');
+                }
+            }
+        }
+        function activeSelect(e) {
+            const parent = e.target.parentElement
+            const childStars = parent.children;
+            const dataset = e.target.dataset;
+            const note = +dataset.note; // Convert note (string) to note (number)
+            for (let i = 0; i < childStars.length; i++) {
+                const star = childStars.item(i)
+                if (+star.dataset.note > note) {
+                    star.classList.remove('hover');
+                    star.dataset.checked = "false";
+                } else {
+                    star.classList.add('hover');
+                    star.dataset.checked = "true";
+                }
+            }
+            const noteTextElement = parent.parentElement.lastElementChild.children.item(0)
+            noteTextElement.innerText = `Note: ${note}`;
+            console.log(note);
+            let url = `/session/sessionRating/${session_id}/${note}`
+            window.location.href = url
+            console.log(url)
+        }
+    </script>
+    {% endblock %}
+{% endblock %}
