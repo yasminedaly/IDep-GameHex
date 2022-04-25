@@ -23,7 +23,7 @@
                 <td>{{ team_mate.memberPhone }}</td>
                 <td>{{ team_mate.memberMail }}</td>
                 <td>
-                    <a href="{{ path('app_team_mates_show', {'riotId': team_mate.riotId}) }}">show</a>
+                    <a href="{{ path('app_team_mates_showAdmin', {'riotId': team_mate.riotId}) }}">show</a>
                 </td>
             </tr>
         {% else %}

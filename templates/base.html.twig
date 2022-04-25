@@ -201,7 +201,7 @@
                 <div class="nk-nav-table">
 
                     <a href="index.html" class="nk-nav-logo">
-                        <img src="{{asset("assets/images/logo.png")}}" alt="GoodGames" width="199">
+                        <img src="{{asset("assets/images/gamehex.png")}}" alt="GameHex" width="199">
                     </a>
 
                     <ul class="nk-nav nk-nav-right d-none d-lg-table-cell" data-nav-mobile="#nk-nav-mobile">
@@ -338,11 +338,26 @@
                                             Matches
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="{{path('app_teams_index') }}">
+                                <li class=" nk-drop-item">
+                                    <a href="#">
                                         Teams
 
                                     </a>
+                                        <ul class="dropdown">
+
+                                             <li>
+                                                  <a href="{{path('app_teams_index') }}">
+                                                     Display All Teams
+
+                                                  </a>
+                                             </li>
+                                            <li>
+                                                <a href="{{path('app_teams_indexMap') }}">
+                                                     Find on Map
+
+                                                </a>
+                                            </li>
+                                        </ul>
                                 </li>
                                 <li>
                                     <a href="{{path('app_team_mates_index') }}">
@@ -453,14 +468,26 @@
         <div class="nk-gap-2"></div>
 
 
-
         <div class="container">
 
+<div>
+    <div>
+        <div>
+            <div>
+                <div>
+                    {% include 'flash_messages.html.twig' %}
             {% block body %}
 
             {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
         </div>
+
 
         <div class="nk-gap-4"></div>
 

@@ -5,35 +5,68 @@
 {% block body %}
     <h1>TeamMates</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>riotId</th>
-                <th>MemberRole</th>
-                <th>MemberPhone</th>
-                <th>MemberMail</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for team_mate in team_mates %}
-            <tr>
-                <td>{{ team_mate.riotId }}</td>
-                <td>{{ team_mate.memberRole }}</td>
-                <td>{{ team_mate.memberPhone }}</td>
-                <td>{{ team_mate.memberMail }}</td>
-                <td>
-                    <a href="{{ path('app_team_mates_show', {'riotId': team_mate.riotId}) }}">show</a>
-                    <a href="{{ path('app_team_mates_edit', {'riotId': team_mate.riotId}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+
+
+
+    <!-- START: Teammate Card -->
+
+
+
+
+
+                        {% for team_mate in team_mates %}
+                            <div class="nk-teammate-card">
+                            <div class="nk-teammate-card-info">
+                                <table>
+                                    <tbody>
+                    <td>
+                            <tr>
+                                <td><strong class="h5">Riot ID: </strong>&nbsp;&nbsp;&nbsp;</td>
+                                <td><strong class="h5">{{ team_mate.riotId }}</strong></td>
+                            </tr>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong class="h5">Role:</strong>
+                    </td>
+                    <td>
+                        <strong class="h5">{{ team_mate.memberRole }}</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong class="h5">Phone Number: </strong>
+                    </td>
+                    <td>
+                        <strong class="h5">{{ team_mate.memberPhone }}</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong class="h5">E-mail</strong>
+                    </td>
+                    <td>
+                        <strong class="h5">{{ team_mate.memberMail }}</strong>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+                            <a href="{{ path('app_team_mates_show', {'riotId': team_mate.riotId}) }}">show</a>
+                            <a href="{{ path('app_team_mates_edit', {'riotId': team_mate.riotId}) }}">edit</a>
+                        {% else %}
+                            <tr>
+                                <td colspan="5">no records found</td>
+                            </tr>
+                        {% endfor %}
+
+    <!-- END: Teammate Card -->
+
 
     <a href="{{ path('app_team_mates_new') }}">Create new</a>
 {% endblock %}

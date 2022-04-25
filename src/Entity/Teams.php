@@ -52,15 +52,21 @@ class Teams
      */
     private $teamReg;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Matches::class, mappedBy="teams")
-     */
-    private $matches;
 
     /**
      * @ORM\OneToMany(targetEntity=TeamMates::class, mappedBy="team", orphanRemoval=true)
      */
     private $teamMates;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Matches::class, mappedBy="team1")
+     */
+    private $matches;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private ?string $teamLogo;
 
     public function __construct()
     {
@@ -77,6 +83,8 @@ class Teams
     {
         return $this->teamName;
     }
+
+
 
     public function setTeamName(string $teamName): self
     {
@@ -174,6 +182,18 @@ class Teams
                 $teamMate->setTeam(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTeamLogo(): ?string
+    {
+        return $this->teamLogo;
+    }
+
+    public function setTeamLogo(string $teamLogo): self
+    {
+        $this->teamLogo = $teamLogo;
 
         return $this;
     }

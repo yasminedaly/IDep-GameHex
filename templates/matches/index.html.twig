@@ -1,41 +1,75 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Matches index{% endblock %}
+{% block title %}Matches{% endblock %}
 
 {% block body %}
-    <h1>Matches index</h1>
+    <style>
+        .imgTest {
+            width: 60px;
+            height: 60px;
+        }
+    </style>
+    <h1>Matches</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>MatchRes</th>
-                <th>MatchCom</th>
-                <th>MatchDate</th>
-                <th>MatchTime</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for match in matches %}
-            <tr>
-                <td>{{ match.id }}</td>
-                <td>{{ match.matchRes }}</td>
-                <td>{{ match.matchCom }}</td>
-                <td>{{ match.matchDate ? match.matchDate|date('Y-m-d') : '' }}</td>
-                <td>{{ match.matchTime ? match.matchTime|date('H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_matches_show', {'id': match.id}) }}">show</a>
-                    <a href="{{ path('app_matches_edit', {'id': match.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <!-- START: Latest Matches -->
+    <div class="nk-gap-2"></div>
+    <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Latest</span> Matches</span></h3>
+    <div class="nk-gap"></div>
+    <div class="row">
+        <div class="col-md-4">
+            <a href="tournaments.html" class="nk-btn nk-btn-rounded nk-btn-color-main-1">Match Details</a>
+        </div>
+        <div class="col-md-8">
+            <div class="responsive-embed responsive-embed-16x9">
+                <iframe src="https://player.twitch.tv/?channel=eulcs&autoplay=false" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
+            </div>
+        </div>
+    </div>
 
-    <a href="{{ path('app_matches_new') }}">Create new</a>
+        <tr>
+    {% for match in matches %}
+
+
+    <div class="nk-gap"></div>
+    <div class="nk-match">
+        <div class="nk-match-team-left">
+            <a href="#">
+                        <span class="nk-match-team-logo">
+                            <img src={{ asset('/teamlogos/5/' ~ match.team1.teamLogo) }} class="imgTest" />
+                        </span>
+                <span class="nk-match-team-name">
+                            {{ match.team1.teamName }}
+                        </span>
+            </a>
+        </div>
+        <div class="nk-match-status">
+            <a href="{{ path('app_matches_show', {'id': match.id}) }}">
+                <span class="nk-match-status-vs">VS</span>
+                <span class="nk-match-status-date">{{ match.matchDate ? match.matchDate|date('Y-m-d') : '' }}</span>
+                <span class="nk-match-status-date">{{ match.matchTime ? match.matchTime|date('H:i:s') : '' }}</span>
+                <span class="nk-match-score bg-danger">{{ match.matchRes }}</span>
+                <p>{{ match.matchCom }}</p>
+
+
+            </a>
+        </div>
+        <div class="nk-match-team-right">
+            <a href="#">
+                        <span class="nk-match-team-name">
+                            {{ match.team2.teamName }}
+                        </span>
+                <span class="nk-match-team-logo">
+                            <img src={{ asset('/teamlogos/5/' ~ match.team2.teamLogo) }} class="imgTest" />
+                        </span>
+            </a>
+        </div>
+    </div>
+        </tr>
+
+    {% else %}
+        <tr>
+            <td colspan="6">no records found</td>
+        </tr>
+    {% endfor %}
+    <!-- END: Latest Matches -->
 {% endblock %}

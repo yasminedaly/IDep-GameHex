@@ -34,8 +34,8 @@ class TeamMates
      * @ORM\Column(type="integer")
      * @Assert\NotBlank
      * @Assert\Length(
-     *      min = 7,
-     *      max = 7,
+     *      min = 8,
+     *      max = 8,
      *      minMessage = "Your phone number must be at least {{ limit }} digits",
      *      maxMessage = "Your phone number cannot be longer than {{ limit }} digits"
      * )

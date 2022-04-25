@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\TeamMates;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,7 +17,11 @@ class TeamMatesType extends AbstractType
             ->add('memberRole')
             ->add('memberPhone')
             ->add('memberMail')
-            ->add('team')
+            ->add('team',EntityType::class,
+                [
+                    'class'=>'App\Entity\Teams',
+                    'choice_label'=>'teamName'
+                ])
         ;
     }
 

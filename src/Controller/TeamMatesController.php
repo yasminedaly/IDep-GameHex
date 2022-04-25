@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+
 use App\Entity\TeamMates;
 use App\Form\TeamMatesType;
 use App\Repository\TeamMatesRepository;
@@ -9,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twilio\Rest\Client;
+
 
 /**
  * @Route("/team/mates")
@@ -40,12 +43,24 @@ class TeamMatesController extends AbstractController
      */
     public function new(Request $request, TeamMatesRepository $teamMatesRepository): Response
     {
+
         $teamMate = new TeamMates();
         $form = $this->createForm(TeamMatesType::class, $teamMate);
         $form->handleRequest($request);
-
+        $twilio_number = "+19108308627";
         if ($form->isSubmitted() && $form->isValid()) {
+            $client =new Client('AC90ac083ebfd6f6485124fb25d08fbbb0', 'd9964c385389b51c5fe3ae2464a8b1b0');
+            $message = $client->messages->create(
+
+// Where to send a text message (your cell phone?)
+                '+21651908081',
+                array(
+                    'from' => $twilio_number,
+                    'body' => 'Team member registered!'
+                )
+            );
             $teamMatesRepository->add($teamMate);
+
             return $this->redirectToRoute('app_team_mates_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -64,6 +79,18 @@ class TeamMatesController extends AbstractController
             'team_mate' => $teamMate,
         ]);
     }
+
+
+    /**
+     * @Route("/back/{riotId}", name="app_team_mates_showAdmin", methods={"GET"})
+     */
+    public function showAdmin(TeamMates $teamMate): Response
+    {
+        return $this->render('team_mates/showAdmin.html.twig', [
+            'team_mate' => $teamMate,
+        ]);
+    }
+
 
     /**
      * @Route("/{riotId}/edit", name="app_team_mates_edit", methods={"GET", "POST"})
@@ -95,4 +122,8 @@ class TeamMatesController extends AbstractController
 
         return $this->redirectToRoute('app_team_mates_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+
 }
+

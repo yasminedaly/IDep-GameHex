@@ -25,6 +25,19 @@ class MatchesController extends AbstractController
         ]);
     }
 
+
+    /**
+     * @Route("/back", name="app_matches_indexAdmin", methods={"GET"})
+     */
+    public function indexAdmin(MatchesRepository $matchesRepository): Response
+    {
+        return $this->render('matches/indexAdmin.html.twig', [
+            'matches' => $matchesRepository->findAll(),
+        ]);
+    }
+
+
+
     /**
      * @Route("/new", name="app_matches_new", methods={"GET", "POST"})
      */
@@ -36,7 +49,7 @@ class MatchesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $matchesRepository->add($match);
-            return $this->redirectToRoute('app_matches_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_matches_indexAdmin', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('matches/new.html.twig', [
@@ -56,6 +69,17 @@ class MatchesController extends AbstractController
     }
 
     /**
+     * @Route("/back/{id}", name="app_matches_showAdmin", methods={"GET"})
+     */
+    public function showAdmin(Matches $match): Response
+    {
+        return $this->render('matches/showAdmin.html.twig', [
+            'match' => $match,
+        ]);
+    }
+
+
+    /**
      * @Route("/{id}/edit", name="app_matches_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Matches $match, MatchesRepository $matchesRepository): Response
@@ -65,7 +89,7 @@ class MatchesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $matchesRepository->add($match);
-            return $this->redirectToRoute('app_matches_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_matches_indexAdmin', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('matches/edit.html.twig', [
@@ -83,6 +107,6 @@ class MatchesController extends AbstractController
             $matchesRepository->remove($match);
         }
 
-        return $this->redirectToRoute('app_matches_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_matches_indexAdmin', [], Response::HTTP_SEE_OTHER);
     }
 }

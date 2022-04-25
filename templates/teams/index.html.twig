@@ -3,39 +3,60 @@
 {% block title %}Teams{% endblock %}
 
 {% block body %}
+    <style>
+        .imgTest {
+            width: 170px;
+            height: 170px;
+        }
+    </style>
     <h1>Teams</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>TeamName</th>
-                <th>TeamTag</th>
-                <th>TeamMail</th>
-                <th>TeamReg</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for team in teams %}
-            <tr>
-                <td>{{ team.id }}</td>
-                <td>{{ team.teamName }}</td>
-                <td>{{ team.teamTag }}</td>
-                <td>{{ team.teamMail }}</td>
-                <td>{{ team.teamReg }}</td>
-                <td>
-                    <a href="{{ path('app_teams_show', {'id': team.id}) }}">show</a>
-                    <a href="{{ path('app_teams_edit', {'id': team.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+
+
+    {% for team in teams %}
+    <div class="nk-team">
+        <div class="nk-team-logo">
+            <img src={{ asset('/teamlogos/5/' ~ team.teamLogo) }} class="imgTest" />
+        </div>
+        <div class="nk-team-cont">
+            <h3 class="h5 mb-20"><span class="text-main-1">Team:{{ team.id }}</span>{{ team.teamName }}</h3>
+            <h4 class="h6 mb-5">Tag: {{ team.teamTag }}</h4>
+            <h4 class="h6 mb-5">Mail: {{ team.teamMail }}</h4>
+            <h4 class="h6 mb-5">Governorate: {{ team.teamReg }}</h4>
+            <a href="{{ path('app_teams_show', {'id': team.id}) }}">Show</a>
+            <div class="nk-team-photo" style="background-image: url({{ asset('/assets/images/team-photo.png') }});">
+
+            </div>
+        </div>
+    </div>
+    {% else %}
+        <tr>
+            <td colspan="6">no records found</td>
+        </tr>
+    {% endfor %}
+
 
     <a href="{{ path('app_teams_new') }}">Create new</a>
+    <!--
+            START: Pagination
+
+            Additional Classes:
+                .nk-pagination-center
+                .nk-pagination-right
+        -->
+    <div class="nk-gap-2"></div>
+    <div class="nk-gap"></div>
+    <div class="nk-pagination nk-pagination-center">
+        <a href="#" class="nk-pagination-prev">
+            <span class="ion-ios-arrow-back"></span>
+        </a>
+        <nav >
+
+            {{ knp_pagination_render(teams) }}
+        </nav>
+        <a href="#" class="nk-pagination-next">
+            <span class="ion-ios-arrow-forward"></span>
+        </a>
+    </div>
+    <!-- END: Pagination -->
 {% endblock %}
