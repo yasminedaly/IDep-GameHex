@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpClient\HttpClient;
+
 
 /**
  * @Route("/articles")
@@ -20,8 +22,17 @@ class ArticlesController extends AbstractController
      */
     public function index(ArticlesRepository $articlesRepository): Response
     {
+        $client = new HttpClient;
+        $request = new Request();
+        $client = HttpClient::create();
+        $response = $client->request('GET', 'https://quotes15.p.rapidapi.com/quotes/random/',['headers'=>['X-RapidAPI-Host' => 'quotes15.p.rapidapi.com',
+        'X-RapidAPI-Key' => 'b72dd72451mshc7d1c9770f461acp1f5299jsn077736d8a6a3']]);
+        
+        $data = json_decode($response->getContent(), true);
+
         return $this->render('articles/index.html.twig', [
             'articles' => $articlesRepository->findAll(),
+            'data'=>$data,
         ]);
     }
 

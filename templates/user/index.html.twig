@@ -4,7 +4,23 @@
 
 {% block body %}
     <h1>User index</h1>
-    
+    {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %} 
+
+        {% for message in app.flashes('info') %}
+            <div class="alert alert-info">
+                {{message}}
+            </div>
+        {% endfor %}
+        
+        {% for message in app.flashes('danger') %}
+            <div class="alert alert-danger">
+                {{message}}
+            </div>
+        {% endfor %}
     <table class="table">
         <thead>
             <tr>
@@ -42,6 +58,7 @@
                 <td colspan="10">no records found</td>
             </tr>
         {% endfor %}
+        
         </tbody>
     </table>
 

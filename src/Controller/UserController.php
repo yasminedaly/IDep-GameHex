@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 
 
 /**
@@ -132,12 +133,17 @@ class UserController extends AbstractController
     /**
      * @Route("/ban/{id}", name="ban")
      */
-    public function ban($id): Response
+    public function ban($id,FlashyNotifier $flashyNotifier): Response
     {
         $user=$this->getDoctrine()->getRepository(User::class)->find($id);
         $user->setBan(true);
         $user->setActivate(false);
         $this->getDoctrine()->getManager()->flush();
+        $this->addFlash(
+            'danger',
+            'USER BANNED!'
+        );
+        /*$flashyNotifier->primary('the user is baned!', 'http://your-awesome-link.com');*/
         return $this->redirectToRoute('backend_user_index');
     }
 
@@ -150,6 +156,10 @@ class UserController extends AbstractController
         $user->setBan(false);
         $user->setActivate(true);
         $this->getDoctrine()->getManager()->flush();
+        $this->addFlash(
+            'success',
+            'USER ACtivated!'
+        );
         return $this->redirectToRoute('backend_user_index');
     }
 

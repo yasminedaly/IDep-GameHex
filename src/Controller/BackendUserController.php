@@ -130,6 +130,10 @@ class BackendUserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $userRepository->add($user);
+            $this->addFlash(
+                'info',
+                'USER MODIFIED!'
+            );
             return $this->redirectToRoute('backend_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -158,7 +162,10 @@ class BackendUserController extends AbstractController
     {
     $id->setAccept(1);
     $this->getDoctrine()->getManager()->flush();
-   
+    $this->addFlash(
+        'success',
+        'Article Accepted!'
+    );
     return $this->redirectToRoute('app_articles_indexAdmin', [], Response::HTTP_SEE_OTHER);
     }
 
