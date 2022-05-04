@@ -168,7 +168,8 @@
                     const summoner_input = $("#riot-summoner-input").val();
                     console.log(summoner_input)
                     let url = `/coach/?summonerName=${summoner_input}`
-                    window.location.href = url
+
+                    history.replaceState(summoner_input, 'Coach Index', url);
                     console.log(url)
                     function loadXMLDoc()
                     {
