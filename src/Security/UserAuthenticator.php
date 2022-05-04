@@ -48,24 +48,30 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
 
     public function getCredentials(Request $request)
     {
-        $user=$this->entityManager->getRepository(User::class)->findOneBy(['email' => $request->request->get('email')]);
-        $roles=null;
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $request->request->get('email')]);
+        $roles = null;
         if (isset($user))
-        $roles=$user->getRoles();
-        if ($user->getBan()==1)
-        return ['email' => null,
-        'password' => null,
-        'roles'=> null,
-        'csrf_token' => null,];
+            $roles = $user->getRoles();
+        if ($user->getBan() == 1)
+            return [
+                'email' => null,
+                'password' => null,
+                'roles' => null,
+                'csrf_token' => null,
+            ];
         $credentials = [
             'email' => $request->request->get('email'),
             'password' => $request->request->get('password'),
-            'roles'=> $roles,
+            'roles' => $roles,
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
         $request->getSession()->set(
             Security::LAST_USERNAME,
             $credentials['email']
+        );
+        $request->getSession()->set(
+            'userData',
+            $user->getId()
         );
 
         return $credentials;
@@ -109,14 +115,14 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
         // For example : 
         //return new RedirectResponse($this->urlGenerator->generate('app_articles_new'));
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
-        $cre=$this->getCredentials($request);
-        $user=$token->getUser();
+        $cre = $this->getCredentials($request);
+        $user = $token->getUser();
 
         VarDumper::dump($cre);
         VarDumper::dump($cre["roles"][0]);
 
-        
-        
+
+
         if (isset($cre["roles"])) {
             if (strcmp($cre["roles"][0], "ROLE_ADMIN") == 0)
                 return new RedirectResponse($this->urlGenerator->generate('backend_user_index'));

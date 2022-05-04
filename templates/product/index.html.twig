@@ -1,8 +1,12 @@
 {% extends 'baseAdmin.html.twig' %}
 
+
+
 {% block title %}Product index{% endblock %}
 
 {% block body %}
+
+
 <h1>Product index</h1>
 
 <table class="table">
@@ -29,8 +33,12 @@
             <td>{{ product.review }}</td>
             <td>{{ product.state }}</td>
             <td>
-                <a href="{{ path('app_product_show', {'id': product.id}) }}">show</a>
-                <a href="{{ path('app_product_edit', {'id': product.id}) }}">edit</a>
+                <img src="{{ asset('/users/5/'~ product.imgURL) }}"></img>
+            <td>
+                <div class="flex row">
+                    <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-dark mr-2">show</a>
+                    <a href="{{ path('app_product_edit', {'id': product.id}) }}" class="btn btn-success">edit</a>
+                </div>
             </td>
         </tr>
         {% else %}
@@ -41,5 +49,4 @@
     </tbody>
 </table>
 
-<a href="{{ path('app_product_new') }}">Create new</a>
 {% endblock %}

@@ -1,4 +1,51 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{# {{ form_widget(form) }} #}
+<div class="for py-6">
+    <div class="form-group">
+        {{ form_label(form.ref) }}
+        {{ form_widget(form.ref, { attr: { class: "form-control" } } ) }}
+        {{ form_errors(form.ref) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name, { attr: { class: "form-control" } } ) }}
+        {{ form_errors(form.name) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description, { attr: { class: "form-control" } } ) }}
+        {{ form_errors(form.description) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.price) }}
+        {{ form_widget(form.price, { attr: { class: "form-control" } } ) }}
+        {{ form_errors(form.price) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.review) }}
+        {{ form_widget(form.review, { attr: { class: "form-control" } } ) }}
+        {{ form_errors(form.review) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.state) }}
+        {{ form_widget(form.state, { attr: { class: "form-control" } } ) }}
+        {{ form_errors(form.state) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.supplier) }}
+        {{ form_widget(form.supplier, { attr: { class: "form-control" } } ) }}
+        {{ form_errors(form.supplier) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.imgURL) }}
+        {{ form_widget(form.imgURL, { attr: { class: "form-control" } } ) }}
+        {{ form_errors(form.imgURL) }}
+    </div>
+
+
+    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+    <a class="btn btn-dark" href="{{ path('app_product_new') }}">Create new</a>
+
+</div>
 {{ form_end(form) }}

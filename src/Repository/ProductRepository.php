@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Product;
+use App\Entity\PropertySearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -73,4 +74,25 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * @return Query
+     */
+    public function findAllVisibleQuery(PropertySearch $search)
+    {
+        //     $query = $this->findVisibleQuery();
+        //     if ($search->getMaxprice()) {
+        //         $query = $query->where('p.price <= :maxprice')
+        //             ->setParameter('maxprice', $search->getMaxprice());
+        //     }
+
+        //     return $query->getQuery();
+
+        $searching = $this->createQueryBuilder('Product')
+            ->andWhere('Product.price < :search')
+            ->setParameter('search', $search->getMaxprice())
+            ->getQuery()
+            ->execute();
+        return ($searching);
+    }
 }

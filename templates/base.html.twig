@@ -84,7 +84,7 @@
         <!-- START: Top Contacts -->
         <div class="nk-contacts-top">
             <div class="container">
-            <!-- <div class="nk-contacts-left">
+                <!-- <div class="nk-contacts-left">
                     <ul class="nk-social-links">
                         <li><a class="nk-social-rss" href="#"><span class="fa fa-rss"></span></a></li>
                         <li><a class="nk-social-twitch" href="#"><span class="fab fa-twitch"></span></a></li>
@@ -121,7 +121,7 @@
                 
                     </ul>
                 </div>-->
-                
+
                 <div class="nk-contacts-right">
                     <ul class="nk-contacts-icons">
 
@@ -180,10 +180,10 @@
                                 </div>
                             </div>
                         </li>
-                        {% endif %} 
+                        {% endif %}
                     </ul>
                 </div>
-                
+
             </div>
         </div>
         <!-- END: Top Contacts -->
@@ -355,13 +355,13 @@
                                 </li>
                             </ul>
                         </li>
-                        
+
                         <li class=" nk-drop-item">
                             <a href="store.html">
                                 Store
 
                             </a>
-                         <ul class="dropdown">
+                            <ul class="dropdown">
 
                                 <li>
                                     <a href="store.html">
@@ -400,66 +400,66 @@
                                 </li>
                             </ul>
                         </li>
-                        {% endif %} 
-                                    {% if app.user.username is defined %}
+                        {% endif %}
+                        {% if app.user.username is defined %}
 
-                                    <li>
-                                    <a href="#" data-toggle="modal" data-target="#modalSearch">
-                                     <span class="fa fa-search"></span>
-                                    </a>
-                                    </li>
-
-                                     <li>
-                                    <a href="{{ path('app_articles_index') }}">
-                                    Articles
-                                    </a>
-                                    </li>
-                                    <li>
-                                    <a href="/user/profile/{{ app.user.username }}">
-                                        Profile
-                                    </a>
-                                    </li>
-                                   
-                                <li class=" nk-drop-item" >
-                                            <a href="/user/profile/{{ app.user.username }}">
-                                             {{ app.user.name }} {{ app.user.lastName }}
-	                                        </a>
-                                    <ul class="dropdown">
-
-                                        <li>
-               
-                                            <a href="/user/profile/{{ app.user.username }}">
-                                            Profile
-	                                        </a>
-         	                            </li>
-
-                                        <li>
-                                            <a href="{{ path('app_logout') }}">
-                                            Logout
-
-                                            </a>
-                                        </li> 
-        
-                                    </ul> 
-            
-                                </li> 
-                                {% endif %}         
-                            
-                        
-                    <ul class="nk-nav nk-nav-right nk-nav-icons">
-
-                        <li class="single-icon d-lg-none">
-                            <a href="#" class="no-link-effect" data-nav-toggle="#nk-nav-mobile">
-                                <span class="nk-icon-burger">
-                                    <span class="nk-t-1"></span>
-                                    <span class="nk-t-2"></span>
-                                    <span class="nk-t-3"></span>
-                                </span>
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#modalSearch">
+                                <span class="fa fa-search"></span>
                             </a>
                         </li>
 
+                        <li>
+                            <a href="{{ path('app_articles_index') }}">
+                                Articles
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/user/profile/{{ app.user.username }}">
+                                Profile
+                            </a>
+                        </li>
 
-                    </ul>
+                        <li class=" nk-drop-item">
+                            <a href="/user/profile/{{ app.user.username }}">
+                                {{ app.user.name }} {{ app.user.lastName }}
+                            </a>
+                            <ul class="dropdown">
+
+                                <li>
+
+                                    <a href="/user/profile/{{ app.user.username }}">
+                                        Profile
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="{{ path('app_logout') }}">
+                                        Logout
+
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                        </li>
+                        {% endif %}
+
+
+                        <ul class="nk-nav nk-nav-right nk-nav-icons">
+
+                            <li class="single-icon d-lg-none">
+                                <a href="#" class="no-link-effect" data-nav-toggle="#nk-nav-mobile">
+                                    <span class="nk-icon-burger">
+                                        <span class="nk-t-1"></span>
+                                        <span class="nk-t-2"></span>
+                                        <span class="nk-t-3"></span>
+                                    </span>
+                                </a>
+                            </li>
+
+
+                        </ul>
                 </div>
             </div>
         </nav>
@@ -505,7 +505,7 @@
         <div class="container">
 
             {% block body %}
-               {# <div>
+            {# <div>
                 <label for="registration_form_CIN" class="required">CIN</label>
                 <ul>
                 <li>
@@ -536,10 +536,10 @@
                                 <form action="#" class="nk-form nk-form-ajax">
                                     <div class="row vertical-gap sm-gap">
                                         <div class="col-md-6">
-                                        <!--<input type="email"  name="email" id="inputEmail" class="form-control" autocomplete="email" placeholder="Email" required autofocus>-->
+                                            <!--<input type="email"  name="email" id="inputEmail" class="form-control" autocomplete="email" placeholder="Email" required autofocus>-->
                                         </div>
                                         <div class="col-md-6">
-                                        <!--<input type="text"  name="name" id="inputName" class="form-control" autocomplete="name" placeholder="Name" required autofocus>-->
+                                            <!--<input type="text"  name="name" id="inputName" class="form-control" autocomplete="name" placeholder="Name" required autofocus>-->
 
                                         </div>
                                     </div>
@@ -611,7 +611,7 @@
                         <a target="_blank" href="{{ path('app_articles_index') }}">For a marvellous Experience</a>
                     </div>
                     <div class="nk-copyright-right">
-                    <!--<ul class="nk-social-links-2">
+                        <!--<ul class="nk-social-links-2">
                             <li><a class="nk-social-rss" href="#"><span class="fa fa-rss"></span></a></li>
                             <li><a class="nk-social-twitch" href="#"><span class="fab fa-twitch"></span></a></li>
                             <li><a class="nk-social-steam" href="#"><span class="fab fa-steam"></span></a></li>
@@ -685,17 +685,18 @@
                     <form action="#" class="nk-form nk-form-style-1">
                         <input type="text" value="" id="myInput" name="search" class="form-control"
                             placeholder="Type something and press Enter" autofocus>
-                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-                                                    <script>
-                                                    $(document).ready(function(){
-                                                    $("#myInput").on("keyup", function() {
-                                                    var value = $(this).val().toLowerCase();
-                                                    $("#myTable tr").filter(function() {
-                                                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                                                    });
-                                                    });
-                                                    });
-                                                    </script>
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                        <script>
+                            $(document).ready(function () {
+                                $("#myInput").on("keyup", function () {
+                                    var value = $(this).val().toLowerCase();
+                                    $("#myTable tr").filter(function () {
+                                        $(this).toggle($(this).text().toLowerCase().indexOf(
+                                            value) > -1)
+                                    });
+                                });
+                            });
+                        </script>
                     </form>
                 </div>
             </div>
@@ -707,57 +708,61 @@
 
     <!-- START: Login Modal -->
     <div class="nk-modal modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span class="ion-android-close"></span>
-                </button>
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span class="ion-android-close"></span>
+                    </button>
 
-                <h4 class="mb-0"><span class="text-main-1">Sign</span> In</h4>
-                
-                <div class="nk-gap-1"></div>
-                <form  method="post" action="{{path('app_login')}}" class="nk-form text-white">
-                <center>
-                    <div class="row vertical-gap">
-                        <div class="col-md-6">
-                            Use email and password:
-
-                            <div class="nk-gap"></div>
-                            <input type="email"  name="email" id="inputEmail" class="form-control" autocomplete="email" placeholder="Email" required autofocus>
-
-                            <div class="nk-gap"></div>
-                            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" placeholder="Password" required>
-                        </div>
-                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" >
-                    </div>
+                    <h4 class="mb-0"><span class="text-main-1">Sign</span> In</h4>
 
                     <div class="nk-gap-1"></div>
-                    <div class="row vertical-gap">
-                        <button class="nk-btn nk-btn-rounded nk-btn-color-white nk-btn-block mt-25" type="submit">
-                            Sign in
-                        </button>
-                        <div class="col-md-6">
-                            <div class="mnt-5">
-                                <small><a href="{{path('app_forgot_password_request')}}">Forgot your password?</a></small>
+                    <form method="post" action="{{path('app_login')}}" class="nk-form text-white">
+                        <center>
+                            <div class="row vertical-gap">
+                                <div class="col-md-6">
+                                    Use email and password:
+
+                                    <div class="nk-gap"></div>
+                                    <input type="email" name="email" id="inputEmail" class="form-control"
+                                        autocomplete="email" placeholder="Email" required autofocus>
+
+                                    <div class="nk-gap"></div>
+                                    <input type="password" name="password" id="inputPassword" class="form-control"
+                                        autocomplete="current-password" placeholder="Password" required>
+                                </div>
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                             </div>
-                            <div class="mnt-5">
-                                <small><a href="{{path('app_register')}}">Not a member? Sign up</a></small>
+
+                            <div class="nk-gap-1"></div>
+                            <div class="row vertical-gap">
+                                <button class="nk-btn nk-btn-rounded nk-btn-color-white nk-btn-block mt-25"
+                                    type="submit">
+                                    Sign in
+                                </button>
+                                <div class="col-md-6">
+                                    <div class="mnt-5">
+                                        <small><a href="{{path('app_forgot_password_request')}}">Forgot your
+                                                password?</a></small>
+                                    </div>
+                                    <div class="mnt-5">
+                                        <small><a href="{{path('app_register')}}">Not a member? Sign up</a></small>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    </center>
-                </form>
-                
+                        </center>
+                    </form>
+
+                </div>
             </div>
         </div>
     </div>
-</div>
     <!-- END: Login Modal -->
 
 
 
-        
+
 
 
 

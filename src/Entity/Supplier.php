@@ -6,6 +6,8 @@ use App\Repository\SupplierRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=SupplierRepository::class)
@@ -26,16 +28,25 @@ class Supplier
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\Expression(
+     *     "this.getLeaveDate() >= this.getStartDate()",
+     *     message="Leave date should be greater than start date !"
+     * )
      */
     private $start_date;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\Expression(
+     *     "this.getLeaveDate() >= this.getStartDate()",
+     *     message="Leave date should be greater than start date !"
+     * )
      */
     private $leave_date;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     
      */
     private $nvr_units_sold;
 

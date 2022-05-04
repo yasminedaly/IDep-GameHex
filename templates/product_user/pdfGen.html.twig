@@ -1,0 +1,175 @@
+<html>
+
+<head>
+    <style>
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #customers td,
+        #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+
+        h4 {
+            color: red;
+        }
+
+        body {
+            font: normal 12px/20PX "Liberation sans", Arial, Helvetica, sans-serif;
+            color: #585858;
+        }
+
+        img {
+            width: 150px;
+            margin: 10px;
+            position: center;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <img src='data:image;base64,<?= {{ img64 }};?>' />
+
+    <table width="100%" style="font-family: sans-serif;" cellpadding="10">
+        <tr>
+            <td width="49%" style="border: 0.1mm solid #eee;">
+                <strong>All In Travel</strong><br>El Ghazela<br>Ariana<br>2083<br>Tunisia</td>
+
+            </td>
+
+            <td width="2%">&nbsp;</td>
+            <td width="49%" style="border: 0.1mm solid #eee; text-align: right;"><strong>All In Travel</strong><br>00-00
+                ABC Aare<br>Tunisia<br>123 456<br><br><strong>Telephone:</strong> +216 71 159 753<br><a href="#"
+                    target="_blank" style="color: #000; text-decoration: none;">GameHex@gmail.com</a><br></td>
+        </tr>
+    </table>
+    <br>
+    <table width="100%" style="font-family: sans-serif; font-size: 14px;">
+        <tr>
+            <td>
+                <table width="60%" align="left" style="font-family: sans-serif; font-size: 14px;">
+                    <tr>
+                        <td style="padding: 0px; line-height: 20px;">&nbsp;</td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+    </table>
+    <br>
+    {% block content %}
+    <table id="customers" width="100%" style="font-size: 14px; border-collapse: collapse;" cellpadding="8">
+
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Ref</th>
+                <th>ProductID</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.ref }}</td>
+                <td>{{ order.productID }}</td>
+                <td> 1 </td>
+                <td>{{ total }}</td>
+                <td>
+                    <a href="{{ path('app_order_show', {'id': order.id}) }}">show</a>
+                    <a href="{{ path('app_order_edit', {'id': order.id}) }}">edit</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <h4 style="font-family: helvetica, arial, sans-serif">NB : You pay once you get to the Invoice</h4>
+
+
+
+
+    <table width="100%" style="font-family: sans-serif; font-size: 14px;">
+        <tr>
+            <td>
+                <table width="60%" align="left" style="font-family: sans-serif; font-size: 14px;">
+                    <tr>
+                        <td style="padding: 0px; line-height: 20px;">&nbsp;</td>
+                    </tr>
+                </table>
+                <table width="40%" align="right" style="font-family: sans-serif; font-size: 14px;">
+                    <tr>
+                        <td style="border: 1px #eee solid; padding: 0px 8px; line-height: 20px;"><strong>Total
+                                Amount</strong></td>
+
+                        <td style="border: 1px #eee solid; padding: 0px 8px; line-height: 20px;">
+                            {{ total }}</td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+
+
+    {% endblock %}
+    <br><br>
+    <table width="100%" style="font-family: sans-serif; font-size: 14px;">
+        <br>
+        <tr>
+            <td>
+
+                <table width="50%" align="left" style="font-family: sans-serif; font-size: 13px; text-align: center;">
+                    <tr>
+                        <td style="padding: 0px; line-height: 20px;">
+                            <strong>GameHex</strong>
+                            <br>
+                            ABC AREA
+                            <br>
+                            Tel: +216 98 652 258 | Email: GameHex@gmail.com
+                            <br>
+                            Company Registered in Tunisia. Company Reg. 12121212.
+                            <br>
+                            VAT Registration No. 021021021 | ATOL No. 1234
+                        </td>
+                    </tr>
+                    <img src='data:image;base64,<?= {{ img643 }};?>' />
+
+                </table>
+
+            </td>
+        </tr>
+        <br>
+    </table>
+</body>
+
+</html>

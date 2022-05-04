@@ -21,5 +21,9 @@
     {{ form_errors(form.nvr_units_sold) }}
 </div>
 
-<button class="btn">{{ button_label|default('Save') }}</button>
+
+<div class="buttons-cont">
+    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+    <a class="btn btn-dark" href="{{ path('app_supplier_index') }}">back to list</a>
+</div>
 {{ form_end(form) }}

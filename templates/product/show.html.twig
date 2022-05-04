@@ -35,12 +35,17 @@
             <th>State</th>
             <td>{{ product.state }}</td>
         </tr>
+        <tr>
+            <th>Image</th>
+            <td> <img src="{{ asset('/users/5/'~ product.imgURL) }}"></img>
+            </td>
+        </tr>
     </tbody>
 </table>
 
-<a href="{{ path('app_product_index') }}">back to list</a>
+<a class="btn btn-dark" href="{{ path('app_product_index') }}">back to list</a>
 
-<a href="{{ path('app_product_edit', {'id': product.id}) }}">edit</a>
+<a class="btn btn-success" href="{{ path('app_product_edit', {'id': product.id}) }}">edit</a>
 
 {{ include('product/_delete_form.html.twig') }}
 {% endblock %}

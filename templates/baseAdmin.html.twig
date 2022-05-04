@@ -45,7 +45,7 @@
                     <ul class="nav navbar-nav mr-auto float-left">
                         <li class="nav-item d-block d-md-none"><a class="nav-link nav-menu-main menu-toggle hidden-xs"
                                 href="#"><i class="ft-menu"></i></a></li>
-                       <!-- <li class="nav-item d-none d-md-block"><a class="nav-link nav-link-expand" href="#"><i
+                        <!-- <li class="nav-item d-none d-md-block"><a class="nav-link nav-link-expand" href="#"><i
                                     class="ficon ft-maximize"></i></a></li>-->
                         <li class="nav-item dropdown navbar-search"><a class="nav-link dropdown-toggle hide"
                                 data-toggle="dropdown" href="#"><i class="ficon ft-search"></i></a>
@@ -56,17 +56,21 @@
                                             <div class="position-relative has-icon-right full-width">
                                                 <input class="form-control" id="myInput" type="text"
                                                     placeholder="Search here...">
-                                                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-                                                    <script>
-                                                    $(document).ready(function(){
-                                                    $("#myInput").on("keyup", function() {
-                                                    var value = $(this).val().toLowerCase();
-                                                    $("#myTable tr").filter(function() {
-                                                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                                <script
+                                                    src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+                                                </script>
+                                                <script>
+                                                    $(document).ready(function () {
+                                                        $("#myInput").on("keyup", function () {
+                                                            var value = $(this).val().toLowerCase();
+                                                            $("#myTable tr").filter(function () {
+                                                                $(this).toggle($(this).text()
+                                                                    .toLowerCase().indexOf(
+                                                                        value) > -1)
+                                                            });
+                                                        });
                                                     });
-                                                    });
-                                                    });
-                                                    </script>
+                                                </script>
                                                 <div class="form-control-position navbar-search-close"><i class="ft-x">
                                                     </i></div>
                                             </div>
@@ -93,7 +97,7 @@
                         </li>
                     </ul>-->
                     <ul class="nav navbar-nav float-right">
-                        
+
                         </li>
                         <li class="dropdown dropdown-user nav-item"><a
                                 class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
@@ -101,28 +105,29 @@
                                         src="{{asset("theme-assets/images/portrait/small/anas.jpg")}}"
                                         alt="avatar"><i></i></span></a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <div class="arrow_box_right"><a class="dropdown-item" href="{{ path('backend_profile', {'email': app.user.username}) }}"><span
+                                <div class="arrow_box_right"><a class="dropdown-item"
+                                        href="{{ path('backend_profile', {'email': app.user.username}) }}"><span
                                             class="avatar avatar-online">
-                                            <img
-                                                src="{{asset("theme-assets/images/portrait/small/anas.jpg")}}"
+                                            <img src="{{asset("theme-assets/images/portrait/small/anas.jpg")}}"
                                                 alt="avatar"><span class="user-name text-bold-700 ml-1">
-                                                
+
                                                 <p>{{ app.user.name }} {{ app.user.lastname }}</p>
-                                                
-                                                </span></span></a>
+
+                                            </span></span></a>
 
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ path('backend_profile', {'email': app.user.username}) }}"><i
+                                    <a class="dropdown-item"
+                                        href="{{ path('backend_profile', {'email': app.user.username}) }}"><i
                                             class="ft-user"></i> Profile</a>
-                                            
-                                            <!--<a class="dropdown-item" href="#"><i
+
+                                    <!--<a class="dropdown-item" href="#"><i
                                             class="ft-mail"></i> My Inbox</a><a class="dropdown-item" href="#"><i
                                             class="ft-check-square"></i> Task</a><a class="dropdown-item" href="#"><i
                                             class="ft-message-square"></i> Chats</a>
                                     <div class="dropdown-divider"></div>-->
-                                    
-                                    <a class="dropdown-item" href="{{ path('app_logout') }}"><i
-                                            class="ft-power"></i> Logout</a>
+
+                                    <a class="dropdown-item" href="{{ path('app_logout') }}"><i class="ft-power"></i>
+                                        Logout</a>
                                 </div>
                             </div>
                         </li>
@@ -133,13 +138,13 @@
     </nav>
 
     <!-- ////////////////////////////////////////////////////////////////////////////-->
-  
+
     <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true"
         data-img="theme-assets/images/backgrounds/02.jpg">
         <div class="navbar-header">
             <ul class="nav navbar-nav flex-row">
                 <li class="nav-item mr-auto"><a class="navbar-brand" href="{{path('backend_user_index')}}">
-                <img  src="{{asset("theme-assets/images/logo/Image1.png")}}" width="100" />
+                        <img src="{{asset("theme-assets/images/logo/Image1.png")}}" width="100" />
                         <h3 class="brand-text">GameHex</h3>
                     </a></li>
                 <li class="nav-item d-md-none"><a class="nav-link close-navbar"><i class="ft-x"></i></a></li>
@@ -147,14 +152,14 @@
         </div>
         <div class="main-menu-content">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                <li class="active"><a href="{{path('backend_user_index')}}"><i class="ft-home"></i><span class="menu-title"
-                            data-i18n="">Users</span></a>
+                <li class="active"><a href="{{path('backend_user_index')}}"><i class="ft-home"></i><span
+                            class="menu-title" data-i18n="">Users</span></a>
                 </li>
-                <li class=" nav-item"><a href="{{path('app_articles_indexAdmin')}}"><i class="ft-pie-chart"></i><span class="menu-title"
-                            data-i18n="">Articles</span></a>
+                <li class=" nav-item"><a href="{{path('app_articles_indexAdmin')}}"><i class="ft-pie-chart"></i><span
+                            class="menu-title" data-i18n="">Articles</span></a>
                 </li>
-                
-                
+
+
             </ul>
         </div><a class="btn btn-danger btn-block btn-glow btn-upgrade-pro mx-1"
             href="https://themeselection.com/products/chameleon-admin-modern-bootstrap-webapp-dashboard-html-template-ui-kit/"
@@ -499,14 +504,14 @@
     <!-- END PAGE LEVEL JS-->
 
 
-<script src="{{ asset('FlashyNotifier/js/flashy.js') }}"></script>
-<script src="//code.jquery.com/jquery.js"></script>
+    <script src="{{ asset('FlashyNotifier/js/flashy.js') }}"></script>
+    <script src="//code.jquery.com/jquery.js"></script>
 
 
     <link rel="stylesheet" href="{{ asset('FlashyNotifier/css/flashy.css') }}">
 
-{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
-  
+    {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+
 
 </body>
 

@@ -53,6 +53,15 @@ class Product
      */
     private $supplier;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $imgURL;
+
+
+
+
+
 
 
     public function getId(): ?int
@@ -140,6 +149,18 @@ class Product
     public function setSupplier(?Supplier $supplier): self
     {
         $this->supplier = $supplier;
+
+        return $this;
+    }
+
+    public function getImgURL(): ?string
+    {
+        return $this->imgURL;
+    }
+
+    public function setImgURL(?string $imgURL): self
+    {
+        $this->imgURL = $imgURL;
 
         return $this;
     }

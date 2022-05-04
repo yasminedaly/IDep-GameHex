@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 
 /**
@@ -25,18 +26,27 @@ class ArticlesController extends AbstractController
         $client = new HttpClient;
         $request = new Request();
         $client = HttpClient::create();
-        $response = $client->request('GET', 'https://quotes15.p.rapidapi.com/quotes/random/',['headers'=>['X-RapidAPI-Host' => 'quotes15.p.rapidapi.com',
-        'X-RapidAPI-Key' => 'b72dd72451mshc7d1c9770f461acp1f5299jsn077736d8a6a3']]);
-        
+        $response = $client->request('GET', 'https://quotes15.p.rapidapi.com/quotes/random/', ['headers' => [
+            'X-RapidAPI-Host' => 'quotes15.p.rapidapi.com',
+            'X-RapidAPI-Key' => 'b72dd72451mshc7d1c9770f461acp1f5299jsn077736d8a6a3'
+        ]]);
+
+        $session = new Session();
+
+        $session->start();
+        // set and get session attributes
+        $session->set('name', 'Drak');
         $data = json_decode($response->getContent(), true);
 
         return $this->render('articles/index.html.twig', [
             'articles' => $articlesRepository->findAll(),
-            'data'=>$data,
+            'data' => $data,
+            'session' => $session->get('userData')
+
         ]);
     }
 
-     /**
+    /**
      * @Route("/back", name="app_articles_indexAdmin", methods={"GET"})
      */
     public function indexAdmin(ArticlesRepository $articlesRepository): Response
@@ -101,7 +111,7 @@ class ArticlesController extends AbstractController
     }
 
 
- /**
+    /**
      * @Route("/back/{id}", name="app_articles_showAdmin", methods={"GET"})
      */
     public function showAdmin(Articles $article): Response
@@ -155,7 +165,7 @@ class ArticlesController extends AbstractController
      */
     public function delete(Request $request, Articles $article, ArticlesRepository $articlesRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->request->get('_token'))) {
             $articlesRepository->remove($article);
         }
 
@@ -167,7 +177,7 @@ class ArticlesController extends AbstractController
      */
     public function deleteAdmin(Request $request, Articles $article, ArticlesRepository $articlesRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->request->get('_token'))) {
             $articlesRepository->remove($article);
         }
 

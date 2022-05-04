@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CartController!{% endblock %}
+
+{% block body %}
+<style>
+
+</style>
+
+<h1>Your Cart :</h1>
+{% if items | length >0 %}
+
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>Ref</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.product.ref }}</td>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.product.price }}</td>
+            <td>{{ item.product.price * item.quantity }}</td>
+
+            <td>
+                <a href="{{path('app_cart_remove', {'id' : item.product.id })}}" class="btn btn-danger btn-sm"><i
+                        class="fas fa-trash"></i></a>
+            </td>
+            <td>
+                <a href="{{path('aaaa', { itemOBJ : {'Itemid' : item.product.id, 'total' : total }}  )}}"
+                    class="btn btn-danger btn-sm">Confirm</a>
+            </td>
+        </tr>
+
+        {% endfor %}
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <td colspan="4" class="text-right">Total :</td>
+            <td>{{ total }}</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="4" class="text-right">Get invoice :</td>
+            <td> <a href="{{path('app_pdfInvoice', { 'total' : total })}}" class="btn btn-danger btn-sm">Download
+                    PDF</a>}</td>
+            <td></td>
+        </tr>
+    </tfoot>
+</table>
+
+{% else %}
+<h2>Empty Cart</h2>
+{% endif %}
+
+{% endblock %}
