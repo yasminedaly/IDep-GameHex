@@ -6,15 +6,14 @@ use App\Entity\Session;
 use App\Form\SessionType;
 use App\Form\PropertySearchType;
 use App\Repository\SessionRepository;
+use App\Service\riotApi;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\MyPropertySearch;
-use Symfony\Component\Serializer\Exception\ExceptionInterface;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
  * @Route("/session")
@@ -35,7 +34,7 @@ class SessionController extends AbstractController
         $form->handleRequest($request);
         //initialement le tableau des articles est vide,
         //c.a.d on affiche les articles que lorsque l'utilisateur clique sur le bouton rechercher
-        $articles= [];
+
 
         if($form->isSubmitted() && $form->isValid()) {
             //on récupère le nom d'article tapé dans le formulaire
@@ -129,45 +128,15 @@ class SessionController extends AbstractController
             $sessionRepository->remove($session);
         }
 
+
         return $this->redirectToRoute('app_session_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    /**
-     * @Route("/searchSessions ", name="searchSessions")
-     * @throws ExceptionInterface
-     */
-    public function searchSessions(Request $request,NormalizerInterface $Normalizer): Response
-    {
-        $repository = $this->getDoctrine()->getRepository(Session::class);
-        $requestString=$request->get('searchValue');
-        $session = $repository->findByMultiple($requestString);
-        $jsonContent = $Normalizer->normalize($session, 'json',['groups'=>'show:read']);
-        $retour=json_encode($jsonContent);
-        return new Response($retour);
-    }
-
-    /**
-     * @Route("/searchSession ", name="searchSession")
-     * @throws ExceptionInterface
-     */
-    public function searchSession(Request $request,NormalizerInterface $Normalizer): Response
-    {
-        $searchTerm = $request->query->get('search');
-        $em = $this->getDoctrine()->getManager();
-        $search = $em->getRepository(Session::class)->findByMultiple($searchTerm);
-        if ($request->isXmlHttpRequest()) {
-            return JsonResponse::create(['status' => 'success', 'results' => $search]);
-
-        }
-        return $this->render('session/index2.html.twig', [
-            'sessions' => $search
-        ]);
-    }
 
     /**
      * @Route("/sessionRating/{id}/{rate}", name="edit_session_rating", methods={"GET", "POST"})
      */
-    public function editActionRating(?Session $session, Request $request, $rate, ManagerRegistry $doctrine):Response
+    public function editActionRating(?Session $session, $rate, ManagerRegistry $doctrine):Response
     {
         $session->setRating($rate);
 
@@ -178,10 +147,10 @@ class SessionController extends AbstractController
         $sessions = $coach->getSessions();
         $coachRating = 0;
         try {
-            foreach ($sessions->getIterator() as $i => $item) {
+            foreach ($sessions->getIterator() as $item) {
                 $coachRating = ($coachRating + $item->getRating())/$sessions->count();
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
         }
         $coach->setRating($coachRating);
         $entityManager = $doctrine->getManager();
@@ -190,4 +159,6 @@ class SessionController extends AbstractController
         // Return code
         return $this->redirectToRoute('app_session_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
 }

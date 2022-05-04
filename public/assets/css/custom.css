@@ -2,9 +2,76 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
 
+
+/** Twitter Typeahead **/
+.twitter-typeahead, .typeahead, .empty-message  {
+    width: 100%;
+}
+.tt-menu {
+    background: white;
+    width: 100%;
+}
+.tt-suggestion {
+    overflow: hidden;
+    display: table;
+    width: 100%;
+    padding: 10px 10px;
+    border-bottom: 1px solid #e9ecf2;
+}
+/** Movie Card (Movie Suggestions) **/
+.movie-card {
+    position: relative;
+    padding: 8px;
+}
+.movie-card-poster {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 52px;
+    height: 52px;
+    border: 2px solid #ccd6dd;
+    border-radius: 5px;
+}
+.movie-card:hover .movie-card-poster {
+    border-color: #f5f8fa;
+}
+.movie-card-details {
+    min-height: 60px;
+    padding-left: 60px;
+}
+.movie-card-name,
+.movie-card-year {
+    display: inline-block;
+}
+.movie-card-name {
+    font-weight: 700;
+}
+.movie-card-year {
+    color: #8899a6;
+}
+.movie-card:hover .movie-card-year {
+    color: #fff;
+}
+.movie-card-plot {
+    margin-top: 5px;
+    font-size: 14px;
+    line-height: 18px;
+}
+.movie-card:hover,
+.movie-card.is-active {
+    color: #fff;
+    background: #0088CC;
+    cursor: pointer;
+}
+.empty-message {
+    position: relative;
+    padding: 10px;
+    font-size: 16px;
+    line-height: 30px;
+    text-align: center;
+}
+
 /* Table CSS */
-
-
 
 body {
     font-family: 'Open Sans', sans-serif;

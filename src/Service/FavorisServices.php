@@ -7,10 +7,13 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Coach;
 
 
+/**
+ * @property EntityManagerInterface $manager
+ */
 class FavorisServices
 {
-    private $session;
-    private $repoCoachs;
+    private SessionInterface $session;
+    private CoachRepository $repoCoachs;
     public function __construct(SessionInterface $session, CoachRepository $repoCoachs,EntityManagerInterface $manager){
         $this->session = $session;
         $this->repoCoachs = $repoCoachs;
@@ -31,7 +34,7 @@ class FavorisServices
         $this->updateFavoris($panier);
     }
 
-    public function removeall(Coach $coach){
+    public function removeAll(Coach $coach){
         $panier = $this->getFavoris();
         $id = $coach->getId();
 

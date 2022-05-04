@@ -67,6 +67,18 @@ class SessionRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+    //  * @return Session[] Returns an array of Session objects
+    //  */
+    public function findByTitle($title)
+    {
+        return $this->createQueryBuilder('s')
+            ->where('s.title LIKE :title')
+            ->setParameter('title', $title)
+            ->getQuery()
+            ->getResult();
+    }
+
     /*
     public function findOneBySomeField($value): ?Session
     {

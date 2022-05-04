@@ -88,8 +88,20 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.7"
     },
+    "guzzlehttp/guzzle": {
+        "version": "6.5.5"
+    },
+    "guzzlehttp/promises": {
+        "version": "1.5.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.8.5"
+    },
     "laminas/laminas-code": {
         "version": "4.5.1"
+    },
+    "michaelgarrez/lol-api": {
+        "version": "v3.0.0"
     },
     "monolog/monolog": {
         "version": "1.27.0"
@@ -153,11 +165,17 @@
     "psr/container": {
         "version": "1.1.2"
     },
+    "psr/http-message": {
+        "version": "1.0.1"
+    },
     "psr/link": {
         "version": "1.0.0"
     },
     "psr/log": {
         "version": "1.1.4"
+    },
+    "ralouphie/getallheaders": {
+        "version": "3.0.3"
     },
     "sebastian/cli-parser": {
         "version": "1.0.1"
@@ -412,9 +430,6 @@
             "./tests/bootstrap.php"
         ]
     },
-    "symfony/polyfill-intl-grapheme": {
-        "version": "v1.25.0"
-    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.25.0"
     },
@@ -497,9 +512,6 @@
     },
     "symfony/stopwatch": {
         "version": "v4.4.38"
-    },
-    "symfony/string": {
-        "version": "v5.4.3"
     },
     "symfony/translation": {
         "version": "4.4",

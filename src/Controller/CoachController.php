@@ -5,12 +5,12 @@ namespace App\Controller;
 use App\Entity\Coach;
 use App\Form\CoachType;
 use App\Repository\CoachRepository;
+use App\Service\riotApi;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
-use Doctrine\ORM\EntityManagerInterface;
-use Psr\Log\LoggerInterface;
+use LoLApi\Api\SummonerApi;
+use LoLApi\ApiClient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,11 +23,21 @@ class CoachController extends AbstractController
     /**
      * @Route("/", name="app_coach_index", methods={"GET"})
      */
-    public function index(CoachRepository $coachRepository): Response
+    public function index(CoachRepository $coachRepository, riotApi $callRiot, Request $request): Response
     {
+        $value = $request->request->get('summoner_input');
         return $this->render('coach/index.html.twig', [
-            'coaches' => $coachRepository->findAll(),
+            'coaches' => $coachRepository->findAll(), 'summoner'=> $this->showSummoner("YàKûza")
         ]);
+    }
+
+    /**
+     * @Route("/?summonerName={summoner_input}", name="show_summoner", methods={"GET"})
+     */
+    public function showSummoner($summoner_input)
+    {
+        $call = new ApiClient(ApiClient::REGION_EUW, 'RGAPI-dc71ec01-75b2-4746-8f92-83a99c9c4d58');
+        return $call->getSummonerApi()->getSummonerBySummonerName($summoner_input)->getResult();
     }
 
     /**
@@ -39,7 +49,6 @@ class CoachController extends AbstractController
         $data = $c->findAll();
         $dest = array();
         foreach ($data as $x) {
-            //$dest[] = [$x->getDestination()] ;
             $dest[] = $x->getTier();
         }
 
@@ -134,6 +143,20 @@ class CoachController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('imageURL')->getData();
+            $path = $this->getParameter('cover_directory') . '/' . 5;
+
+            $filename = md5(uniqid()) . '.' . $file->guessExtension();
+
+            try {
+                $file->move(
+                    $path,
+                    $filename
+                );
+            } catch (FileException $e) {
+                echo ('hello');
+            }
+            $coach->setImageURL($filename);
             $coachRepository->add($coach);
             return $this->redirectToRoute('app_coach_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -147,7 +170,7 @@ class CoachController extends AbstractController
     /**
      * @Route("/editRating/{id}/{rate}", name="edit_coach_rating", methods={"GET", "POST"})
      */
-    public function editActionRating(?Coach $coach, Request $request, $rate):Response
+    public function editActionRating(?Coach $coach, $rate):Response
     {
             $coach->setRating($rate);
 
@@ -169,6 +192,7 @@ class CoachController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$coach->getId(), $request->request->get('_token'))) {
             $coachRepository->remove($coach);
         }
+
 
         return $this->redirectToRoute('app_coach_index', [], Response::HTTP_SEE_OTHER);
     }

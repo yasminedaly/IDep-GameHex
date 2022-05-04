@@ -49,7 +49,7 @@ class FavorisController extends AbstractController
     public function delete(Coach $coach,FavorisServices $cartServices)
     {
         // On récupère le panier actuel
-        $cartServices->removeall($coach);
+        $cartServices->removeAll($coach);
         return $this->redirectToRoute("app_favoris");
     }
 

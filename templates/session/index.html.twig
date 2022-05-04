@@ -1,8 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block title %}Session index{% endblock %}
 {% block body %}
-    <h1>Session index</h1>
-    <h2>Search A Session !!</h2>
+    <header class="container-coach"><center><h1 title="coach-index-h1">Session Index</h1></center></header>
 
     <div class="sidebar-search">
 
@@ -62,7 +61,11 @@
         </tbody>
     </table>
     <a href="{{ path('app_session_new') }}">Create new</a>
+
+
+
 {% block js %}
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
 </script>
     <script>

@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>GoodGames | Community and Store HTML Game Template</title>
+    <title>GameHex | Your Gaming Hub</title>
 
     <meta name="description" content="GoodGames - Bootstrap template for communities and games store">
     <meta name="keywords" content="game, gaming, template, HTML template, responsive, Bootstrap, premium">
@@ -57,7 +57,8 @@
     <!-- jQuery -->
     <script src="{{asset("assets/vendor/jquery/dist/jquery.min.js")}}"></script>
     <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
-    
+
+
     
 </head>
 
@@ -657,7 +658,7 @@
 
     
 <!-- START: Scripts -->
-
+{% block js %}
 <!-- Object Fit Polyfill -->
 <script src="{{asset("assets/vendor/object-fit-images/dist/ofi.min.js")}}"></script>
 
@@ -718,7 +719,7 @@
 <script src="{{asset("assets/js/goodgames.min.js")}}"></script>
 <script src="{{asset("assets/js/goodgames-init.js")}}"></script>
 <!-- END: Scripts -->
-
+{% endblock %}
 
     
 </body>

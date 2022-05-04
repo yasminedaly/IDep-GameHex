@@ -47,6 +47,25 @@ class CoachRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+    //  * @return Session[] Returns an array of Session objects
+    //  */
+
+    public function findByMultiple($searchValue)
+    {
+        return $this->createQueryBuilder('c')
+            ->where('tier LIKE :tier')
+            ->orWhere(' rating LIKE :rating')
+            ->orWhere('motto LIKE :motto')
+            ->setParameters(
+                ['tier' => $searchValue,
+                    'rating'=>$searchValue,
+                     'motto'=>$searchValue
+                ])
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Coach[] Returns an array of Coach objects
     //  */
