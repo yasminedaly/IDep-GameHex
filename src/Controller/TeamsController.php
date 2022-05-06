@@ -2,15 +2,20 @@
 
 namespace App\Controller;
 
-use App\Entity\Agency;
 use App\Entity\Teams;
 use App\Form\TeamsType;
 use App\Repository\TeamsRepository;
+use spec\TwitchApi\Resources\StreamsApiSpec;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
+use TwitchApi\RequestGenerator;
+use TwitchClient\API\Helix\Helix;
+use TwitchClient\API\Helix\Services\Users;
+use TwitchClient\API\Kraken\Kraken;
+use TwitchClient\Authentication\DefaultTokenProvider;
 
 
 
@@ -27,9 +32,9 @@ class TeamsController extends AbstractController
     {
         $donnees = $teamsRepository
             ->findAll();
-        $teams= $paginator->paginate(
+        $teams = $paginator->paginate(
             $donnees,
-            $request -> query->getInt('page',1),
+            $request->query->getInt('page', 1),
             4
         );
         return $this->render('teams/index.html.twig', [
@@ -38,6 +43,7 @@ class TeamsController extends AbstractController
 
 
     }
+
 
     /**
      * @Route("/map", name="app_teams_indexMap", methods={"GET"})
@@ -56,6 +62,7 @@ class TeamsController extends AbstractController
             'teams' => $teamsRepository->findAll(),
         ]);
     }
+
     /**
      * @Route("/new", name="app_teams_new", methods={"GET", "POST"})
      */
@@ -78,17 +85,17 @@ class TeamsController extends AbstractController
                     $filename
                 );
             } catch (FileException $e) {
-                echo ('Exception raised');
+                echo('Exception raised');
             }
             $team->setTeamLogo($filename);
             $teamsRepository->add($team);
             $var = $form->get('teamName')->getData();
-                $message = (new \Swift_Message('Team Registration'))
-                    ->setFrom('gamehex2022@gmail.com')
-                    ->setTo($form->get('teamMail')->getData())
-                    ->setBody("Team ".$var." successfully registered"
-                    );
-                $mailer->send($message);
+            $message = (new \Swift_Message('Team Registration'))
+                ->setFrom('gamehex2022@gmail.com')
+                ->setTo($form->get('teamMail')->getData())
+                ->setBody("Team " . $var . " successfully registered"
+                );
+            $mailer->send($message);
             $this->addFlash('success', 'Mail successfully sent');
             return $this->redirectToRoute('app_teams_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -122,7 +129,6 @@ class TeamsController extends AbstractController
     }
 
 
-
     /**
      * @Route("/{id}/edit", name="app_teams_edit", methods={"GET", "POST"})
      */
@@ -143,7 +149,7 @@ class TeamsController extends AbstractController
                     $filename
                 );
             } catch (FileException $e) {
-                echo ('Exception raised');
+                echo('Exception raised');
             }
             $team->setTeamLogo($filename);
             $teamsRepository->add($team);
@@ -161,7 +167,7 @@ class TeamsController extends AbstractController
      */
     public function delete(Request $request, Teams $team, TeamsRepository $teamsRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$team->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $team->getId(), $request->request->get('_token'))) {
             $teamsRepository->remove($team);
         }
 
@@ -169,13 +175,12 @@ class TeamsController extends AbstractController
     }
 
 
-
     /**
      * @Route("/back/{id}", name="app_teams_deleteAdmin", methods={"POST"})
      */
     public function deleteAdmin(Request $request, Teams $team, TeamsRepository $teamsRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$team->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $team->getId(), $request->request->get('_token'))) {
             $teamsRepository->remove($team);
         }
 
@@ -187,10 +192,10 @@ class TeamsController extends AbstractController
      */
     public function showTeamsByReg(string $teamReg, Teams $team, TeamsRepository $teamsRepository, Request $request, PaginatorInterface $paginator): Response
     {
-        $donnees = $teamsRepository->findBy(array('teamReg'=> $teamReg), array('teamReg'=>'desc'));
-        $teams= $paginator->paginate(
+        $donnees = $teamsRepository->findBy(array('teamReg' => $teamReg), array('teamReg' => 'desc'));
+        $teams = $paginator->paginate(
             $donnees,
-            $request -> query->getInt('page',1),
+            $request->query->getInt('page', 1),
             4
         );
         return $this->render('teams/index.html.twig', [
@@ -202,12 +207,12 @@ class TeamsController extends AbstractController
     /**
      * @Route("/search/{teamName}/{pageNumber}", name="app_team_findByname"), methods={"GET"})
      */
-    public function findByName($teamName,$pageNumber): Response
+    public function findByName($teamName, $pageNumber): Response
     {
         $rep = $this->getDoctrine()->getRepository(Teams::class);
         $response = new JsonResponse();
         if ($teamName != "") {
-            $team = $rep->findByName($teamName,$pageNumber);
+            $team = $rep->findByName($teamName, $pageNumber);
             $response->setData(($team));
         } else {
             $response->setData([]);
@@ -220,7 +225,7 @@ class TeamsController extends AbstractController
     /**
      * @Route("/SearchAll/{pageNumber}", name="app_team_findall"), methods={"GET"})
      */
-    public function searchAllATeams(PaginatorInterface $paginator, Request $request,$pageNumber):Response
+    public function searchAllATeams(PaginatorInterface $paginator, Request $request, $pageNumber): Response
     {
 
         $rep = $this->getDoctrine()->getRepository(Teams::class);
@@ -230,6 +235,5 @@ class TeamsController extends AbstractController
         $response->headers->set('Content-Type', 'application/json');
         return $response;
     }
-
 
 }
