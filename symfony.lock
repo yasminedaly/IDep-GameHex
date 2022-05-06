@@ -1,6 +1,9 @@
 {
-    "composer/package-versions-deprecated": {
-        "version": "1.11.99.5"
+    "cmen/google-charts-bundle": {
+        "version": "5.0.0"
+    },
+    "cweagans/composer-patches": {
+        "version": "1.7.2"
     },
     "doctrine/annotations": {
         "version": "1.13",
@@ -91,6 +94,15 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.7"
     },
+    "guzzlehttp/guzzle": {
+        "version": "6.5.5"
+    },
+    "guzzlehttp/promises": {
+        "version": "1.5.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.8.5"
+    },
     "knplabs/knp-components": {
         "version": "v3.4.0"
     },
@@ -101,6 +113,9 @@
         "version": "4.5.1"
     },
     "mercuryseries/flashy-bundle": {
+        "version": "v3.0.0"
+    },
+    "michaelgarrez/lol-api": {
         "version": "v3.0.0"
     },
     "monolog/monolog": {
@@ -171,11 +186,17 @@
     "psr/container": {
         "version": "1.1.2"
     },
+    "psr/http-message": {
+        "version": "1.0.1"
+    },
     "psr/link": {
         "version": "1.0.0"
     },
     "psr/log": {
         "version": "1.1.4"
+    },
+    "ralouphie/getallheaders": {
+        "version": "3.0.3"
     },
     "sabberworm/php-css-parser": {
         "version": "8.4.0"
@@ -436,9 +457,6 @@
             "./tests/bootstrap.php"
         ]
     },
-    "symfony/polyfill-intl-grapheme": {
-        "version": "v1.25.0"
-    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.25.0"
     },
@@ -521,9 +539,6 @@
     },
     "symfony/stopwatch": {
         "version": "v4.4.38"
-    },
-    "symfony/string": {
-        "version": "v5.4.3"
     },
     "symfony/swiftmailer-bundle": {
         "version": "3.5",

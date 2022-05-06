@@ -1,0 +1,56 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Session index{% endblock %}
+
+{% block body %}
+    <h1>Session index</h1>
+
+    <table class="table" id="myTable">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>StartTime</th>
+            <th>Link</th>
+            <th>Rating</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for session in sessions %}
+            <tr>
+                <td>{{ session.id }}</td>
+                <td>{{ session.title }}</td>
+                <td>{{ session.description }}</td>
+                <td>{{ session.date ? session.date|date('Y-m-d') : '' }}</td>
+                <td>{{ session.startTime ? session.startTime|date('H:i:s') : '' }}</td>
+                <td>{{ session.link }}</td>
+                <td>{{ session.rating }}</td>
+                <td>
+                    <a href="{{ path('app_session_showAdmin', {'id': session.id}) }}">show</a>
+                    <a href="{{ path('app_session_delete', {'id': session.id}) }}">Delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% block javascript %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            })
+        });
+        </script>
+    {% endblock %}
+{% endblock %}

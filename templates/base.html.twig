@@ -95,7 +95,7 @@
                                     class="fab fa-twitter"></span></a></li>
                         <li><a class="nk-social-pinterest" href="#"><span class="fab fa-pinterest-p"></span></a></li>
 
-                        <!-- Additional Social Buttons
+                        <-- Additional Social Buttons
                     <li><a class="nk-social-behance" href="#"><span class="fab fa-behance"></span></a></li>
                     <li><a class="nk-social-bitbucket" href="#"><span class="fab fa-bitbucket"></span></a></li>
                     <li><a class="nk-social-dropbox" href="#"><span class="fab fa-dropbox"></span></a></li>
@@ -414,6 +414,30 @@
                                 Articles
                             </a>
                         </li>
+
+                        <li class=" nk-drop-item">
+                            <a href="#">
+                                Coaching
+
+                            </a>
+                            <ul class="dropdown">
+
+                                <li>
+                                    <a href="{{ path('app_session_index') }}">
+                                        Sessions
+
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('app_coach_index') }}">
+                                        Coaches
+
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
                         <li>
                             <a href="/user/profile/{{ app.user.username }}">
                                 Profile
@@ -623,7 +647,7 @@
                             <li><a class="nk-social-pinterest" href="#"><span class="fab fa-pinterest-p"></span></a>
                             </li>
 
-                            <!-- Additional Social Buttons
+                            <-- Additional Social Buttons
                         <li><a class="nk-social-behance" href="#"><span class="fab fa-behance"></span></a></li>
                         <li><a class="nk-social-bitbucket" href="#"><span class="fab fa-bitbucket"></span></a></li>
                         <li><a class="nk-social-dropbox" href="#"><span class="fab fa-dropbox"></span></a></li>

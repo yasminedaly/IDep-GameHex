@@ -1,0 +1,95 @@
+
+{% block all %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marvel Slider by Juan Ioo</title>
+    <link rel="stylesheet" href="{{asset ('assets/css/reset.css')}}">
+    <link rel="stylesheet" href="{{asset ('assets/css/styles.css')}}">
+    <link rel="stylesheet" href="{{asset ('assets/css/component.css')}}">
+
+
+
+    <link rel="stylesheet" href="{{asset ('assets/css/lightslider.css')}}" type="text/css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <!--JQUERY-->
+    <script type="text/javascript" src="{{asset ('assets/js/JQuery3.3.1.js')}}"></script>
+    <script type="text/javascript" src="{{asset ('assets/js/lightslider.js')}}"></script>
+    <script src="{{asset ('assets/js/modernizr.custom.js')}}"></script>
+
+</head>
+
+<body>
+
+
+
+<script src="{{asset ('assets/js/classie.js')}}"></script>
+
+
+<div class="view">
+
+    <section class="grid">
+
+        <div class="container">
+
+
+            <!---SLIDER-->
+            <ul id="autoWidth" class="cs-hidden">
+                {% if app.session.get('panier') %}
+                    {% for  element in dataPanier.products %}
+
+                        <li class="item-a">
+                            <!--SLIDER BOX-->
+
+                            <div class="box">
+
+
+                                <div class="product">
+
+                                    <div class="product__info">
+
+                                        <div class="imgbx">
+                                            <img class="product__image" src="{{ asset('/users/5/' ~ element.product.imageUrl) }}" alt="Can't find image">
+                                        </div>
+
+                                        <img class="product__image" />
+                                    </div>
+
+
+
+                                </div>
+                                <div class="content">
+                                    <button class="btn btn--right" onclick="window.location.href='{{ path('deletef', {'id': element.product.id})}}'">Remove</button>
+                                </div>
+
+
+                            </div>
+
+                        </li>
+                    {% endfor %}
+
+                {% else %}
+
+
+                    <tr>
+                        <td colspan="5" class="text-center">You don't have any favorites</td>
+                    </tr>
+                {% endif %}
+            </ul>
+        </div>
+    </section>
+</div>
+
+
+<script src="{{asset ('assets/js/classie.js')}}"></script>
+<script src="{{asset ('assets/js/az.js')}}"></script>
+<script src="{{asset ('assets/js/main.js')}}"></script>
+
+</body>
+
+</html>
+{% endblock %}

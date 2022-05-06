@@ -87,6 +87,16 @@ class User implements UserInterface
      */
     private $products;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Coach::class, mappedBy="user")
+     */
+    private $coach;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Session::class, mappedBy="user")
+     */
+    private $sessions;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -215,8 +225,6 @@ class User implements UserInterface
         return $this;
     }
 
-    
-
     /**
      * Returning a salt is only needed, if you are not using a modern
      * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
@@ -301,6 +309,38 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCoach()
+    {
+        return $this->coach;
+    }
+
+    /**
+     * @param mixed $coach
+     */
+    public function setCoach($coach): void
+    {
+        $this->coach = $coach;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSessions()
+    {
+        return $this->sessions;
+    }
+
+    /**
+     * @param mixed $sessions
+     */
+    public function setSessions($sessions): void
+    {
+        $this->sessions = $sessions;
     }
 
 }
