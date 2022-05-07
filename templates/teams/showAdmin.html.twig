@@ -1,0 +1,48 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Teams{% endblock %}
+
+{% block body %}
+    <style>
+        .imgTest {
+            width: 60px;
+            height: 60px;
+        }
+    </style>
+    <h1>Teams</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ team.id }}</td>
+        </tr>
+        <tr>
+            <th>Team Logo</th>
+            <td> <img src={{ asset('/teamlogos/5/' ~ team.teamLogo) }} class="imgTest" /></td>
+
+        </tr>
+        <tr>
+            <th>TeamName</th>
+            <td>{{ team.teamName }}</td>
+        </tr>
+        <tr>
+            <th>TeamTag</th>
+            <td>{{ team.teamTag }}</td>
+        </tr>
+        <tr>
+            <th>TeamMail</th>
+            <td>{{ team.teamMail }}</td>
+        </tr>
+        <tr>
+            <th>TeamReg</th>
+            <td>{{ team.teamReg }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_teams_indexAdmin') }}">back to list</a>
+
+
+    {{ include('teams/_deleteAdmin_form.html.twig') }}
+{% endblock %}

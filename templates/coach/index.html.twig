@@ -3,12 +3,14 @@
 {% block title %}Coach index{% endblock %}
 
 {% block body %}
-
+    <link rel="stylesheet" href="{{asset("assets/css/style.css")}}">
 
     <header class="container-coach"><center><h1 title="coach-index-h1">Coach Index</h1></center></header>
     <div class ="row">
         {% for coach in coaches %}
-            {% if coach.user.name != current_user.name and coach.user.lastName != current_user.lastName%}
+            {% if coach.user.id != current_user.id %}
+                {% for key, value in combined %}
+
         <aside class="profile-card">
             <header>
                 <!-- here’s the avatar -->
@@ -16,6 +18,9 @@
                 <a href="{{path('app_coach_show', { 'id': coach.id }) }}">
                     <img src="{{ asset('/users/5/'~ coach.imageURL) }}" alt="Fix this dude's picture" style = "width: 100px;height: 100px">
                 </a><br>
+                <span>
+                        <input class="coachID" value="{{ key }}">
+                </span>
                 <!-- the username -->
                 <h3>{{ coach.user.name ~ ' ' ~ coach.user.lastName }}</h3>
 
@@ -31,19 +36,29 @@
                 <p>{{ coach.motto }}</p>
             </div>
 
-            <div>
-                <span></span>
-                <span class="rating" data-rating="0">
-                    <i class="star" data-checked="false" data-note="1">&#9733;</i>
-                    <i class="star" data-checked="false" data-note="2">&#9733;</i>
-                    <i class="star" data-checked="false" data-note="3">&#9733;</i>
-                    <i class="star" data-checked="false" data-note="4">&#9733;</i>
-                    <i class="star" data-checked="false" data-note="5">&#9733;</i>
-                </span>
-                <span>
-                    <input class="coach-id" hidden value="{{ coach.id }}">
-                </span>
-            </div>
+            <section class='rating-widget'>
+
+                <!-- Rating Stars Box -->
+                <div class='rating-stars text-center'>
+                    <ul id='stars'>
+                        <li class='star selected' title='Bad' data-value='1'>
+                            <i class='fa fa-star fa-fw'></i>
+                        </li>
+                        <li class='star selected' title='Poor' data-value='2'>
+                            <i class='fa fa-star fa-fw'></i>
+                        </li>
+                        <li class='star selected' title='Fair' data-value='3'>
+                            <i class='fa fa-star fa-fw'></i>
+                        </li>
+                        <li class='star selected' title='Good' data-value='4'>
+                            <i class='fa fa-star fa-fw'></i>
+                        </li>
+                        <li class='star selected' title='Excellent' data-value='5'>
+                            <i class='fa fa-star fa-fw'></i>
+                        </li>
+                    </ul>
+                </div>
+            </section>
 
             <a href="{{ path('app_coach_edit', {'id': coach.id}) }}"><h5>edit</h5></a>
 
@@ -80,6 +95,7 @@
             </ul>
 
         </aside>
+                {% endfor %}
             {% endif %}
         {% endfor %}
         {% if not is_granted('ROLE_COACH') %}
@@ -107,7 +123,7 @@
             const ratings = document.querySelectorAll('.rating');
             const coach_id = document.querySelector('.coach-id').value;
             ratings.forEach(rating =>
-                rating.addEventListener('mouseleave', ratingHandler)
+                rating.addEventListener('load', ratingHandler)
             );
             const stars = document.querySelectorAll('.rating .star');
             stars.forEach(star => {
@@ -119,14 +135,12 @@
                 const childStars = e.target.children;
                 for(let i = 0; i < childStars.length; i++) {
                     const star = childStars.item(i)
-                    if (star.dataset.checked === "true") {
-                        star.classList.add('hover');
-                    }
-                    else {
-                        star.classList.remove('hover');
+                    if (star.dataset.checked === "false") {
+                        star.classList.checked = "true";
                     }
                 }
             }
+
             function starSelection(e) {
                 const parent = e.target.parentElement
                 const childStars = parent.children;
@@ -171,7 +185,7 @@
                 $("#valid-summoner").click(function () {
                     const summoner_input = $("#riot-summoner-input").val();
                     console.log(summoner_input)
-                    let url = `/coach/?summonerName=${summoner_input}`
+
 
                     history.replaceState(summoner_input, 'Coach Index', url);
                     console.log(url)

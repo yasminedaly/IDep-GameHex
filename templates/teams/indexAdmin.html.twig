@@ -1,0 +1,48 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Teams{% endblock %}
+
+{% block body %}
+    <style>
+        .imgTest {
+            width: 60px;
+            height: 60px;
+        }
+    </style>
+    <h1>Teams</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Team Name</th>
+            <th>Tag</th>
+            <th>E-Mail</th>
+            <th>Governorate</th>
+            <th>Logo</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for team in teams %}
+            <tr>
+                <td>{{ team.id }}</td>
+                <td>{{ team.teamName }}</td>
+                <td>{{ team.teamTag }}</td>
+                <td>{{ team.teamMail }}</td>
+                <td>{{ team.teamReg }}</td>
+                <td><img src={{ asset('/users/5/' ~ team.teamLogo) }} class="imgTest" /></td>
+                <td>
+                    <a href="{{ path('app_teams_showAdmin', {'id': team.id}) }}">show</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

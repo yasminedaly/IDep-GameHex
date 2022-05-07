@@ -1,0 +1,71 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Matches{% endblock %}
+
+{% block body %}
+    <h1>Matches</h1>
+
+    <style>
+        .imgTest {
+            width: 60px;
+            height: 60px;
+        }
+    </style>
+    <h1>Matches</h1>
+
+    <!-- START: Latest Matches -->
+    <div class="nk-gap-2"></div>
+    <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Latest</span> Matches</span></h3>
+    <div class="nk-gap"></div>
+    <div class="row">
+    </div>
+
+    <tr>
+    {% for match in matches %}
+
+
+        <div class="nk-gap"></div>
+        <div class="nk-match">
+            <div class="nk-match-team-left">
+                <a href="#">
+                        <span class="nk-match-team-logo">
+                            <img src={{ asset('/users/5/' ~ match.team1.teamLogo) }} class="imgTest" />
+                        </span>
+                    <span class="nk-match-team-name">
+                            {{ match.team1.teamName }}
+                        </span>
+                </a>
+            </div>
+            <div class="nk-match-status">
+                <a href="{{ path('app_matches_showAdmin', {'id': match.id}) }}">
+                    <span class="nk-match-status-vs">VS</span>
+                    <span class="nk-match-status-date">{{ match.matchDate ? match.matchDate|date('Y-m-d') : '' }}</span>
+                    <span class="nk-match-status-date">{{ match.matchTime ? match.matchTime|date('H:i:s') : '' }}</span>
+                    <span class="nk-match-score bg-danger">{{ match.matchRes }}</span>
+                    <p>{{ match.matchCom }}</p>
+
+
+                </a>
+            </div>
+            <div class="nk-match-team-right">
+                <a href="#">
+                        <span class="nk-match-team-name">
+                            {{ match.team2.teamName }}
+                        </span>
+                    <span class="nk-match-team-logo">
+                            <img src={{ asset('/users/5/' ~ match.team2.teamLogo) }} class="imgTest" />
+                        </span>
+                </a>
+            </div>
+        </div>
+        </tr>
+        <a href="{{ path('app_matches_edit', {'id': match.id}) }}">edit</a>
+    {% else %}
+        <tr>
+            <td colspan="6">no records found</td>
+        </tr>
+    {% endfor %}
+    <!-- END: Latest Matches -->
+    <a href="{{ path('app_matches_new') }}">Create new</a>
+{% endblock %}
+

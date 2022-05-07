@@ -97,6 +97,11 @@ class User implements UserInterface
      */
     private $sessions;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Teams::class, mappedBy="user")
+     */
+    private $teams;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -341,6 +346,22 @@ class User implements UserInterface
     public function setSessions($sessions): void
     {
         $this->sessions = $sessions;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTeams()
+    {
+        return $this->teams;
+    }
+
+    /**
+     * @param mixed $teams
+     */
+    public function setTeams($teams): void
+    {
+        $this->teams = $teams;
     }
 
 }

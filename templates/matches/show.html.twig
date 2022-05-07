@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Matches{% endblock %}
+
+{% block body %}
+    <h1>Matches</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ match.id }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ match.team1.id }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ match.team2.id }}</td>
+            </tr>
+            <tr>
+                <th>MatchRes</th>
+                <td>{{ match.matchRes }}</td>
+            </tr>
+            <tr>
+                <th>MatchCom</th>
+                <td>{{ match.matchCom }}</td>
+            </tr>
+            <tr>
+                <th>MatchDate</th>
+                <td>{{ match.matchDate ? match.matchDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>MatchTime</th>
+                <td>{{ match.matchTime ? match.matchTime|date('H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_matches_index') }}">back to list</a>
+{% endblock %}

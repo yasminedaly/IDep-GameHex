@@ -3,12 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Coach;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
+use Doctrine\ORM\Query as ORM;
 use Doctrine\Persistence\ManagerRegistry;
-use phpDocumentor\Reflection\Types\Integer;
-use function mysql_xdevapi\getSession;
 
 /**
  * @method Coach|null find($id, $lockMode = null, $lockVersion = null)
@@ -64,6 +62,16 @@ class CoachRepository extends ServiceEntityRepository
                 ])
             ->getQuery()
             ->getResult();
+    }
+
+    public function findRatingByCoach()
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $query = $qb->SELECT('partial c.{id,rating}')
+            ->From('App\Entity\Coach', 'c')
+            ->getQuery();
+        $query->setHint(ORM::HINT_FORCE_PARTIAL_LOAD, 1);
+        return $query->getResult();
     }
 
     // /**

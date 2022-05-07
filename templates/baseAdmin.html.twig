@@ -22,6 +22,12 @@
     <link rel="stylesheet" type="text/css" href="{{asset("theme-assets/vendors/css/charts/chartist.css")}}">
     <!-- END VENDOR CSS-->
     <!-- BEGIN CHAMELEON  CSS-->
+    <!-- GoodGames -->
+    <link rel="stylesheet" href="{{asset("theme-assets/css/goodgames.css")}}">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="{{asset("theme-assets/css/custom.css")}}">
+
     <link rel="stylesheet" type="text/css" href="{{asset("theme-assets/css/app-lite.css")}}">
     <!-- END CHAMELEON  CSS-->
     <!-- BEGIN Page Level CSS-->
@@ -172,13 +178,27 @@
                         </li>
                     </ul>
                 </li>
+                <!-- YASMINE, Tournaments MODULE ########## -->
+                <li class=" nav-item"><a href="#"><i class="ft-pie-chart"></i><span class="menu-title"
+                                                                                    data-i18n="">Tournaments</span>
+                    </a>
+                    <ul class="nolist">
+                        <li>
+                            <a href="{{path('app_matches_indexAdmin')}}">Matches</a>
+                        </li>
+                        <li>
+                            <a href="{{path('app_teams_indexAdmin')}}">Teams</a>
+                        </li>
+                        <li>
+                            <a href="{{path('app_team_mates_indexAdmin')}}">Teammates</a>
+                        </li>
 
+                    </ul>
+                </li>
 
             </ul>
 
-        </div><a class="btn btn-danger btn-block btn-glow btn-upgrade-pro mx-1"
-            href="https://themeselection.com/products/chameleon-admin-modern-bootstrap-webapp-dashboard-html-template-ui-kit/"
-            target="_blank">Download PRO!</a>
+        </div>
         <div class="navigation-background"></div>
     </div>
 

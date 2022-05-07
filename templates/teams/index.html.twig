@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Teams{% endblock %}
+
+{% block body %}
+    <style>
+        .imgTest {
+            width: 170px;
+            height: 170px;
+        }
+    </style>
+    <h1>Teams</h1>
+
+
+
+    {% for team in teams %}
+        {% if team.user.id == current_user.id %}
+    <div class="nk-team">
+        <div class="nk-team-logo">
+            <img src={{ asset('/users/5/' ~ team.teamLogo) }} class="imgTest" />
+        </div>
+        <div class="nk-team-cont">
+            <h3 class="h5 mb-20"><span class="text-main-1">Team:{{ team.id }}</span>{{ team.teamName }}</h3>
+            <h4 class="h6 mb-5">Tag: {{ team.teamTag }}</h4>
+            <h4 class="h6 mb-5">Mail: {{ team.teamMail }}</h4>
+            <h4 class="h6 mb-5">Governorate: {{ team.teamReg }}</h4>
+            <a href="{{ path('app_teams_show', {'id': team.id}) }}">Show</a>
+            <div class="nk-team-photo" style="background-image: url({{ asset('/assets/images/team-photo.png') }});">
+
+            </div>
+        </div>
+    </div>
+    {% else %}
+        <tr>
+            <td colspan="6">no records found</td>
+        </tr>
+        {% endif %}
+    {% endfor %}
+
+
+    <a href="{{ path('app_teams_new') }}">Create new</a>
+    <!--
+            START: Pagination
+
+            Additional Classes:
+                .nk-pagination-center
+                .nk-pagination-right
+        -->
+    <div class="nk-gap-2"></div>
+    <div class="nk-gap"></div>
+    <div class="nk-pagination nk-pagination-center">
+        <a href="#" class="nk-pagination-prev">
+            <span class="ion-ios-arrow-back"></span>
+        </a>
+        <nav >
+
+            {{ knp_pagination_render(teams) }}
+        </nav>
+        <a href="#" class="nk-pagination-next">
+            <span class="ion-ios-arrow-forward"></span>
+        </a>
+    </div>
+    <!-- END: Pagination -->
+{% endblock %}

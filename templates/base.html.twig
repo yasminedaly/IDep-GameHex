@@ -328,33 +328,6 @@
 
                             </a>
                         </li>
-                        <li class=" nk-drop-item">
-                            <a href="tournaments.html">
-                                Tournaments
-
-                            </a>
-                            <ul class="dropdown">
-
-                                <li>
-                                    <a href="tournaments.html">
-                                        Tournament
-
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="tournaments-teams.html">
-                                        Teams
-
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="tournaments-teammate.html">
-                                        Teammate
-
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
 
                         <li class=" nk-drop-item">
                             <a href="store.html">
@@ -415,6 +388,48 @@
                             </a>
                         </li>
 
+                            <li class=" nk-drop-item">
+                                <a href="#">
+                                    Tournaments
+
+                                </a>
+                                <ul class="dropdown">
+
+                                    <li>
+                                        <a href="{{path('app_matches_index') }}">
+                                            Matches
+                                        </a>
+                                    </li>
+                                    <li class=" nk-drop-item">
+                                        <a href="#">
+                                            Teams
+
+                                        </a>
+                                        <ul class="dropdown">
+
+                                            <li>
+                                                <a href="{{path('app_teams_index') }}">
+                                                    Display All Teams
+
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{path('app_teams_indexMap') }}">
+                                                    Find on Map
+
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="{{path('app_team_mates_index') }}">
+                                            Teammate
+
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
                         <li class=" nk-drop-item">
                             <a href="#">
                                 Coaching
@@ -436,12 +451,6 @@
                                 </li>
 
                             </ul>
-                        </li>
-
-                        <li>
-                            <a href="/user/profile/{{ app.user.username }}">
-                                Profile
-                            </a>
                         </li>
 
                         <li class=" nk-drop-item">
@@ -528,18 +537,20 @@
 
         <div class="container">
 
-            {% block body %}
-            {# <div>
-                <label for="registration_form_CIN" class="required">CIN</label>
-                <ul>
-                <li>
-                ::maker
-                "This value is not valid."
-                </li>
-                </ul>
-                <input type="text" >
-                </div>#}
-            {% endblock %}
+            <div>
+                <div>
+                    <div>
+                        <div>
+                            <div>
+                                {% include 'flash_messages.html.twig' %}
+                                {% block body %}
+
+                                {% endblock %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
 

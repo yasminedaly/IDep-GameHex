@@ -1,0 +1,37 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}TeamMates{% endblock %}
+
+{% block body %}
+    <h1>TeamMates</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>riotId</th>
+            <th>MemberRole</th>
+            <th>MemberPhone</th>
+            <th>MemberMail</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for team_mate in team_mates %}
+            <tr>
+                <td>{{ team_mate.riotId }}</td>
+                <td>{{ team_mate.memberRole }}</td>
+                <td>{{ team_mate.memberPhone }}</td>
+                <td>{{ team_mate.memberMail }}</td>
+                <td>
+                    <a href="{{ path('app_team_mates_showAdmin', {'riotId': team_mate.riotId}) }}">show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

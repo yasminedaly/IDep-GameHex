@@ -1,0 +1,11 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}New Matches{% endblock %}
+
+{% block body %}
+    <h1>Create new Matches</h1>
+
+    {{ include('matches/_form.html.twig') }}
+
+    <a href="{{ path('app_matches_indexAdmin') }}">back to list</a>
+{% endblock %}

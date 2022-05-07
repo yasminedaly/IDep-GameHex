@@ -1,0 +1,58 @@
+.map {
+
+    overflow: hidden;
+
+}
+.map__image{
+    width: 50%;
+
+    float: left;
+
+
+}
+
+.map__image path{
+
+    fill: #fa91ae;
+
+    stroke: #FFF;
+
+    stroke-width: 1px;
+
+    transition: fill color 0.3s;
+
+}
+
+.map__image .is-active path{
+
+    fill: #F40E4D;
+
+}
+
+.map__list{
+
+    float: right;
+
+    width: 50%;
+
+}
+
+.map__list a{
+
+    color: inherit;
+
+    text-decoration: none;
+
+    transition: color 0.3s;
+}
+
+.map__list  a.is-active{
+
+    color: #F40E4D;
+
+    font-weight: bold;
+
+    text-decoration: underline;
+
+
+}

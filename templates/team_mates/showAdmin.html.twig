@@ -1,0 +1,30 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}TeamMates{% endblock %}
+
+{% block body %}
+    <h1>TeamMates</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>riotId</th>
+            <td>{{ team_mate.riotId }}</td>
+        </tr>
+        <tr>
+            <th>MemberRole</th>
+            <td>{{ team_mate.memberRole }}</td>
+        </tr>
+        <tr>
+            <th>MemberPhone</th>
+            <td>{{ team_mate.memberPhone }}</td>
+        </tr>
+        <tr>
+            <th>MemberMail</th>
+            <td>{{ team_mate.memberMail }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_team_mates_indexAdmin') }}">back to list</a>
+{% endblock %}

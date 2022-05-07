@@ -10,6 +10,7 @@ use App\Service\riotApi;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 use LoLApi\Api\SummonerApi;
 use LoLApi\ApiClient;
+use App\Service\HelperFunctions;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,14 +27,29 @@ class CoachController extends AbstractController
      */
     public function index(CoachRepository $coachRepository, riotApi $callRiot, Request $request): ?Response
     {
+        //Denying Access Unless Visitor is a User
         $this->denyAccessUnlessGranted('ROLE_USER');
-        $value = $request->request->get('summoner_input');
+
+        //Fetching All Coaches
+        $coaches = $coachRepository->findAll();
+
+        //Using HelperFunctions Service
+        $call = new HelperFunctions();
+
+        //Setting Summoner Name for Riot API
+        $value = $request->request->get('summonerName', false);
+        if(false !== $value){
+            //Testing Value of Summoner for Riot API
+            $this->debug_to_console($value . "Hi");
+        }
+
+        //Getting the Current User
         /** @var User $currentUser */
         $currentUser = $this->getUser();
-        $this->debug_to_console($value . "Hi");
+
         return $this->render('coach/index.html.twig', [
-            'coaches' => $coachRepository->findAll(), 'summoner'=> $this->showSummoner("YàKûZa"),
-            'current_user'=>$currentUser
+            'coaches' => $coaches, 'summoner'=> $this->showSummoner('YàKûZa'),
+            'current_user'=>$currentUser, 'combined'=>$call->fetchCoachRating($coaches)
         ]);
     }
 
