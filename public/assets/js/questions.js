@@ -2,57 +2,57 @@
 let questions = [
     {
         numb: 1,
-        question: "What does HTML stand for?",
-        answer: "Hyper Text Markup Language",
+        question: "When was the online game \"League of Legends\" released?",
+        answer: "2009",
         options: [
-            "Hyper Text Preprocessor",
-            "Hyper Text Markup Language",
-            "Hyper Text Multiple Language",
-            "Hyper Tool Multi Language"
+            "2008",
+            "2009",
+            "2010",
+            "2011"
         ]
     },
     {
         numb: 2,
-        question: "What does CSS stand for?",
-        answer: "Cascading Style Sheet",
+        question: "How many lanes are there in the Summoner's Rift map of the game \"League of Legends?\"?",
+        answer: "Three",
         options: [
-            "Common Style Sheet",
-            "Colorful Style Sheet",
-            "Computer Style Sheet",
-            "Cascading Style Sheet"
+            "One",
+            "Two",
+            "Three",
+            "Four"
         ]
     },
     {
         numb: 3,
-        question: "What does PHP stand for?",
-        answer: "Hypertext Preprocessor",
+        question: "Who joins Serylda and Avarosa as the third sister in the \"League of Legends\" Three Sisters triad?",
+        answer: "Lissandra",
         options: [
-            "Hypertext Preprocessor",
-            "Hypertext Programming",
-            "Hypertext Preprogramming",
-            "Hometext Preprocessor"
+            "Lissandra",
+            "Quinn",
+            "Akali",
+            "Katarina"
         ]
     },
     {
         numb: 4,
-        question: "What does SQL stand for?",
-        answer: "Structured Query Language",
+        question: "In \"League of Legends\" Cassiopeia is half woman and half what creature?",
+        answer: "Snake",
         options: [
-            "Stylish Question Language",
-            "Stylesheet Query Language",
-            "Statement Question Language",
-            "Structured Query Language"
+            "Lion",
+            "Horse",
+            "Cat",
+            "Snake"
         ]
     },
     {
         numb: 5,
-        question: "What does XML stand for?",
-        answer: "eXtensible Markup Language",
+        question: "How many champions are now in the game \"League of Legends?\"?",
+        answer: "129",
         options: [
-            "eXtensible Markup Language",
-            "eXecutable Multiple Language",
-            "eXTra Multi-Program Language",
-            "eXamine Multiple Language"
+            "69",
+            "100",
+            "129",
+            "169"
         ]
     },
     // you can uncomment the below codes and make duplicate as more as you want to add question

@@ -5,14 +5,12 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
-body{
-    background: #F40E4D;
-}
+
 ::selection{
     color: #fff;
     background: #F40E4D;
 }
-.start_btn,
+
 .info_box,
 .quiz_box,
 .result_box{
@@ -32,10 +30,10 @@ body{
     transform: translate(-50%, -50%) scale(1);
 }
 .start_btn button{
-    font-size: 25px;
+    font-size: 15px;
     font-weight: 500;
     color: #F40E4D;
-    padding: 15px 30px;
+    padding: 10px 15px;
     outline: none;
     border: none;
     border-radius: 5px;
@@ -120,9 +118,9 @@ body{
     font-weight: 600;
 }
 .quiz_box header .timer{
-    color: #004085;
-    background: #cce5ff;
-    border: 1px solid #b8daff;
+    color: #171e22;
+    background: #7f8b92;
+    border: 1px solid #303e47;
     height: 45px;
     padding: 0 8px;
     border-radius: 5px;
@@ -185,9 +183,9 @@ section .option_list .option:last-child{
     margin-bottom: 0px;
 }
 section .option_list .option:hover{
-    color: #004085;
-    background: #cce5ff;
-    border: 1px solid #b8daff;
+    color: #171e22;
+    background: #7f8b92;
+    border: 1px solid #303e47;
 }
 section .option_list .option.correct{
     color: #155724;

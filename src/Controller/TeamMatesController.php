@@ -123,7 +123,20 @@ class TeamMatesController extends AbstractController
         return $this->redirectToRoute('app_team_mates_index', [], Response::HTTP_SEE_OTHER);
     }
 
+    /**
+     * @Route("/change_locale/{locale}", name="change_locale")
+     */
+    public function changeLocale($locale, Request $request)
+    {
+        $request->getSession()->set('_locale', $locale);
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $user->setLocale($locale);
+        $em->persist($user);
+        $em->flush();
+        return $this->redirect($request->headers->get('referer'));
 
+    }
 
 }
 

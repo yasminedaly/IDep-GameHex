@@ -73,4 +73,62 @@ class OrderRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+    /**
+     * @return Query
+     */
+    public function findAllVisibleQuery()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT DISTINCT(ref),total,user_id FROM order';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
+
+
+    /**
+     * @return Query
+     */
+    public function findAllVisibleQuery2($ref)
+    {
+
+
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT product_id FROM `order` WHERE `order`.ref = :ref';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['ref' => $ref]);
+
+        $resultSet = $stmt->executeQuery();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
+
+    /**
+     * @return Query
+     */
+    public function findAllGreaterThanRef($ref): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT ref
+            FROM App\Entity\Order o
+            WHERE o.ref > :ref'
+        )->setParameter('ref', $ref);
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
 }

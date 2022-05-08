@@ -8,10 +8,7 @@
 
 
 
-    <link rel="stylesheet" href="{{asset("../assets/css/quiz.css")}}">
-    <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+
 
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -377,7 +374,9 @@
                                 </li>
                                 <li>
                                     <a href="store-cart.html">
+                                        {% trans %}
                                         Cart
+                                        {% endtrans %}
                                     </a>
                                 </li>
                             </ul>
@@ -397,9 +396,19 @@
                             </a>
                         </li>
 
+                        <li>
+                             <a href="{{ path('app_product_user') }}">
+                                 {% trans %}
+                                 Shop
+                                 {% endtrans %}
+                             </a>
+                        </li>
+
                             <li class=" nk-drop-item">
                                 <a href="#">
+                                    {% trans %}
                                     Tournaments
+                                    {% endtrans %}
 
                                 </a>
                                 <ul class="dropdown">
@@ -411,20 +420,26 @@
                                     </li>
                                     <li class=" nk-drop-item">
                                         <a href="#">
+                                            {% trans %}
                                             Teams
+                                            {% endtrans %}
 
                                         </a>
                                         <ul class="dropdown">
 
                                             <li>
                                                 <a href="{{path('app_teams_index') }}">
+                                                    {% trans %}
                                                     Display All Teams
+                                                    {% endtrans %}
 
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="{{path('app_teams_indexMap') }}">
+                                                    {% trans %}
                                                     Find on Map
+                                                    {% endtrans %}
 
                                                 </a>
                                             </li>
@@ -432,7 +447,9 @@
                                     </li>
                                     <li>
                                         <a href="{{path('app_team_mates_index') }}">
+                                            {% trans %}
                                             Teammate
+                                            {% endtrans %}
 
                                         </a>
                                     </li>
@@ -448,7 +465,9 @@
 
                                 <li>
                                     <a href="{{ path('app_session_index') }}">
+                                        {% trans %}
                                         Sessions
+                                        {% endtrans %}
 
                                     </a>
                                 </li>
@@ -462,6 +481,12 @@
                             </ul>
                         </li>
 
+
+
+
+
+
+
                         <li class=" nk-drop-item">
                             <a href="/user/profile/{{ app.user.username }}">
                                 {{ app.user.name }} {{ app.user.lastName }}
@@ -471,13 +496,17 @@
                                 <li>
 
                                     <a href="/user/profile/{{ app.user.username }}">
+                                        {% trans %}
                                         Profile
+                                        {% endtrans %}
                                     </a>
                                 </li>
 
                                 <li>
                                     <a href="{{ path('app_logout') }}">
+                                        {% trans %}
                                         Logout
+                                        {% endtrans %}
 
                                     </a>
                                 </li>
@@ -485,6 +514,14 @@
                             </ul>
 
                         </li>
+
+                        <li class=" nk-drop-item">
+
+                                    {% include 'team_mates/locale.html.twig' %}
+
+                        </li>
+
+
                         {% endif %}
 
 
@@ -500,7 +537,7 @@
                                 </a>
                             </li>
 
-
+                        </ul>
                         </ul>
                 </div>
             </div>

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Order;
 use App\Form\OrderType;
 use App\Repository\OrderRepository;
+use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +23,30 @@ class OrderController extends AbstractController
     public function index(OrderRepository $orderRepository): Response
     {
         return $this->render('order/index.html.twig', [
-            'orders' => $orderRepository->findAll(),
+            'orders' => $orderRepository->findAllVisibleQuery(),
+        ]);
+    }
+
+    /**
+     * @Route("/app_order_findByRef", name="app_order_findByRef", methods={"GET"})
+     */
+    public function testt2(OrderRepository $orderRepository, Request $request, ProductRepository $prodref): Response
+    {
+        // $request->query->get('ref');
+
+        $ref  = $request->query->get('ref');
+        $res = $orderRepository->findAllVisibleQuery2($ref);
+        $array = [];
+        for ($i = 0; $i < count($res); $i++) {
+
+            // dd($prodref->find($res[$i]['product_id']));
+            array_push($array, $prodref->find($res[$i]['product_id']));
+        }
+
+        // dd($array);
+        // dd($res);
+        return $this->render('order/show.html.twig', [
+            'array' => $array,
         ]);
     }
 

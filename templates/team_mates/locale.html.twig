@@ -1,0 +1,8 @@
+<div class="utf_user_name"><span><img src="images/dashboard-avatar.jpg" alt=""></span>lang</div>
+<ul>
+    {% for locale in locales %}
+        <li>
+            <a href="{{ path('change_locale', {'locale': locale}) }}">{{ locale }}</a>
+        </li>
+    {% endfor %}
+</ul>

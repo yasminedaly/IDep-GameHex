@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
   cover_directory: "%kernel.project_dir%/public/users"
+  locale: 'en'
+  app_locales: [ fr_FR, en_EN ]
 
 services:
   # default configuration for services in *this* file
@@ -21,12 +23,22 @@ services:
       - "../src/Entity/"
       - "../src/Kernel.php"
 
+
   # controllers are imported separately to make sure services can be injected
   # as action arguments even if you don't extend any base controller class
   App\Controller\:
     resource: "../src/Controller/"
     tags: ["controller.service_arguments"]
 
+  app.locale_listener:
+    class: App\Listener\LocaleListener
+    arguments: [ "%kernel.default_locale%" ]
+    tags:
+      - { name: kernel.event_subscriber }
+
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones
 
+twig:
+  globals:
+    locales: "%app_locales%"

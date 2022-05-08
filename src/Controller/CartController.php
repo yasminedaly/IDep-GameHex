@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Order;
 use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,13 +29,17 @@ class CartController extends AbstractController
             ];
         }
 
+
+
         $total = 0;
+
 
         foreach ($panierData as $item) {
             $totalItem = $item['product']->getPrice() * $item['quantity'];
             $total += $totalItem;
         }
-
+        $session->set('panierData', $panierData);
+        $session->set('total', $total);
         // dd($panierData);
 
         return $this->render('cart/index.html.twig', [
@@ -99,7 +104,6 @@ class CartController extends AbstractController
         $order1->setRef(1);
         $order1->setProductID($request->get('itemOBJ')['Itemid']);
         $order1->setTotal($request->get('itemOBJ')['total']);
-
         $orderrep->add($order1);
 
 
@@ -109,5 +113,37 @@ class CartController extends AbstractController
         // foreach ($items as $item) {
         //     echo ($item);
         // }
+    }
+
+    /**
+     * @Route("/testParse", name="testParse", methods={"GET", "POST"})
+     */
+    public function ParseProducts(SessionInterface $session, ProductRepository $productRepository, Request $request, OrderRepository $orderrep, UserRepository $us): Response
+    {
+
+        $randomGenRef = rand(1, 200);
+
+        $panier = $session->get('panier', []);
+        $panierData = [];
+        foreach ($panier as $id => $quantity) {
+            $order1 = new Order();
+
+            $order1->setQuantity($quantity);
+            $order1->setUser($us->find($session->get('userData')));
+            $order1->setRef($randomGenRef);
+            $order1->setProductID($id);
+            $order1->setTotal($session->get('total'));
+
+            $orderrep->add($order1);
+            echo 'Id ' .  $id . ' Quantity :' .  $quantity;
+        }
+
+        $session->remove('panier');
+
+        // echo 'Total ' . $session->get('total');
+        $randomGenRef = 'Ref' . rand(1, 20);
+
+
+        return $this->redirectToRoute('app_cart');
     }
 }
