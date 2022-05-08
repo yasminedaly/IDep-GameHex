@@ -25,6 +25,15 @@ class MatchesController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/quiz", name="app_matches_quiz", methods={"GET"})
+     */
+    public function quiz(): Response
+    {
+        return $this->render('matches/quiz.html.twig');
+
+    }
+
 
     /**
      * @Route("/back", name="app_matches_indexAdmin", methods={"GET"})

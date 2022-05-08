@@ -70,7 +70,7 @@ class TeamsController extends AbstractController
 
         $team = new Teams();
         $options['current_id'] = $this->getUser()->getId();
-        $form = $this->createForm(TeamsType::class, $team, $options);
+        $form = $this->createForm(TeamsType::class, $team);
         $form->handleRequest($request);
         $this->addFlash('info', 'A mail will be sent after form submission');
         if ($form->isSubmitted() && $form->isValid()) {

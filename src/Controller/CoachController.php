@@ -66,7 +66,7 @@ class CoachController extends AbstractController
      */
     public function showSummoner($summoner_input)
     {
-        $call = new ApiClient(ApiClient::REGION_EUW, 'RGAPI-a1725189-2666-4f33-ac15-51dc70f9454d');
+        $call = new ApiClient(ApiClient::REGION_EUW, 'RGAPI-beae1828-8b8f-4633-80a2-eab23093694e');
         return $call->getSummonerApi()->getSummonerBySummonerName($summoner_input)->getResult();
     }
 
