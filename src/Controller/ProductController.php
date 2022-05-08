@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Dompdf\Dompdf;
 
+
 /**
  * @Route("/admin/product")
  */
@@ -33,7 +34,6 @@ class ProductController extends AbstractController
     public function new(Request $request, ProductRepository $productRepository): Response
     {
         $product = new Product();
-
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
@@ -58,10 +58,10 @@ class ProductController extends AbstractController
             $product->setImgURL($filename);
             $productRepository->add($product);
 
-            // $chatId = '2144775265';
-            // $messageText = 'Hurry up new Product Added : ' . $product->getRef() . '--' . $product->getName() . '-- Visit the Link :' . 'http://127.0.0.1:8000/admin/product/' . $product->getId();
-            // $bot = new \TelegramBot\Api\BotApi('5343556949:AAE_06QbwXjJl1mXrSZkHDH1uUG8w_784KU');
-            // $bot->sendMessage($chatId, $messageText);
+            $chatId = '5016731252';
+            $messageText = 'Hurry up new Product Added : ' . $product->getRef() . '--' . $product->getName() . '-- Visit the Link :' . 'http://127.0.0.1:8000/admin/product/' . $product->getId();
+            $bot = new \TelegramBot\Api\BotApi('5367445444:AAFTnVXSMUnHpUC6SUxGiSjgmOC5Y1rgHoI');
+            $bot->sendMessage($chatId, $messageText);
             return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
         }
 

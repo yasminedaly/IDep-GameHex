@@ -234,29 +234,29 @@
 
 
 <script>
-    //     let rating = 5;
+    let rating = 5;
 
-    //     function greeting() {
-    //         $.ajax({
-    //             type: "POST",
-    //             url: "{{ path('app_product_test')}}",
-    //             data: {
-    //                 rating: rating,
-    //                 path: 'ajax'
-    //             },
-    //             success: function (response) {
-    //                 // console.log(JSON.parse(response));
-    //                 console.log("sucess");
+    function greeting() {
+        $.ajax({
+            type: "POST",
+            url: "{{ path('app_product_test')}}",
+            data: {
+                rating: rating,
+                path: 'ajax'
+            },
+            success: function (response) {
+                // console.log(JSON.parse(response));
+                console.log("sucess");
 
-    //             }
-    //         });
-    //     }
+            }
+        });
+    }
 
-    //     let test = document.getElementById('test');
-    //     test.onclick = function () {
-    //         greeting();
-    //         console.log('clicked');
-    //     }
+    let test = document.getElementById('test');
+    test.onclick = function () {
+        greeting();
+        console.log('clicked');
+    }
 </script>
 
 {% endblock %}

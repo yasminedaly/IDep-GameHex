@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{asset("../assets/css/quiz.css")}}">
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -396,48 +396,52 @@
                                 Articles
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ path('app_product_user') }}">
+                                Shop
+                            </a>
+                        </li>
 
-                            <li class=" nk-drop-item">
-                                <a href="#">
-                                    Tournaments
+                        <li class=" nk-drop-item">
+                            <a href="#">
+                                Tournaments
+                            </a>
+                            <ul class="dropdown">
 
-                                </a>
-                                <ul class="dropdown">
+                                <li>
+                                    <a href="{{path('app_matches_index') }}">
+                                        Matches
+                                    </a>
+                                </li>
+                                <li class=" nk-drop-item">
+                                    <a href="#">
+                                        Teams
 
-                                    <li>
-                                        <a href="{{path('app_matches_index') }}">
-                                            Matches
-                                        </a>
-                                    </li>
-                                    <li class=" nk-drop-item">
-                                        <a href="#">
-                                            Teams
+                                    </a>
+                                    <ul class="dropdown">
 
-                                        </a>
-                                        <ul class="dropdown">
+                                        <li>
+                                            <a href="{{path('app_teams_index') }}">
+                                                Display All Teams
 
-                                            <li>
-                                                <a href="{{path('app_teams_index') }}">
-                                                    Display All Teams
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{path('app_teams_indexMap') }}">
+                                                Find on Map
 
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="{{path('app_teams_indexMap') }}">
-                                                    Find on Map
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="{{path('app_team_mates_index') }}">
+                                        Teammate
 
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="{{path('app_team_mates_index') }}">
-                                            Teammate
-
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
 
                         <li class=" nk-drop-item">
                             <a href="#">

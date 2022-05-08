@@ -650,6 +650,9 @@
     "symfonycasts/verify-email-bundle": {
         "version": "v1.10.0"
     },
+    "telegram-bot/api": {
+        "version": "v2.3.24"
+    },
     "theseer/tokenizer": {
         "version": "1.2.1"
     },
