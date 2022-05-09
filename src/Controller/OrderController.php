@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Dompdf\Dompdf;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * @Route("/order")
@@ -106,7 +107,7 @@ class OrderController extends AbstractController
     /**
      * @Route("/a/OrderInvoice", name="app_pdfInvoice", methods={"GET"})
      */
-    public function pdfAction(Request $req, OrderRepository $orderrep, Request $request)
+    public function pdfAction(Request $req, OrderRepository $orderrep, Request $request, SessionInterface $session)
     {
 
 
@@ -120,7 +121,7 @@ class OrderController extends AbstractController
             'title' => 'testing title',
             "img64" => $pngbase64,
             "img643" => $pngbase643,
-            "orders" => $orders,
+            "orders" => $session->get('panierData'),
             "total" => $request->get('total')
         ]);
         $dompdf->loadHtml($html);

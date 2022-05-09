@@ -85,25 +85,18 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Ref</th>
-                <th>ProductID</th>
+                <th>Product Name</th>
                 <th>Quantity</th>
                 <th>Total</th>
-                <th>actions</th>
             </tr>
         </thead>
         <tbody>
             {% for order in orders %}
             <tr>
-                <td>{{ order.id }}</td>
-                <td>{{ order.ref }}</td>
-                <td>{{ order.productID }}</td>
-                <td> 1 </td>
+                <td>{{ order.product.id }}</td>
+                <td>{{ order.product.name  }}</td>
+                <td>{{ order.quantity }}</td>
                 <td>{{ total }}</td>
-                <td>
-                    <a href="{{ path('app_order_show', {'id': order.id}) }}">show</a>
-                    <a href="{{ path('app_order_edit', {'id': order.id}) }}">edit</a>
-                </td>
             </tr>
             {% else %}
             <tr>

@@ -83,7 +83,7 @@ class OrderRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
-            SELECT DISTINCT(ref),total,user_id FROM order';
+            SELECT DISTINCT(ref),total,user_id FROM `order`';
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery();
 

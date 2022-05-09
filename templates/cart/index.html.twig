@@ -35,10 +35,7 @@
                 <a href="{{path('app_cart_remove', {'id' : item.product.id })}}" class="btn btn-danger btn-sm"><i
                         class="fas fa-trash"></i></a>
             </td>
-            <td>
-                <a href="{{path('aaaa', { itemOBJ : {'Itemid' : item.product.id, 'total' : total }}  )}}"
-                    class="btn btn-danger btn-sm">Confirm</a>
-            </td>
+
         </tr>
 
         {% endfor %}
@@ -53,9 +50,9 @@
         <tr>
             <td colspan="4" class="text-right">Get invoice :</td>
             <td> <a href="{{path('app_pdfInvoice', { 'total' : total })}}" class="btn btn-danger btn-sm">Download
-                    PDF</a>}</td>
-            <td> <a href="{{path('testParse', { 'total' : 'total' })}}" class="btn btn-danger btn-sm">test
-                    PDF</a>}</td>
+                    PDF</a></td>
+            <td> <a href="{{path('testParse', { 'total' : 'total' })}}" class="btn btn-danger btn-sm">Confirm
+                    Purchase</a></td>
             <td></td>
         </tr>
     </tfoot>

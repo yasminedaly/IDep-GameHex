@@ -104,6 +104,7 @@ class CartController extends AbstractController
         $order1->setRef(1);
         $order1->setProductID($request->get('itemOBJ')['Itemid']);
         $order1->setTotal($request->get('itemOBJ')['total']);
+
         $orderrep->add($order1);
 
 
