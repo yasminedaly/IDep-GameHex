@@ -1,4 +1,45 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{# {{ form_widget(form) }} #}
+<div class="form-group">
+    {{ form_label(form.title) }}
+    {{ form_widget(form.title, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.title) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.description) }}
+    {{ form_widget(form.description, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.description) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.start) }}
+    {{ form_widget(form.start, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.start) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.all_day) }}
+    {{ form_widget(form.all_day, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.all_day) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.background_color) }}
+    {{ form_widget(form.background_color, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.background_color) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.border_color) }}
+    {{ form_widget(form.border_color, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.border_color) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.text_color) }}
+    {{ form_widget(form.text_color, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.text_color) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.coach) }}
+    {{ form_widget(form.coach, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.coach) }}
+</div>
+
+<button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

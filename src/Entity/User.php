@@ -98,6 +98,11 @@ class User implements UserInterface
     private $sessions;
 
     /**
+     * @ORM\OneToMany(targetEntity=Calendar::class, mappedBy="user")
+     */
+    private $calendar;
+
+    /**
      * @ORM\OneToMany(targetEntity=Teams::class, mappedBy="user")
      */
     private $teams;
@@ -123,9 +128,21 @@ class User implements UserInterface
         $this->orders = new ArrayCollection();
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCalendar()
+    {
+        return $this->calendar;
+    }
 
-
-    
+    /**
+     * @param mixed $calendar
+     */
+    public function setCalendar($calendar): void
+    {
+        $this->calendar = $calendar;
+    }
 
     public function getId(): ?int
     {

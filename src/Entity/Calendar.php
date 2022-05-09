@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\CalendarRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @ORM\Entity(repositoryClass=CalendarRepository::class)
@@ -13,8 +12,8 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 class Calendar
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -25,17 +24,17 @@ class Calendar
     private $title;
 
     /**
-     * @ORM\Column(type="date")
-     * @Assert\NotBlank
+     * @ORM\Column(type="datetime")
      * @Assert\GreaterThanOrEqual("today UTC")
+     * @Assert\NotBlank
      */
-    private ?\DateTimeInterface $start;
+    private $start;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      * @Assert\NotBlank
      */
-    private ?\DateTimeInterface $end;
+    private $end;
 
     /**
      * @ORM\Column(type="text")
@@ -61,6 +60,50 @@ class Calendar
      * @ORM\Column(type="string", length=7)
      */
     private $text_color;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Coach::class, inversedBy="calendar")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private ?Coach $calendarCoach;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="calendar")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private ?User $user;
+
+    /**
+     * @return Coach|null
+     */
+    public function getCalendarCoach(): ?Coach
+    {
+        return $this->calendarCoach;
+    }
+
+    /**
+     * @param Coach|null $calendarCoach
+     */
+    public function setCalendarCoach(?Coach $calendarCoach): void
+    {
+        $this->calendarCoach = $calendarCoach;
+    }
+
+    /**
+     * @return User|null
+     */
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User|null $user
+     */
+    public function setUser(?User $user): void
+    {
+        $this->user = $user;
+    }
 
     public function getId(): ?int
     {
@@ -164,13 +207,18 @@ class Calendar
     }
 
     /**
-     * @Assert\Callback
+     * @return Coach|null
      */
-    public function validate(ExecutionContextInterface $context) {
-        if ($this->end < $this->start) {
-            $context->buildViolation('End date cannot be earlier than start date')
-                ->atPath('end')
-                ->addViolation();
-        }
+    public function getCoach(): ?Coach
+    {
+        return $this->calendarCoach;
+    }
+
+    /**
+     * @param Coach|null $calendarCoach
+     */
+    public function setCoach(?Coach $calendarCoach): void
+    {
+        $this->calendarCoach = $calendarCoach;
     }
 }

@@ -37,20 +37,27 @@ class CoachController extends AbstractController
         $call = new HelperFunctions();
 
         //Setting Summoner Name for Riot API
-        $value = $request->request->get('summonerName', false);
-        if(false !== $value){
-            //Testing Value of Summoner for Riot API
-            $this->debug_to_console($value . "Hi");
-        }
+
 
         //Getting the Current User
         /** @var User $currentUser */
         $currentUser = $this->getUser();
+        $data = json_decode($request->getContent());
 
-        return $this->render('coach/index.html.twig', [
-            'coaches' => $coaches, 'summoner'=> $this->showSummoner('YàKûZa'),
-            'current_user'=>$currentUser, 'combined'=>$call->fetchCoachRating($coaches)
-        ]);
+        if(isset($data->sumoner_name) && !empty($data->sumoner_name)){
+
+            // We return the code
+            return $this->render('coach/index.html.twig', [
+                'coaches' => $coaches, 'summoner'=> $this->showSummoner($data->sumoner_name),
+                'current_user'=>$currentUser, 'combined'=>$call->fetchCoachRating($coaches)
+            ]);
+        }else{
+            return $this->render('coach/index.html.twig', [
+                'coaches' => $coaches,
+                'current_user'=>$currentUser, 'combined'=>$call->fetchCoachRating($coaches)
+            ]);
+        }
+
     }
 
     function debug_to_console($data) {
@@ -61,12 +68,9 @@ class CoachController extends AbstractController
         echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
     }
 
-    /**
-     * @Route("/?summonerName={summoner_input}", name="show_summoner", methods={"GET"})
-     */
     public function showSummoner($summoner_input)
     {
-        $call = new ApiClient(ApiClient::REGION_EUW, 'RGAPI-beae1828-8b8f-4633-80a2-eab23093694e');
+        $call = new ApiClient(ApiClient::REGION_EUW, 'RGAPI-7f5eeae6-14fc-411e-910e-04369b045914');
         return $call->getSummonerApi()->getSummonerBySummonerName($summoner_input)->getResult();
     }
 
@@ -135,6 +139,7 @@ class CoachController extends AbstractController
             $coach->setImageURL($filename);
             $coach->setUser($user);
             $coach->getUser()->setRoles($roles);
+            $coach->setRating(0);
             $coachRepository->add($coach);
 
             return $this->redirectToRoute('app_coach_index', [], Response::HTTP_SEE_OTHER);

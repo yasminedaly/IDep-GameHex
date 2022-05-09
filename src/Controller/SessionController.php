@@ -2,10 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Calendar;
 use App\Entity\Session;
 use App\Entity\User;
+use App\Form\CalendarType;
 use App\Form\SessionType;
+use App\Repository\CalendarRepository;
 use App\Repository\SessionRepository;
+use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -46,21 +50,28 @@ class SessionController extends AbstractController
     /**
      * @Route("/new", name="app_session_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, SessionRepository $sessionRepository): Response
+    public function new(Request $request, SessionRepository $sessionRepository, CalendarRepository $calendarRepository): Response
     {
         $session = new Session();
-        $form = $this->createForm(SessionType::class, $session);
+        $calendar = new Calendar();
+        $form = $this->createForm(CalendarType::class, $calendar);
         $form->handleRequest($request);
         /** @var User $user */
         $user = $this->getUser();
         if ($form->isSubmitted() && $form->isValid()) {
+            $calendar->setUser($user);
+            $calendarRepository->add($calendar);
             $session->setUser($user);
+            $session->setTitle($calendar->getTitle());
+            $session->setDescription($calendar->getDescription());
+            $session->setStart($calendar->getStart());
+            $session->setCoach($calendar->getCoach());
             $sessionRepository->add($session);
             return $this->redirectToRoute('app_session_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('session/new.html.twig', [
-            'session' => $session,
+        return $this->render('calendar/new.html.twig', [
+            'calendar' => $calendar,
             'form' => $form->createView(),
         ]);
     }
@@ -87,24 +98,31 @@ class SessionController extends AbstractController
     }
 
 
-
     /**
-     * @Route("/{id}/edit", name="app_session_edit", methods={"GET", "POST"})
+     * @Route("/{id}/edit", name="app_session_edit", methods={"PUT"})
+     * @throws Exception
      */
-    public function edit(Request $request, Session $session, SessionRepository $sessionRepository): Response
+    public function edit(Request $request, ?Session $session): Response
     {
-        $form = $this->createForm(SessionType::class, $session);
-        $form->handleRequest($request);
+        $data = json_decode($request->getContent());
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $sessionRepository->add($session);
-            return $this->redirectToRoute('app_session_index', [], Response::HTTP_SEE_OTHER);
+        if(isset($data->start) && !empty($data->start)){
+            // data is complete
+            // We initialize the code
+            $code = 200;
+
+            // We hydrate the object with the data
+            $session->setStart(new DateTime($data->start));
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($session);
+            $em->flush();
+            // We return the code
+            return new Response('Ok', $code);
+        }else{
+            // Data is incomplete
+            return new Response('Data incomplete', 404);
         }
-
-        return $this->render('session/edit.html.twig', [
-            'session' => $session,
-            'form' => $form->createView(),
-        ]);
     }
 
     /**

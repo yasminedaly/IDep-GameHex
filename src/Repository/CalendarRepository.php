@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Calendar;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -41,6 +42,17 @@ class CalendarRepository extends ServiceEntityRepository
         if ($flush) {
             $this->_em->flush();
         }
+    }
+
+    public function findSessionByUser(User $user)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery(
+                'SELECT s FROM App:Calendar s '.
+                'WHERE s.user = :id'
+            )->setParameter('id', $user->getId());
+
+        return $query->getResult();
     }
 
     // /**

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Calendar;
+use App\Entity\User;
 use App\Form\CalendarType;
 use App\Repository\CalendarRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,12 +17,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class CalendarController extends AbstractController
 {
     /**
-     * @Route("/", name="app_calendar_index", methods={"GET"})
+     * @Route("/", name="app_calendar_index", methods={"GET", "POST"})
+     * @param CalendarRepository $calendarRepository
+     * @return Response
      */
     public function index(CalendarRepository $calendarRepository): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
         return $this->render('calendar/index.html.twig', [
-            'calendars' => $calendarRepository->findAll(),
+            'calendars' => $calendarRepository->findSessionByUser($user),
         ]);
     }
 
@@ -33,7 +38,6 @@ class CalendarController extends AbstractController
         $calendar = new Calendar();
         $form = $this->createForm(CalendarType::class, $calendar);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $calendarRepository->add($calendar);
             return $this->redirectToRoute('app_calendar_index', [], Response::HTTP_SEE_OTHER);

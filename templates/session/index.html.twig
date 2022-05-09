@@ -2,7 +2,9 @@
 {% block title %}Session index{% endblock %}
 {% block body %}
     <header class="container-coach"><center><h1 title="coach-index-h1">Session Index</h1></center></header>
-
+    <br>
+        <a class = "goCalendar" href="{{ path('main') }}">Visit Calendar</a>
+    <br><br>
     <div class="sidebar-search">
 
         <div class="input-group custom-search-form">
@@ -17,8 +19,7 @@
             <th width="50px">ID</th>
             <th>Title</th>
             <th>Description</th>
-            <th>Date</th>
-            <th>StartTime</th>
+            <th>Start Time</th>
             <th>Link</th>
             <th>Rating</th>
             <th>actions</th>
@@ -30,11 +31,10 @@
             <td>{{ session.id }}</td>
             <td>{{ session.title }}</td>
             <td>{{ session.description }}</td>
-            <td>{{ session.date ? session.date|date('Y-m-d') : '' }}</td>
-            <td>{{ session.startTime ? session.startTime|date('H:i:s') : '' }}</td>
+            <td>{{ session.start|date('Y-m-d H:i') }}</td>
             <td>{{ session.link }}</td>
             <td>
-                <div>
+                <div id="div-{{ session.id }}">
                     <span></span>
                     <span class="rating" data-rating="0">
                     <i class="star" data-checked="false" data-note="1">&#9733;</i>
@@ -80,7 +80,7 @@
     </script>
     <script>
         const ratings = document.querySelectorAll('.rating');
-        const session_id = document.querySelector('.session-id').value;
+        const session_id = document.querySelector('div-{{ session.id }}.session-id').value;
         ratings.forEach(rating =>
             rating.addEventListener('mouseleave', ratingHandler)
         );

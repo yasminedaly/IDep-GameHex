@@ -48,6 +48,7 @@ class Coach
      */
     private $sessions;
 
+
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
@@ -65,6 +66,11 @@ class Coach
      */
     private ?User $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Calendar::class, mappedBy="calendarCoach")
+     */
+    private $calendar;
+
     public function __construct()
     {
         $this->sessions = new ArrayCollection();
@@ -73,6 +79,22 @@ class Coach
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCalendar()
+    {
+        return $this->calendar;
+    }
+
+    /**
+     * @param mixed $calendar
+     */
+    public function setCalendar($calendar): void
+    {
+        $this->calendar = $calendar;
     }
 
     public function getRating(): ?float
@@ -123,6 +145,36 @@ class Coach
             // set the owning side to null (unless already changed)
             if ($session->getCoach() === $this) {
                 $session->setCoach(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Session>
+     */
+    public function getCalendarSessions(): Collection
+    {
+        return $this->calendarSessions;
+    }
+
+    public function addCalendarSession(Calendar $calendarSessions): self
+    {
+        if (!$this->sessions->contains($calendarSessions)) {
+            $this->sessions[] = $calendarSessions;
+            $calendarSessions->setCoach($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCalendarSession(Calendar $calendarSessions): self
+    {
+        if ($this->sessions->removeElement($calendarSessions)) {
+            // set the owning side to null (unless already changed)
+            if ($calendarSessions->getCoach() === $this) {
+                $calendarSessions->setCoach(null);
             }
         }
 

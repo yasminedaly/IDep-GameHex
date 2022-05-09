@@ -1,28 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Calendar{% endblock %}</title>
+{% extends 'base2.html.twig' %}
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css" integrity="sha256-5veQuRbWaECuYxwap/IOE/DAwNxgm4ikX7nrgsqYp88=" crossorigin="anonymous">
-    {% block stylesheets %}
-        <style>
-            #calendrier{
-                width: 80%;
-                margin: auto;
-            }
-        </style>
-    {% endblock %}
-</head>
-<body>
+{% block title %}Calendrier{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        #calendrier{
+            width: 80%;
+            margin: auto;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
     <div id="calendrier">
     </div>
 {% endblock %}
 
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js" integrity="sha256-XCdgoNaBjzkUaEJiauEq+85q/xi/2D4NcB3ZHwAapoM=" crossorigin="anonymous"></script>
 {% block javascripts %}
     <script>
+        const {FullCalendar} = require("../../public/theme-assets/vendors/js/extensions/fullcalendar.min");
         window.onload = () => {
             let calendarElt = document.querySelector("#calendrier")
 
@@ -42,6 +38,7 @@
 
             calendar.on('eventChange', (e) => {
                 let url = `/api/${e.event.id}/edit`
+                let url2 = `/session/${e.event.id}/edit`
                 let donnees = {
                     "title": e.event.title,
                     "description": e.event.extendedProps.description,
@@ -52,24 +49,24 @@
                     "textColor": e.event.textColor,
                     "allDay": e.event.allDay
                 }
-                console.log(donnees)
+
+                let data = {
+                    "start": e.event.start,
+                }
 
                 let xhr = new XMLHttpRequest
 
                 xhr.open("PUT", url)
                 xhr.send(JSON.stringify(donnees))
+
+                let xhr2 = new XMLHttpRequest
+
+                xhr2.open("PUT", url2)
+                xhr2.send(JSON.stringify(data))
             })
+
             calendar.render()
         }
     </script>
+
 {% endblock %}
-</body>
-</html>
-
-
-
-
-
-
-
-

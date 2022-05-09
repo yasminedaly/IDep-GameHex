@@ -32,17 +32,11 @@ class Session
     private ?string $description;
 
     /**
-     * @ORM\Column(type="date")
-     * @Assert\NotBlank
-     * @Assert\GreaterThan("today UTC")
-     */
-    private ?DateTimeInterface $date;
-
-    /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="datetime")
+     * @Assert\GreaterThanOrEqual("today UTC")
      * @Assert\NotBlank
      */
-    private ?DateTimeInterface $startTime;
+    private $start;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -96,28 +90,20 @@ class Session
         return $this;
     }
 
-    public function getDate(): ?DateTimeInterface
+    /**
+     * @return mixed
+     */
+    public function getStart()
     {
-        return $this->date;
+        return $this->start;
     }
 
-    public function setDate(DateTimeInterface $date): self
+    /**
+     * @param mixed $start
+     */
+    public function setStart($start): void
     {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    public function getStartTime(): ?DateTimeInterface
-    {
-        return $this->startTime;
-    }
-
-    public function setStartTime(DateTimeInterface $startTime): self
-    {
-        $this->startTime = $startTime;
-
-        return $this;
+        $this->start = $start;
     }
 
     public function getLink(): ?string

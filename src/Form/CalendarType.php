@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Calendar;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -26,6 +27,11 @@ class CalendarType extends AbstractType
             ->add('background_color', ColorType::class)
             ->add('border_color', ColorType::class)
             ->add('text_color', ColorType::class)
+            ->add('coach', EntityType::class,
+                [
+                    'class'=>'App\Entity\Coach',
+                    'choice_label'=>'id'
+                ])
         ;
     }
 
