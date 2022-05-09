@@ -28,6 +28,17 @@ class TeamMatesController extends AbstractController
         ]);
     }
 
+
+    /**
+     * @Route("/quotes", name="app_team_mates_quotes", methods={"GET"})
+     */
+    public function quotes(TeamMatesRepository $teamMatesRepository): Response
+    {
+        return $this->render('team_mates/quotes.html.twig');
+    }
+
+
+
     /**
      * @Route("/back", name="app_team_mates_indexAdmin", methods={"GET"})
      */

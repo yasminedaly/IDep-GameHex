@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Matches{% endblock %}
+{% block title %} {% trans %} Matches {% endtrans %}{% endblock %}
 
 {% block body %}
     <style>
@@ -19,11 +19,17 @@
 
     <!-- START: Latest Matches -->
     <div class="nk-gap-2"></div>
-    <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Latest</span> Matches</span></h3>
+
+    <h3 class="nk-decorated-h-2"><span><span class="text-main-1">
+                {% trans %}
+                Latest
+                {% endtrans %}</span> {% trans %} Matches {% endtrans %}</span></h3>
+
     <div class="nk-gap"></div>
     <div class="row">
         <div class="col-md-4">
-            <a href="tournaments.html" class="nk-btn nk-btn-rounded nk-btn-color-main-1">Match Details</a>
+            <a href="tournaments.html" class="nk-btn nk-btn-rounded nk-btn-color-main-1">
+                {% trans %} Match Details {% endtrans %}</a>
         </div>
         <div class="col-md-8">
             <div class="responsive-embed responsive-embed-16x9">
@@ -36,7 +42,13 @@
     <tr>
     <tr>
     <!-- start Quiz button -->
-    <div style="float: left" class="start_btn"><button>Start Quiz</button></div>
+
+    <div style="float: left" class="start_btn"><button>
+            {% trans %}
+            Start Quiz
+            {% endtrans %}
+        </button></div>
+
     </tr>
     </tr>
     <!-- Info Box -->
@@ -57,7 +69,7 @@
     <!-- Quiz Box -->
     <div class="quiz_box">
         <header>
-            <div class="title">Awesome Quiz Application</div>
+            <div class="title">GameHex Exclusive Quiz</div>
             <div class="timer">
                 <div class="time_left_txt">Time Left</div>
                 <div class="timer_sec">15</div>

@@ -10,10 +10,7 @@
         }
     </style>
     <h1>Teams</h1>
-
-
-
-    {% for team in teams %}
+        {% for team in teams %}
         {% if team.user.id == current_user.id %}
     <div class="nk-team">
         <div class="nk-team-logo">
@@ -32,7 +29,7 @@
     </div>
     {% else %}
         <tr>
-            <td colspan="6">no records found</td>
+            <td colspan="6"></td>
         </tr>
         {% endif %}
     {% endfor %}

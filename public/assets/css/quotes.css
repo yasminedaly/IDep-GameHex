@@ -6,13 +6,7 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
-body{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background: #5372F0;
-}
+
 .wrapper{
     width: 605px;
     background: #fff;
@@ -21,7 +15,7 @@ body{
     box-shadow: 0 12px 35px rgba(0,0,0,0.1);
 }
 header, .content :where(i, p, span){
-    color: #202842;
+    color: #F40E4D;
 }
 .wrapper header{
     font-size: 35px;
@@ -80,12 +74,12 @@ header, .content :where(i, p, span){
     width: 47px;
     display: flex;
     cursor: pointer;
-    color: #5372F0;
+    color: #fa91ae;
     list-style: none;
     border-radius: 50%;
     align-items: center;
     justify-content: center;
-    border: 2px solid #5372F0;
+    border: 2px solid #fa91ae;
     transition: all 0.3s ease;
 }
 .features ul li:first-child{
@@ -93,7 +87,7 @@ header, .content :where(i, p, span){
 }
 ul li:is(:hover, .active){
     color: #fff;
-    background: #5372F0;
+    background: #fa91ae;
 }
 ul .speech.active{
     pointer-events: none;
@@ -106,7 +100,7 @@ ul .speech.active{
     cursor: pointer;
     padding: 13px 22px;
     border-radius: 30px;
-    background: #5372F0;
+    background: #fa91ae;
 }
 .buttons button.loading{
     opacity: 0.7;
