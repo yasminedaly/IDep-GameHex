@@ -1,17 +1,19 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
 {% block title %}Info index{% endblock %}
 
 {% block body %}
-    <h1>Esports Informations</h1>
 
-    <table class="table">
+    <h1 class="pt-3" style="text-align:center;">Esports Informations</h1>
+    <center class="container py-3">
+    <table class="table text-center">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Title</th>
                 <th>Upload Date</th>
-                <th>Content</th>
+                <th>Upload Video</th>
+                <th>Youtube URL</th>
                 <th></th>
             </tr>
         </thead>
@@ -22,9 +24,10 @@
                 <td>{{ info.contenttitle }}</td>
                 <td>{{ info.contentdate ? info.contentdate|date('Y-m-d') : '' }}</td>
                 <td>{{ info.infocontent }}</td>
+                <td>{{ info.ytContent }}</td>
                 <td>
-                    <a href="{{ path('app_info_show', {'contentid': info.contentid}) }}">show</a>
-                    <a href="{{ path('app_info_edit', {'contentid': info.contentid}) }}">edit</a>
+                    <a href="{{ path('app_info_show', {'contentid': info.contentid}) }}" class="font-weight-bold mr-1">show</a>
+                    <a href="{{ path('app_info_edit', {'contentid': info.contentid}) }}" class="font-weight-bold mr-1">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -34,6 +37,12 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_info_new') }}">Create new</a>
+    </center>
+    <div class="container text-center">
+    
+    <a href="{{ path('app_info_new') }}" class="font-weight-bold">Create new</a>
+    </div>
+        <div class="navigation mt-5" style="display: flex; align-items: center; justify-content: center;">
+        {{ knp_pagination_render(infos) }}
+    </div>
 {% endblock %}

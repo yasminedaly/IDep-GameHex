@@ -1,14 +1,16 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
 {% block title %}Articles index{% endblock %}
 
 {% block body %}
-    <h1>Articles and Tutos</h1>
 
-    <table class="table">
+    <h1 class="pt-3" style="text-align:center;">Articles and Tutos</h1>
+    <center class="container py-3">
+    <table class="table text-center">
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Article Title</th>
                 <th>Article Content</th>
                 <th>Category</th>
                 <th></th>
@@ -18,11 +20,12 @@
         {% for article in articles %}
             <tr>
                 <td>{{ article.articleid }}</td>
+                <td>{{ article.title }}</td>
                 <td>{{ article.content }}</td>
                 <td>{{ article.category.title }}</td>
                 <td>
-                    <a href="{{ path('app_articles_show', {'articleid': article.articleid}) }}">show</a>
-                    <a href="{{ path('app_articles_edit', {'articleid': article.articleid}) }}">edit</a>
+                    <a href="{{ path('app_articles_show', {'articleid': article.articleid}) }}" class="font-weight-bold mr-1">Show</a>
+                    <a href="{{ path('app_articles_edit', {'articleid': article.articleid}) }}" class="font-weight-bold ml-1">Edit</a>
                 </td>
             </tr>
         {% else %}
@@ -33,5 +36,10 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_articles_new') }}">Create new</a>
+    <div class="navigation mt-5" style="display: flex; align-items: center; justify-content: center;">
+        {{ knp_pagination_render(articles) }}
+    </div>
+    
+    <a href="{{ path('app_articles_new') }}" class="font-weight-bold">Create new</a>
+    </center>
 {% endblock %}

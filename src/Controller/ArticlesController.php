@@ -10,15 +10,46 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+// Include paginator interface
+use Knp\Component\Pager\PaginatorInterface;
+
 /**
- * @Route("/articles")
+ * @Route("/admin/articles")
  */
 class ArticlesController extends AbstractController
 {
     /**
      * @Route("/", name="app_articles_index", methods={"GET"})
      */
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(Request $request, PaginatorInterface $paginator)
+    {
+        // Retrieve the entity manager of Doctrine
+        $em = $this->getDoctrine()->getManager();
+        
+        // Get some repository of data, in our case we have an Articles entity
+        $articles = $em
+				->getRepository(Articles::class)
+				->findAll();
+                
+
+        
+        // Paginate the results of the query
+        $articles = $paginator->paginate(
+            // Doctrine Query, not results
+            $articles,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            5
+        );
+        
+        // Render the twig view
+        return $this->render('articles/index.html.twig', [
+            'articles' => $articles,
+        ]);
+    }
+
+/*    public function index(EntityManagerInterface $entityManager): Response
     {
         $articles = $entityManager
             ->getRepository(Articles::class)
@@ -28,7 +59,7 @@ class ArticlesController extends AbstractController
             'articles' => $articles,
         ]);
     }
-
+*/
     /**
      * @Route("/new", name="app_articles_new", methods={"GET", "POST"})
      */

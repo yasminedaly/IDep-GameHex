@@ -1,5 +1,15 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_widget(form.category)}}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <center class="container py-3">
+
+        {{ form_widget(form) }}
+        {{ form_widget(form.category)}}
+
+    </center>
+
+    <div style="text-align:center;">
+
+        <button class="btn btn-success m-3">{{ button_label|default('Save') }}</button> 
+        <a href="{{ path('app_articles_index') }}" class="font-weight-bold">Back to list</a>
+        
+    </div>
 {{ form_end(form) }}

@@ -1,11 +1,14 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
 {% block title %}Informations{% endblock %}
 
 {% block body %}
-    <h1>Info</h1>
 
-    <table class="table">
+    <h1 class="pt-3" style="text-align:center;">Information Details</h1>
+
+    <center class="container py-3">
+
+        <table class="table text-center">
         <tbody>
             <tr>
                 <th>ID</th>
@@ -20,15 +23,23 @@
                 <td>{{ info.contentdate ? info.contentdate|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>Content Info</th>
+                <th>Video Name</th>
                 <td>{{ info.infocontent }}</td>
             </tr>
+            <tr>
+                <th>Video URL</th>
+                <td>{{ info.ytContent }}</td>
+            </tr>
         </tbody>
-    </table>
+        </table>
 
-    <a href="{{ path('app_info_index') }}">back to list</a>
+        <div class="font-weight-bold m-5">
 
-    <a href="{{ path('app_info_edit', {'contentid': info.contentid}) }}">edit</a>
-
-    {{ include('info/_delete_form.html.twig') }}
+            <a href="{{ path('app_info_index') }}" class="mx-2">Back to list</a>
+            <a href="{{ path('app_info_edit', {'contentid': info.contentid}) }}" class="px-5">Edit</a>
+            {{ include('info/_delete_form.html.twig') }}
+            
+        </div>
+    </center>
+    
 {% endblock %}

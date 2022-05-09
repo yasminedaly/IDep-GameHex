@@ -19,11 +19,11 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/index2", name="index2")
+     * @Route("/admin", name="admin")
      */
     public function index2(): Response
     {
-        return $this->render('home/index2.html.twig', [
+        return $this->render('baseAdmin.html.twig', [
             'controller_name' => 'HomeController',
         ]);
     }

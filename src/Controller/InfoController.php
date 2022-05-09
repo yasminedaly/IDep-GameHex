@@ -10,15 +10,46 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+// Include paginator interface
+use Knp\Component\Pager\PaginatorInterface;
+
 /**
- * @Route("/info")
+ * @Route("/admin/info")
  */
 class InfoController extends AbstractController
 {
     /**
      * @Route("/", name="app_info_index", methods={"GET"})
      */
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(Request $request, PaginatorInterface $paginator)
+    {
+        // Retrieve the entity manager of Doctrine
+        $em = $this->getDoctrine()->getManager();
+        
+        // Get some repository of data, in our case we have an Articles entity
+        $infos = $em
+				->getRepository(Info::class)
+				->findAll();
+                
+
+        
+        // Paginate the results of the query
+        $infos = $paginator->paginate(
+            // Doctrine Query, not results
+            $infos,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            5
+        );
+        
+        // Render the twig view
+        return $this->render('info/index.html.twig', [
+            'infos' => $infos,
+        ]);
+    }
+
+    /*public function index(EntityManagerInterface $entityManager): Response
     {
         $infos = $entityManager
             ->getRepository(Info::class)
@@ -26,8 +57,8 @@ class InfoController extends AbstractController
 
         return $this->render('info/index.html.twig', [
             'infos' => $infos,
-        ]);
-    }
+        ]);*/
+
 
     /**
      * @Route("/new", name="app_info_new", methods={"GET", "POST"})
@@ -39,6 +70,11 @@ class InfoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $info->getInfocontent();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move($this->getParameter('upload_directory'), $fileName);
+            $info->setInfocontent($fileName);
+
             $entityManager->persist($info);
             $entityManager->flush();
 
