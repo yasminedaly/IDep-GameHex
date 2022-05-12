@@ -67,7 +67,7 @@ class TeamMatesController extends AbstractController
                 '+21651908081',
                 array(
                     'from' => $twilio_number,
-                    'body' => 'Team member registered!'
+                    'body' => ' Hello, this is your favorite website GameHex. Team member registered!'
                 )
             );
             $teamMatesRepository->add($teamMate);

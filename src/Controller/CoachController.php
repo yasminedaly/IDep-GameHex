@@ -43,7 +43,7 @@ class CoachController extends AbstractController
         /** @var User $currentUser */
         $currentUser = $this->getUser();
         $data = json_decode($request->getContent());
-
+        var_dump($request->getContent());
         if(isset($data->sumoner_name) && !empty($data->sumoner_name)){
 
             // We return the code

@@ -80,7 +80,7 @@
     </script>
     <script>
         const ratings = document.querySelectorAll('.rating');
-        const session_id = document.querySelector('div-{{ session.id }}.session-id').value;
+        const session_id = document.querySelector('.session-id').value;
         ratings.forEach(rating =>
             rating.addEventListener('mouseleave', ratingHandler)
         );

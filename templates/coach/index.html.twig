@@ -49,6 +49,7 @@
                 {% elseif coach.rating == '5' %}
                     {% set ratingDisplay = 'Excellent' %}
                 {% endif %}
+
             <br><br>
             <div class="container">
                 <div class="row">
@@ -114,7 +115,7 @@
         <div class="input-group custom-search-form">
             <<label for="riot-summoner-input">Search a Summoner</label><br>
             <input type="text" id="riot-summoner-input" class="form-control" placeholder="Type summoner name..." style="margin-bottom: 20px">
-            <a href="{{ path('app_coach_index') }}"><button type="button" id="valid-summoner">Search</button></a>
+            <button type="button" id="valid-summoner">Search</button>
         </div>
     </div>
 
@@ -131,7 +132,7 @@
 
                 xhr.open("GET", url)
                 xhr.send(JSON.stringify(data))
-                console.log(data)
+
                 function loadXMLDoc()
                 {
                     document.getElementById("display-summonerLevel").innerHTML = `Summoner Level: <h2>${res}</h2>`

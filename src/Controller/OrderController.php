@@ -113,8 +113,8 @@ class OrderController extends AbstractController
 
         $orders = $orderrep->findAll();
         $dompdf = new Dompdf();
-        $png = file_get_contents("avatar-1.jpg");
-        $png2 = file_get_contents("avatar-1.jpg");
+        $png = file_get_contents("avatar-1.png");
+        $png2 = file_get_contents("avatar-1.png");
         $pngbase64 = base64_encode($png);
         $pngbase643 = base64_encode($png2);
         $html = $this->renderView('product_user/pdfGen.html.twig', [

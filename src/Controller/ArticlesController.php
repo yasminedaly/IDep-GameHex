@@ -21,17 +21,17 @@ class ArticlesController extends AbstractController
     /**
      * @Route("/", name="app_articles_index", methods={"GET"})
      */
-    public function index(ArticlesRepository $articlesRepository): Response
+    public function index(ArticlesRepository $articlesRepository, Request  $request): Response
     {
         $client = new HttpClient;
-        $request = new Request();
+
         $client = HttpClient::create();
         $response = $client->request('GET', 'https://quotes15.p.rapidapi.com/quotes/random/', ['headers' => [
             'X-RapidAPI-Host' => 'quotes15.p.rapidapi.com',
             'X-RapidAPI-Key' => 'b72dd72451mshc7d1c9770f461acp1f5299jsn077736d8a6a3'
         ]]);
 
-        $session = new Session();
+        $session = $request->getSession();
 
         $session->start();
         // set and get session attributes
