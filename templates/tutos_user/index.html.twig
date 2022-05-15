@@ -1,0 +1,162 @@
+{% extends 'base.html.twig' %}
+{% block title %}Hello TutosUserController!{% endblock %}
+{% block body %}
+<style>
+   .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+   .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+{% set listCategory=[] %}
+{% for tuto in tutos %}
+{% if  tuto.category.title not in listCategory %}
+{% set listCategory = listCategory|merge([tuto.category.title]) %}
+{% endif %}
+{% endfor %}
+<div class="nk-main">
+   <!-- START: Breadcrumbs -->
+   <div class="nk-gap-1"></div>
+   <div class="container">
+      <ul class="nk-breadcrumbs">
+         <li><a href="index.html">Home</a></li>
+         <li><span class="fa fa-angle-right"></span></li>
+         <li><span>Gaming Tutorials</span></li>
+      </ul>
+   </div>
+   <div class="nk-gap-1"></div>
+   <div class="nk-gap-1"></div>
+   <!-- END: Breadcrumbs -->
+   <div class="container">
+      <div class="row vertical-gap">
+         <div class="col-lg-12">
+            <!-- START: Tabs  -->
+            <div class="nk-tabs">
+               <ul class="nav nav-tabs nav-tabs-fill" role="tablist">
+                  <li class="nav-item">
+                     {% if listCategory|default %}
+                     <a class="nav-link active" href="#tabs-1-1" role="tab" data-toggle="tab">  {{ listCategory[0] }}  </a>
+                     {% endif %}
+                  </li>
+                  {% set i = 1 %}
+                  {% for x in listCategory|filter(x => x != listCategory[0]) %}    
+                  {% set i = i + 1 %}
+                  <li class="nav-item">
+                     <a class="nav-link" href="#tabs-1-{{ i }}" role="tab" data-toggle="tab">{{ x }}</a>
+                  </li>
+                  {% endfor %}
+               </ul>
+            </div>
+            <div class="tab-content">
+               <div role="tabpanel" class="tab-pane fade show active" id="tabs-1-1">
+                  <div class="nk-gap"></div>
+                  {% for tuto in tutos %}
+                  {% if tuto.category.title == listCategory[0] %}
+                  <div class="nk-blog-post nk-blog-post-border-bottom">
+                     <div class="nk-gap-1"></div>
+                     <div class="row vertical-gap">
+                        <div class="col-lg-12 col-md-7">
+                           <h2 class="nk-post-title h4"><a href="blog-tuto.html">{{ tuto.title }}</a></h2>
+                           <div class="mt-8 mb-8">
+                              <span class="nk-post-categories mt-8 mb-8">
+                              <span class="bg-main-1">{{ tuto.category.title }}</span>
+                              </span>
+                           </div>
+                           <div class="nk-post-text">
+                              <p class="mt-8 mb-8">{{ tuto.content }}</p>
+                              <br>
+                              <div style="text-align:center;">
+                                 <button type="button" class="btn btn-primary"><i class="fa fa-share-square"></i> Share Tuto </button>
+                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                 <script>
+                                    let shareData = {
+                                        title: 'GameHex',
+                                        text: 'GameHex : Best Esports Website !',
+                                        url: '{{ path('sumDisplay', {'tutoid': tuto.tutoid}) }}',
+                                    }
+                                    
+                                    const btn = document.querySelector('button');
+                                    const resultPara = document.querySelector('.result');
+                                    
+                                    btn.addEventListener('click', () => {
+                                        navigator.share(shareData)
+                                    });
+                                 </script>
+                                 <button type="button" class="btn btn-primary" onclick="location.href='{{ path('sumDisplay', {'tutoid': tuto.tutoid}) }}'"><i class="fa fa-file-text"></i> Summarize </button>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  {% endif %}
+                  {% else %}
+                  <div class="nk-fullscreen-block-middle">
+                     <div class="container text-center">
+                        <div class="row">
+                           <div class="col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+                              <div class="nk-gap-3"></div>
+                              <h1 class="text-main-1">404</h1>
+                              <div class="nk-gap"></div>
+                              <h5>Nothing is Up !</h5>
+                              <div>Please Come Back Later ...</div>
+                           </div>
+                        </div>
+                        <div class="nk-gap-3"></div>
+                     </div>
+                  </div>
+                  {% endfor %}
+               </div>
+               {% set i = 1 %}
+               {% for x in listCategory|filter(x => x != listCategory[0]) %}    
+               {% set i = i + 1 %}
+               <div role="tabpanel" class="tab-pane fade" id="tabs-1-{{ i }}">
+                  <div class="nk-gap"></div>
+                  {% for tuto in tutos %}
+                  {% if tuto.category.title == listCategory[i-1] %}
+                  <div class="nk-blog-post nk-blog-post-border-bottom">
+                     <div class="nk-gap-1"></div>
+                     <div class="row vertical-gap">
+                        <div class="col-lg-12 col-md-7">
+                           <h2 class="nk-post-title h4"><a href="blog-tuto.html">{{ tuto.title }}</a></h2>
+                           <div class="mt-8 mb-8">
+                              <span class="nk-post-categories mt-8 mb-8">
+                              <span class="bg-main-1">{{ tuto.category.title }}</span>
+                              </span>
+                           </div>
+                           <div class="nk-post-text">
+                              <p class="mt-8 mb-8">{{ tuto.content }}</p>
+                              <br>
+                              <div style="text-align:center;">
+                                 <button type="button" class="btn btn-primary"><i class="fa fa-share-square"></i> Share Tuto </button>
+                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                 <script>
+                                    let shareData = {
+                                        title: 'GameHex',
+                                        text: 'GameHex : Best Esports Website !',
+                                        url: '{{ path('sumDisplay', {'tutoid': tuto.tutoid}) }}',
+                                    }
+                                    
+                                    const btn = document.querySelector('button');
+                                    const resultPara = document.querySelector('.result');
+                                    
+                                    btn.addEventListener('click', () => {
+                                        navigator.share(shareData)
+                                    });
+                                 </script>
+                                 <button type="button" class="btn btn-primary" onclick="location.href='{{ path('sumDisplay', {'tutoid': tuto.tutoid}) }}'"><i class="fa fa-file-text"></i> Summarize </button>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  {% endif %}
+                  {% endfor %}
+                  {% endfor %}
+                  <div class="nk-gap"></div>
+                  <!-- END: Tabs -->
+               </div>
+               <div class="nk-gap-2"></div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+</div>
+{% endblock %}

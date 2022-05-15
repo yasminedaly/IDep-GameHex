@@ -1,0 +1,19 @@
+{{ form_start(form) }}
+{# {{ form_widget(form) }} #}
+<div class="form-group">
+    {{ form_label(form.title) }}
+    {{ form_widget(form.title, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.title) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.description) }}
+    {{ form_widget(form.description, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.description) }}
+</div>
+
+
+<div class="buttons-cont">
+    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+    <a class="btn btn-dark" href="{{ path('app_category_index') }}">back to list</a>
+</div>
+{{ form_end(form) }}

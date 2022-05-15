@@ -1,0 +1,39 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Info index{% endblock %}
+
+{% block body %}
+<h1>Info index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Tuto Content</th>
+            <th>actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tuto in tutos %}
+        <tr>
+            <td>{{ tuto.tutoid }}</td>
+            <td>{{ tuto.title }}</td>
+            <td>{{ tuto.category.title }}</td>
+            <td>{{ tuto.content }}</td>
+            <td>
+                <a href="{{ path('app_tutos_show', {'tutoid': tuto.tutoid}) }}">show</a>
+                <a href="{{ path('app_tutos_edit', {'tutoid': tuto.tutoid}) }}">edit</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="6">no records found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a class="btn btn-success ml-9" href="{{ path('app_tutos_new') }}">Create new</a>
+{% endblock %}

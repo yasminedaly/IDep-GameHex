@@ -1,0 +1,38 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Info{% endblock %}
+
+{% block body %}
+<h1>Info</h1>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Content ID</th>
+            <td>{{ info.contentid }}</td>
+        </tr>
+        <tr>
+            <th>Content Title</th>
+            <td>{{ info.contenttitle }}</td>
+        </tr>
+        <tr>
+            <th>Upload Date</th>
+            <td>{{ info.contentdate ? info.contentdate|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Local URL</th>
+            <td>{{ info.infocontent }}</td>
+        </tr>
+        <tr>
+            <th>Youtube URL</th>
+            <td>{{ info.ytContent }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<a href="{{ path('app_info_index') }}">back to list</a>
+
+<a href="{{ path('app_info_edit', {'contentid': info.contentid}) }}">edit</a>
+
+{{ include('info/_delete_form.html.twig') }}
+{% endblock %}

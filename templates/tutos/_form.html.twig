@@ -1,0 +1,23 @@
+{{ form_start(form) }}
+{# {{ form_widget(form) }} #}
+<div class="form-group">
+    {{ form_label(form.title) }}
+    {{ form_widget(form.title, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.title) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.category) }}
+    {{ form_widget(form.category, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.category) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.content) }}
+    {{ form_widget(form.content, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.content) }}
+</div>
+
+<div class="buttons-cont">
+    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+    <a class="btn btn-dark" href="{{ path('app_tutos_index') }}">back to list</a>
+</div>
+{{ form_end(form) }}

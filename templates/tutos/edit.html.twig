@@ -1,0 +1,13 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Edit Info{% endblock %}
+
+{% block body %}
+<h1>Edit Info</h1>
+
+{{ include('tutos/_form.html.twig', {'button_label': 'Update'}) }}
+
+<a href="{{ path('app_tutos_index') }}">back to list</a>
+
+{{ include('tutos/_delete_form.html.twig') }}
+{% endblock %}

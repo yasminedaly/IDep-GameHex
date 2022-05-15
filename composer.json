@@ -2,7 +2,7 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": ">=7.4",
+        "php": "^7.3|^8.1",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
@@ -14,8 +14,9 @@
         "doctrine/orm": "^2.10",
         "dompdf/dompdf": "^1.2",
         "knplabs/knp-paginator-bundle": "^5.8",
-        "mercuryseries/flashy-bundle": "3.0",
+        "mercuryseries/flashy-bundle": "^5.1",
         "michaelgarrez/lol-api": "*",
+        "nlpcloud/nlpcloud-client": "*",
         "phpdocumentor/reflection-docblock": "^5.3",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "4.4.*",
@@ -57,7 +58,8 @@
         "symfony/phpunit-bridge": "^6.0",
         "symfony/stopwatch": "4.4.*",
         "symfony/web-profiler-bundle": "4.4.*",
-        "symfony/web-server-bundle": "4.4.*"
+        "symfony/web-server-bundle": "4.4.*",
+        "vich/uploader-bundle": "^1.19"
     },
     "config": {
         "allow-plugins": {

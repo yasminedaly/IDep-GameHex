@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello InfoUserController!{% endblock %}
+
+{% block body %}
+
+<div class="nk-main">
+
+    <!-- START: Breadcrumbs -->
+    <div class="nk-gap-1"></div>
+    <div class="container">
+        <ul class="nk-breadcrumbs">
+            <li><a href="index.html">Home</a></li>
+            <li><span class="fa fa-angle-right"></span></li>                    
+            <li><span>Esports Contents</span></li>                    
+        </ul>
+    </div>
+    <div class="nk-gap-1"></div>
+    <div class="nk-gap-1"></div>
+    <!-- END: Breadcrumbs -->
+
+<div class="container">
+    <div class="row vertical-gap">
+        <div class="col-lg-12">
+            <!-- START: Video Galleries-->
+            <div class="nk-gap-2"></div>
+            
+
+            {% for info in infos %}
+            <div class="row vertical-gap">
+                {% if (info.ytContent is null)  %}
+                    <div class="col-md-6">
+                        <h4>{{ info.contenttitle }}</h4>
+                        <div class="nk-plain-video" style="padding:0;">
+                            <video style="width: 100%;" preload="metadata" controls>
+                                <source src="{{  asset('uploads/' ~ info.infocontent) }}" type="video/mp4" >
+                            </video>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="col-md-6">
+                        <h4>{{ info.contenttitle }}</h4>
+                        <div class="nk-plain-video" data-video="{{ info.ytContent }}"></div>
+                    </div>
+                {% endif %}
+            {% else %}
+                  <div class="nk-fullscreen-block-middle">
+                     <div class="container text-center">
+                        <div class="row justify-content-md-center">
+                           <div class="">
+                              <div class="nk-gap-3"></div>
+                              <h1 class="text-main-1">404</h1>
+                              <div class="nk-gap"></div>
+                              <h5>Nothing is Up !</h5>
+                              <div>Please Come Back Later ...</div>
+                           </div>
+                        </div>
+                        <div class="nk-gap-3"></div>
+                     </div>
+                  </div>            
+            {% endfor %}
+
+            </div>
+            <!-- END: Video Galleries -->
+        </div>
+    </div>
+</div>
+
+<div class="nk-gap-2"></div>
+
+    </div>
+
+    <br><br><br><br><br><br>
+    </div class="nk-footer">
+        <div class="navigation mt-5" style="display: flex; align-items: center; justify-content: center;">
+        {{ knp_pagination_render(infos) }}
+    </div>
+{% endblock %}

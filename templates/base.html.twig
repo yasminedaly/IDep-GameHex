@@ -199,7 +199,7 @@
             .nk-navbar-autohide
     -->
         <nav class="nk-navbar nk-navbar-top nk-navbar-sticky nk-navbar-autohide">
-            <div class="container">
+            <div class="container" style="max-width:90%">
                 <div class="nk-nav-table">
 
                     <a href="{{ path('app_articles_index') }}" class="nk-nav-logo">
@@ -211,7 +211,6 @@
                         <li class=" nk-drop-item">
                             <a href="elements.html">
                                 Features
-
                             </a>
                             <ul class="dropdown">
 
@@ -322,13 +321,29 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class=" nk-drop-item">
+                        <a href='{{ path('app_tutos_user_index') }}'>
+                        Library
+                        </a>
+                        <ul class="dropdown">
+                            <li>
+                                <a href='{{ path('app_tutos_user_index') }}'>
+                                Gaming Tutorials
+                                </a>
+                            </li>
+                            <li>
+                                <a href='{{ path('app_Info_user_index') }}'>
+                                Esports Contents
+                                </a>
+                        </ul>
+                        </li>
                         <li>
                             <a href="gallery.html">
                                 Gallery
 
                             </a>
                         </li>
-
+        
                         <li class=" nk-drop-item">
                             <a href="store.html">
                                 Store
@@ -477,6 +492,23 @@
                                 </li>
 
                             </ul>
+                            <li class=" nk-drop-item">
+                                <a href='{{ path('app_tutos_user_index') }}'>
+                                Library
+                                </a>
+                                
+                                <ul class="dropdown">
+                                    <li>
+                                        <a href='{{ path('app_tutos_user_index') }}'>
+                                        Gaming Tutorials
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href='{{ path('app_Info_user_index') }}'>
+                                        Esports Contents
+                                        </a>
+                                </ul>
+                            </li>
                         </li>
 
 

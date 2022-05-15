@@ -1,0 +1,29 @@
+{{ form_start(form) }}
+{# {{ form_widget(form) }} #}
+<div class="form-group">
+    {{ form_label(form.contenttitle) }}
+    {{ form_widget(form.contenttitle, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.contenttitle) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.contentdate) }}
+    {{ form_widget(form.contentdate, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.contentdate) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.infocontent) }}
+    {{ form_widget(form.infocontent, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.infocontent) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.ytContent) }}
+    {{ form_widget(form.ytContent, { attr: { class: "form-control" } } ) }}
+    {{ form_errors(form.ytContent) }}
+</div>
+
+
+<div class="buttons-cont">
+    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+    <a class="btn btn-dark" href="{{ path('app_info_index') }}">back to list</a>
+</div>
+{{ form_end(form) }}
