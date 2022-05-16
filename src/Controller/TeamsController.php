@@ -14,7 +14,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
-
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 
 
@@ -44,6 +46,93 @@ class TeamsController extends AbstractController
 
 
     }
+
+    /* begin Mobile */
+    /**
+     * @Route("/DeleteTeam", name="team_delJSON"),methods={"PUT"}
+     */
+
+    public function delJSON(Request $request, SerializerInterface $serializerInterface)
+    {
+        $id = $request->get("id");
+
+        $em = $this->getDoctrine()->getManager();
+        $h = $em->getRepository(Teams::class)->find($id);
+        if ($h != null) {
+            $em->remove($h);
+            $em->flush();
+
+            $json = $serializerInterface->serialize($h, 'json', ['groups' => 'post:read']);
+
+            return new JsonResponse("Done!!" . json_encode($json));
+        } else {
+            return new JsonResponse("Check again");
+        }
+    }
+
+
+    /**
+     * @Route("/UpdateTeam", name="hotel_updateJSON"),methods={"PUT"}
+     */
+    public function UpdateTeam(TeamsRepository $sRepository, SerializerInterface $serializerInterface, Request $request, NormalizerInterface $normalizerInterface)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $h = $entityManager->getRepository(Teams::class)->find($request->get("id"));
+        $h->setTeamName($request->get("team_name"));
+        $h->setTeamTag($request->get("team_tag"));
+        $h->setTeamMail($request->get("team_mail"));
+        $h->setTeamReg($request->get("team_reg"));
+        $entityManager->persist($h);
+        $entityManager->flush();
+
+        $jsoncontent = $serializerInterface->serialize($h, 'json', ['groups' => 'post:read']);
+        return new Response(json_encode($jsoncontent));
+    }
+
+
+    /**
+     * @Route("/DisplayAllTeamsMobile", name="test", methods={"GET","POST"})
+     */
+    public function DisplayAllTeamsMobile(NormalizerInterface $normalizerInterface, EntityManagerInterface $entityManager)
+    {
+        $repository = $this->getDoctrine()->getRepository(Teams::class);
+        $teams = $repository->findAll();
+        // dd($hotel);
+        $json = $normalizerInterface->normalize($teams, 'json', ['groups' => 'post:read']);
+        return new Response(json_encode($json));
+    }
+
+    /**
+     * @Route("/AddTeamMobile", name="app_team_index", methods={"GET","POST"})
+     */
+    public function AddTeamMobile(Request $request, SerializerInterface $serializerInterface, EntityManagerInterface $entityManager): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $h = new Teams();
+        $h->setTeamName($request->get("team_name"));
+        $h->setTeamTag($request->get("team_tag"));
+        $h->setTeamMail($request->get("team_mail"));
+        $h->setTeamReg($request->get("team_reg"));
+
+
+        $entityManager->persist($h);
+        $entityManager->flush();
+        $jsoncontent = $serializerInterface->serialize($h, 'json', ['groups' => 'post:read']);
+        return new Response(json_encode($jsoncontent));
+    }
+
+
+    /**
+     * @Route("/show/{id}", name="showJson")
+     */
+    public function showJson($id, Request $request, SerializerInterface $serializerInterface)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $hc = $entityManager->getRepository(Teams::class)->find($id);
+        $jsoncontent = $serializerInterface->serialize($hc, 'json', ['groups' => 'post:read']);
+        return new Response(json_encode($jsoncontent));
+    }
+    /*end Mobile */
 
     /**
      * @Route("/map", name="app_teams_indexMap", methods={"GET"})

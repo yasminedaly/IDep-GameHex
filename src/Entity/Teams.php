@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=TeamsRepository::class)
@@ -23,6 +24,7 @@ class Teams
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
+     * @Groups("post:read")
      */
     private $teamName;
 
@@ -35,6 +37,7 @@ class Teams
      *      minMessage = "Your team tag must be at least {{ limit }} characters long",
      *      maxMessage = "Your team tag cannot be longer than {{ limit }} characters"
      * )
+     * @Groups("post:read")
      */
     private $teamTag;
 
@@ -43,12 +46,14 @@ class Teams
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email."
      * )
+     * @Groups("post:read")
      */
     private $teamMail;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
+     * @Groups("post:read")
      */
     private $teamReg;
 
